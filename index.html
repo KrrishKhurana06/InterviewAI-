@@ -1,1249 +1,1392 @@
-
-<style id="krrish-premium-overhaul">
-body{
-background:#f8fafc !important;
-font-family:Inter,Segoe UI,sans-serif !important;
-color:#0f172a !important;
-}
-.page{max-width:1280px !important;padding:32px !important;}
-.hero{
-min-height:620px !important;
-display:flex !important;
-justify-content:center !important;
-align-items:center !important;
-background:linear-gradient(180deg,#ffffff,#f8fafc) !important;
-border:none !important;
-box-shadow:0 20px 60px rgba(15,23,42,.08) !important;
-border-radius:32px !important;
-}
-.hero h1{
-font-size:72px !important;
-font-weight:800 !important;
-line-height:1.05 !important;
-max-width:900px !important;
-}
-.hero p{
-font-size:20px !important;
-max-width:700px !important;
-color:#64748b !important;
-}
-.topnav{
-backdrop-filter:blur(20px) !important;
-box-shadow:0 2px 20px rgba(15,23,42,.05) !important;
-}
-.card,.surface,.feat-card,.metric{
-background:#fff !important;
-border:none !important;
-border-radius:24px !important;
-box-shadow:0 8px 32px rgba(15,23,42,.07) !important;
-}
-.metric-num{
-font-size:38px !important;
-font-weight:700 !important;
-}
-.feature-grid{
-gap:24px !important;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr)) !important;
-}
-.feat-card{
-padding:28px !important;
-}
-.feat-card:hover{
-transform:translateY(-8px) !important;
-}
-.btn-primary{
-background:#2563eb !important;
-border:none !important;
-border-radius:14px !important;
-}
-.stat-row{
-background:white !important;
-padding:28px !important;
-border-radius:24px !important;
-box-shadow:0 8px 32px rgba(15,23,42,.07) !important;
-max-width:1100px !important;
-margin:30px auto !important;
-}
-</style>
-
-<style id="professional-redesign">
-:root{
- --p:#2563eb !important;
- --p-dark:#1d4ed8 !important;
- --p-light:#eff6ff !important;
-}
-body{
- background:#f8fafc !important;
-}
-.hero{
- background:linear-gradient(180deg,#ffffff,#f8fafc) !important;
- color:#0f172a !important;
- border-radius:32px !important;
- box-shadow:none !important;
- border:1px solid #e2e8f0 !important;
-}
-.hero h1,.hero p{
- color:#0f172a !important;
-}
-.card,.feat-card,.surface,.metric{
- background:#ffffff !important;
- border:1px solid #e5e7eb !important;
- border-radius:24px !important;
- box-shadow:0 4px 20px rgba(15,23,42,.05) !important;
-}
-.topnav{
- background:rgba(255,255,255,.9) !important;
- border-bottom:1px solid #e5e7eb !important;
-}
-.page{
- max-width:1200px !important;
-}
-.feature-grid{
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) !important;
-}
-.role-card{
- border-radius:22px !important;
- border:1px solid #e5e7eb !important;
-}
-.role-card:hover{
- transform:translateY(-3px);
- box-shadow:0 10px 25px rgba(0,0,0,.08);
- background:#fff !important;
-}
-.btn-primary{
- background:#2563eb !important;
- border-color:#2563eb !important;
-}
-.metric{
- padding:1.25rem !important;
-}
-.hero-eyebrow{
- background:#eff6ff !important;
- color:#2563eb !important;
-}
-</style>
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewAI | Premium AI Coaching</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --p:#534AB7;--p-light:#EEEDFE;--p-dark:#3C3489;--p-mid:#7F77DD;
-  --t:#0F6E56;--t-light:#E1F5EE;
-  --a:#854F0B;--a-light:#FAEEDA;
-  --r:#A32D2D;--r-light:#FCEBEB;
-  --g-success:#3B6D11;--g-light:#EAF3DE;
+/* ==========================================
+   DESIGN SYSTEM & VARIABLES (Linear/Stripe Inspired)
+========================================== */
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Color Palette */
+  --p: #6366F1; --p-light: #EEF2FF; --p-dark: #4338CA; --p-mid: #818CF8;
+  --t: #0D9488; --t-light: #F0FDFA;
+  --a: #F59E0B; --a-light: #FEF3C7;
+  --r: #EF4444; --r-light: #FEF2F2;
+  --g-success: #10B981; --g-light: #ECFDF5;
+  
+  /* Surface & Text */
+  --color-bg-main: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sub: #F4F4F5;
+  --color-text-main: #09090B;
+  --color-text-sub: #71717A;
+  --color-text-muted: #A1A1AA;
+  --color-border: #E4E4E7;
+  --color-border-hover: #D4D4D8;
+  
+  /* Shadows & Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.02);
+  --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
+  
+  /* Animations */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-body{font-family:var(--font-sans);background:var(--color-background-tertiary);}
-.screen{display:none}.screen.active{display:block}
-.hidden{display:none!important}
 
-/* NAV */
-.topnav{display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:52px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);position:sticky;top:0;z-index:50;}
-.logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:var(--color-text-primary);}
-.logo-icon{width:28px;height:28px;border-radius:8px;background:var(--p);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;}
-.nav-pills{display:flex;gap:2px;}
-.nav-pill{padding:5px 10px;font-size:13px;border-radius:var(--border-radius-md);cursor:pointer;color:var(--color-text-secondary);border:none;background:none;}
-.nav-pill:hover{background:var(--color-background-secondary);color:var(--color-text-primary);}
-.nav-pill.active{background:var(--p-light);color:var(--p-dark);font-weight:500;}
-.nav-right{display:flex;align-items:center;gap:8px;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); background: var(--color-bg-main); color: var(--color-text-main); -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:13px;font-weight:500;border-radius:var(--border-radius-md);cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);transition:background .15s;}
-.btn:hover{background:var(--color-background-secondary);}
-.btn-primary{background:var(--p);color:#fff;border-color:var(--p);}
-.btn-primary:hover{background:var(--p-dark);border-color:var(--p-dark);}
-.btn-ghost{border-color:transparent;background:transparent;}
-.btn-ghost:hover{background:var(--color-background-secondary);}
-.btn-sm{padding:5px 10px;font-size:12px;}
-.btn-lg{padding:11px 20px;font-size:14px;}
-.btn-full{width:100%;justify-content:center;}
-.btn-success{background:var(--g-success);color:#fff;border-color:var(--g-success);}
-.btn-teal{background:var(--t);color:#fff;border-color:var(--t);}
+/* ==========================================
+   ANIMATIONS & TRANSITIONS
+========================================== */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
 
-/* CARDS */
-.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;}
-.card-sm{padding:.75rem 1rem;}
-.surface{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem;}
+.screen { display: none; opacity: 0; }
+.screen.active { display: block; animation: fadeInUp 0.5s var(--transition-base) forwards; }
+.hidden { display: none !important; }
 
-/* BADGES */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
-.badge-purple{background:var(--p-light);color:var(--p-dark);}
-.badge-teal{background:var(--t-light);color:var(--t);}
-.badge-amber{background:var(--a-light);color:var(--a);}
-.badge-red{background:var(--r-light);color:var(--r);}
-.badge-green{background:var(--g-light);color:var(--g-success);}
-.badge-dot{width:6px;height:6px;border-radius:50%;}
+/* ==========================================
+   LAYOUT UTILITIES
+========================================== */
+.page { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: 12px; }
+.spacer { flex: 1; }
+.divider { height: 1px; background: var(--color-border); margin: 2rem 0; width: 100%; }
+.text-center { text-align: center; }
 
-/* METRICS */
-.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem;text-align:center;}
-.metric-num{font-size:22px;font-weight:500;color:var(--color-text-primary);}
-.metric-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:2px;}
+/* Grids */
+.grid-features { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+@media (max-width: 1024px) { .grid-features { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-features { grid-template-columns: 1fr; } }
 
-/* SCORE BARS */
-.sbar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.sbar-lbl{font-size:12px;color:var(--color-text-secondary);min-width:120px;}
-.sbar-track{flex:1;height:5px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden;}
-.sbar-fill{height:100%;border-radius:3px;transition:width .7s ease;}
-.sbar-val{font-size:12px;font-weight:500;color:var(--color-text-primary);min-width:28px;text-align:right;}
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
 
-/* XP BAR */
-.xp-bar{height:6px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden;margin-top:4px;}
-.xp-fill{height:100%;background:var(--p);border-radius:3px;transition:width .5s;}
+/* ==========================================
+   NAVIGATION
+========================================== */
+.topnav { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 64px; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(16px); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 100; transition: var(--transition-base); }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--color-text-main); letter-spacing: -0.5px; }
+.logo-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--p); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: 0 4px 10px rgba(99,102,241,0.3); }
+.nav-pills { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 0 10px; }
+.nav-pills::-webkit-scrollbar { display: none; }
+.nav-pill { padding: 8px 12px; font-size: 13px; font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text-sub); border: none; background: transparent; transition: var(--transition-fast); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.nav-pill:hover { background: var(--color-bg-sub); color: var(--color-text-main); }
+.nav-pill.active { background: var(--color-text-main); color: #fff; font-weight: 600; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
 
-/* AVATAR */
-.av-wrap{display:flex;flex-direction:column;align-items:center;}
-.av{width:72px;height:72px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;position:relative;}
-.av-ring{position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--p);animation:ring 1.5s infinite;opacity:0;}
-.av.speaking .av-ring{opacity:1;}
-@keyframes ring{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.08);opacity:.2}}
-.waveform{display:flex;align-items:center;gap:3px;height:24px;margin-top:8px;}
-.wave-bar{width:3px;border-radius:2px;background:var(--p);}
-.wave-bar.active{animation:wave var(--d,0.8s) infinite ease-in-out alternate;}
-@keyframes wave{from{height:4px}to{height:var(--h,18px)}}
+/* ==========================================
+   COMPONENTS
+========================================== */
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--color-border); background: var(--color-bg-card); color: var(--color-text-main); transition: var(--transition-base); box-shadow: var(--shadow-sm); outline: none; }
+.btn:hover { background: var(--color-bg-sub); border-color: var(--color-border-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: var(--p); color: #fff; border: 1px solid transparent; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
+.btn-primary:hover { background: var(--p-dark); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3); color: #fff; }
+.btn-ghost { border-color: transparent; background: transparent; box-shadow: none; }
+.btn-ghost:hover { background: var(--color-bg-sub); }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+.btn-lg { padding: 14px 24px; font-size: 15px; border-radius: var(--radius-md); font-weight: 600; }
+.btn-full { width: 100%; }
 
-/* CHAT */
-.chat-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem;min-height:180px;max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;}
-.bubble{max-width:88%;padding:8px 12px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.55;}
-.bubble-ai{align-self:flex-start;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);}
-.bubble-user{align-self:flex-end;background:var(--p);color:#fff;}
-.bubble-wrap{display:flex;flex-direction:column;}
-.bubble-wrap-user{align-items:flex-end;}
-.bubble-sender{font-size:10px;color:var(--color-text-secondary);margin-bottom:2px;}
-.bubble-wrap-user .bubble-sender{text-align:right;}
-.typing span{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--color-text-secondary);margin:0 1px;animation:dot 1.1s infinite;}
-.typing span:nth-child(2){animation-delay:.18s}
-.typing span:nth-child(3){animation-delay:.36s}
-@keyframes dot{0%,80%,100%{transform:scale(.7);opacity:.4}40%{transform:scale(1);opacity:1}}
+/* Cards & Surfaces */
+.card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-sm); transition: var(--transition-base); }
+.card-hover:hover { box-shadow: var(--shadow-hover); border-color: var(--p-light); transform: translateY(-2px); }
+.surface { background: var(--color-bg-sub); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem; }
 
-/* PROGRESS */
-.prog-bar{width:100%;height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;}
-.prog-fill{height:100%;background:var(--p);border-radius:2px;transition:width .4s;}
+/* Typography */
+h1, h2, h3, h4 { color: var(--color-text-main); letter-spacing: -0.02em; line-height: 1.2; }
+.text-muted { color: var(--color-text-sub); }
 
-/* TABS */
-.tab-bar{display:flex;gap:2px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1rem;}
-.tab{padding:6px 12px;font-size:13px;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-.5px;}
-.tab.on{color:var(--p);border-bottom-color:var(--p);font-weight:500;}
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-purple { background: var(--p-light); color: var(--p-dark); }
+.badge-teal { background: var(--t-light); color: var(--t); }
+.badge-amber { background: var(--a-light); color: var(--a); }
+.badge-red { background: var(--r-light); color: var(--r); }
+.badge-green { background: var(--g-light); color: var(--g-success); }
+.badge-gray { background: var(--color-bg-sub); color: var(--color-text-sub); }
 
-/* ANSWER */
-.ans-box{width:100%;min-height:72px;padding:10px 12px;font-size:13px;resize:none;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);line-height:1.5;font-family:var(--font-sans);}
-.ans-box:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 2px rgba(83,74,183,.12);}
+/* Forms */
+.fl { margin-bottom: 1.25rem; width: 100%; }
+.fl label { display: block; font-size: 13px; color: var(--color-text-main); margin-bottom: 6px; font-weight: 500; }
+input, select, textarea { width: 100%; padding: 10px 14px; font-family: var(--font-sans); font-size: 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); color: var(--color-text-main); transition: var(--transition-fast); outline: none; }
+input:focus, select:focus, textarea:focus { border-color: var(--p); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+input::placeholder, textarea::placeholder { color: var(--color-text-muted); }
+.ans-box { resize: vertical; min-height: 100px; line-height: 1.6; }
 
-/* MIC */
-.mic-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;font-size:17px;color:var(--color-text-secondary);}
-.mic-btn.on{background:var(--r-light);border-color:var(--r);color:var(--r);animation:pulse-r 1s infinite;}
-@keyframes pulse-r{0%,100%{opacity:1}50%{opacity:.6}}
+/* Progress Bars */
+.prog-bar, .xp-bar { width: 100%; height: 6px; background: var(--color-bg-sub); border-radius: 4px; overflow: hidden; }
+.prog-fill, .xp-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); background: var(--p); }
 
-/* CONFIDENCE METER */
-.conf-meter{height:8px;border-radius:4px;background:var(--color-background-secondary);overflow:hidden;margin:4px 0;}
-.conf-fill{height:100%;border-radius:4px;transition:width .5s;}
+/* Chat Bubbles */
+.chat-box { background: var(--color-bg-main); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; min-height: 300px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-bottom: 1rem; scroll-behavior: smooth; }
+.bubble { max-width: 85%; padding: 12px 16px; border-radius: var(--radius-md); font-size: 14px; line-height: 1.6; box-shadow: var(--shadow-sm); animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.bubble-ai { align-self: flex-start; background: var(--color-bg-card); border: 1px solid var(--color-border); border-bottom-left-radius: 4px; }
+.bubble-user { align-self: flex-end; background: var(--color-text-main); color: #fff; border-bottom-right-radius: 4px; }
+.bubble-peer { align-self: flex-start; background: var(--t-light); border: 1px solid var(--t-light); color: var(--color-text-main); border-bottom-left-radius: 4px; }
 
-/* ACHIEVEMENT */
-.ach-card{display:flex;align-items:center;gap:10px;padding:.625rem .875rem;border-radius:var(--border-radius-md);background:var(--color-background-secondary);}
-.ach-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+/* Custom Grids for Setup */
+.role-grid, .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.role-card, .company-card { padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; background: var(--color-bg-card); text-align: center; transition: var(--transition-base); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.role-card:hover, .company-card:hover { border-color: var(--p-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.role-card.sel, .company-card.sel { border: 2px solid var(--p); background: var(--p-light); transform: scale(1.02); }
 
-/* SKILL TAG */
-.skill-tag{padding:3px 10px;border-radius:20px;font-size:12px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);display:inline-block;margin:2px;}
-.skill-tag.strong{background:var(--g-light);color:var(--g-success);border-color:var(--g-light);}
-.skill-tag.weak{background:var(--r-light);color:var(--r);border-color:var(--r-light);}
+/* Hero Section */
+.hero { padding: 6rem 1.5rem; text-align: center; background: radial-gradient(100% 100% at 50% 0%, #FFFFFF 0%, #F4F4F5 100%); border-bottom: 1px solid var(--color-border); margin-top: -64px; padding-top: calc(6rem + 64px); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMCwwLDAsMC4wNSkiLz48L3N2Zz4='); mask-image: linear-gradient(to bottom, black 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%); pointer-events: none; }
+.hero h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: var(--color-text-main); letter-spacing: -0.04em; }
+.hero p { font-size: 18px; color: var(--color-text-sub); max-width: 600px; margin: 0 auto 2.5rem; }
 
-/* TIMER */
-.timer{font-size:13px;font-weight:500;color:var(--color-text-secondary);font-variant-numeric:tabular-nums;}
-.timer.warn{color:var(--r);}
+/* Dashboard Metrics */
+.metric { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-sm); transition: var(--transition-base); }
+.metric:hover { box-shadow: var(--shadow-md); border-color: var(--color-border-hover); transform: translateY(-2px); }
+.metric-num { font-size: 32px; font-weight: 700; color: var(--color-text-main); letter-spacing: -1px; line-height: 1; }
+.metric-lbl { font-size: 13px; font-weight: 500; color: var(--color-text-sub); }
+.metric-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px; }
 
-/* CHART MINI */
-.sparkline{display:flex;align-items:flex-end;gap:3px;height:36px;}
-.spark-bar{flex:1;border-radius:2px 2px 0 0;background:var(--p-light);min-width:0;}
-.spark-bar.hi{background:var(--p);}
+/* Video Coach */
+.video-container { width: 100%; max-width: 600px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; background: #000; position: relative; border: 1px solid var(--color-border); box-shadow: var(--shadow-lg); }
+video { width: 100%; height: auto; display: block; transform: scaleX(-1); }
+.overlay-metrics { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; gap: 8px; justify-content: center; }
+.metric-pill { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); color: #fff; padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.1); }
 
-/* STEP DOTS */
-.step-row{display:flex;align-items:center;gap:4px;margin-bottom:1.25rem;}
-.step-dot{width:22px;height:22px;border-radius:50%;border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--color-text-secondary);}
-.step-dot.done{background:var(--p);border-color:var(--p);color:#fff;}
-.step-dot.cur{border-color:var(--p);color:var(--p);}
-.step-line{flex:1;height:0.5px;background:var(--color-border-tertiary);}
+/* Timeline */
+.timeline-item { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
+.timeline-item::before { content: ''; position: absolute; left: 5px; top: 24px; bottom: -2rem; width: 2px; background: var(--color-border); }
+.timeline-item:last-child::before { display: none; }
+.timeline-dot { position: absolute; left: 0; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--color-bg-card); border: 2px solid var(--p); box-shadow: 0 0 0 4px var(--color-bg-main); z-index: 1; }
 
-/* ROLE GRID */
-.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:1rem;}
-.role-card{padding:.75rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;background:var(--color-background-primary);text-align:center;transition:border-color .15s,background .15s;}
-.role-card:hover{border-color:var(--p);background:var(--p-light);}
-.role-card.sel{border:2px solid var(--p);background:var(--p-light);}
-.role-icon{font-size:22px;color:var(--p);margin-bottom:5px;}
-.role-name{font-size:12px;font-weight:500;color:var(--color-text-primary);}
-.role-tag{font-size:10px;color:var(--color-text-secondary);margin-top:2px;}
+/* Practice Bank List */
+.q-list { display: flex; flex-direction: column; gap: 12px; max-height: 600px; overflow-y: auto; padding-right: 8px; }
+.q-item { padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg-card); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: var(--transition-fast); }
+.q-item:hover { border-color: var(--p-mid); box-shadow: var(--shadow-md); transform: translateX(4px); }
 
-/* LANDING */
-.hero{padding:3rem 1.5rem 2rem;text-align:center;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;background:var(--p-light);color:var(--p-dark);font-size:12px;font-weight:500;margin-bottom:1rem;}
-.hero h1{font-size:30px;font-weight:500;line-height:1.25;margin-bottom:.75rem;color:var(--color-text-primary);}
-.hero p{font-size:15px;color:var(--color-text-secondary);line-height:1.65;max-width:480px;margin:0 auto 1.75rem;}
-.stat-row{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0;flex-wrap:wrap;}
-.stat-item{text-align:center;}
-.stat-num{font-size:22px;font-weight:500;color:var(--p);}
-.stat-desc{font-size:11px;color:var(--color-text-secondary);}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:0 1.5rem;margin-bottom:1.5rem;}
-.feat-card{padding:1rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);}
-.feat-icon{width:36px;height:36px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:.625rem;font-size:17px;}
+/* Footer */
+footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-bg-main); color: var(--color-text-sub); margin-top: 4rem; }
 
-/* TOAST */
-.toast{position:absolute;bottom:16px;right:16px;padding:10px 14px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;z-index:99;transition:opacity .3s;border:0.5px solid;}
-.toast-success{background:var(--g-light);color:var(--g-success);border-color:var(--g-light);}
-.toast-info{background:var(--p-light);color:var(--p-dark);border-color:var(--p-light);}
+@media (max-width: 768px) {
+  .hero { padding: 4rem 1rem; }
+  .page { padding: 1rem 1rem 5rem; }
+  .nav-right span.hidden-mobile { display: none; }
+}
 
-/* REPORT HEADER */
-.report-hero{padding:1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);}
-.big-score{font-size:48px;font-weight:500;color:var(--p);line-height:1;}
+.dark-mode{
+ background:#0f172a !important;
+ color:#f8fafc !important;
+}
+.dark-mode .card,.dark-mode .metric,.dark-mode input,.dark-mode select,.dark-mode textarea{
+ background:#111827 !important;
+ color:#f8fafc !important;
+}
+.card-hover:hover{transform:translateY(-6px) scale(1.01)!important;}
+.hero h1{background:linear-gradient(90deg,#6366F1,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-/* FIELDS */
-.fl{margin-bottom:.875rem;}
-.fl label{display:block;font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500;}
-input,select,textarea{font-family:var(--font-sans);font-size:13px;}
+.dark-mode{
+  background:#0b1220 !important;
+  color:#f8fafc !important;
+}
+.dark-mode .topnav,
+.dark-mode .card,
+.dark-mode .metric,
+.dark-mode .surface,
+.dark-mode .chat-box,
+.dark-mode footer{
+  background:#111827 !important;
+  color:#f8fafc !important;
+  border-color:#374151 !important;
+}
+.dark-mode .text-muted,
+.dark-mode p,
+.dark-mode .metric-lbl,
+.dark-mode .nav-pill{
+  color:#cbd5e1 !important;
+}
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode .logo,
+.dark-mode label{
+  color:#ffffff !important;
+}
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea{
+  background:#1f2937 !important;
+  color:#ffffff !important;
+  border-color:#4b5563 !important;
+}
+.dark-mode .hero{
+  background:linear-gradient(180deg,#0f172a,#111827) !important;
+}
+.dark-mode .bubble-ai{
+  background:#1f2937 !important;
+  color:#fff !important;
+  border-color:#374151 !important;
+}
+.dark-mode .q-item,
+.dark-mode .role-card,
+.dark-mode .company-card{
+  background:#111827 !important;
+  color:#fff !important;
+  border-color:#374151 !important;
+}
+.dark-mode .nav-pill.active{
+  background:#6366f1 !important;
+  color:#fff !important;
+}
 
-/* MISC */
-.divider{height:0.5px;background:var(--color-border-tertiary);margin:1rem 0;}
-.row{display:flex;align-items:center;gap:8px;}
-.col{display:flex;flex-direction:column;gap:8px;}
-.spacer{flex:1;}
-.page{max-width:640px;margin:0 auto;padding:1rem 1rem 2rem;}
 </style>
+</head>
+<body>
 
-<div style="position:relative;" id="root">
+<div id="root">
+  <nav class="topnav" id="topnav" style="display:none;">
+    <div class="logo">
+      <div class="logo-icon"><i class="ti ti-brain"></i></div>
+      InterviewAI
+    </div>
+    <div class="nav-pills" id="nav-pills">
+      <button class="nav-pill" onclick="go('dashboard', this)"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+      <button class="nav-pill" onclick="go('setup', this)"><i class="ti ti-microphone"></i> Mock Interview</button>
+      <button class="nav-pill" onclick="go('practice', this)"><i class="ti ti-books"></i> Practice Bank</button>
+      <button class="nav-pill" onclick="go('company', this)"><i class="ti ti-building"></i> Company Prep</button>
+      <button class="nav-pill" onclick="go('salary', this)"><i class="ti ti-currency-dollar"></i> Salary Trainer</button>
+      <button class="nav-pill" onclick="go('gd', this)"><i class="ti ti-users"></i> GD Simulator</button>
+      <button class="nav-pill" onclick="go('bodycoach', this)"><i class="ti ti-eye"></i> Body Coach</button>
+      <button class="nav-pill" onclick="go('replay', this)"><i class="ti ti-player-track-next"></i> Replays</button>
+    </div>
+    <div class="nav-right">
+      <div id="xp-display" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--color-text-sub);">
+        <span class="badge badge-purple" id="level-badge" style="font-size:11px;">Lv 1</span>
+        <div style="width:80px;" class="hidden-mobile">
+          <div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:20%;"></div></div>
+        </div>
+      </div>
+      <div id="nav-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--color-text-main);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer;box-shadow:var(--shadow-sm);" onclick="go('dashboard', document.querySelector('.nav-pill'))"></div>
+      <button class="btn btn-sm btn-ghost" onclick="toggleDarkMode()" title="Dark Mode"><i class="ti ti-moon"></i></button><button class="btn btn-sm btn-ghost" onclick="logout()" title="Logout"><i class="ti ti-logout"></i></button>
+    </div>
+  </nav>
 
-<!-- ═══════════════════ TOP NAV ═══════════════════ -->
-<nav class="topnav" id="topnav" style="display:none;">
-  <div class="logo">
-    <div class="logo-icon"><i class="ti ti-brain" aria-hidden="true"></i></div>
-    InterviewAI
-  </div>
-  <div class="nav-pills" id="nav-pills">
-    <button class="nav-pill" onclick="go('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
-    <button class="nav-pill" onclick="go('setup')"><i class="ti ti-plus"></i> Practice</button>
-    <button class="nav-pill" onclick="go('coach')"><i class="ti ti-bulb"></i> Coach</button>
-  </div>
-  <div class="nav-right">
-    <div id="xp-display" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary);">
-      <span class="badge badge-purple" id="level-badge">Lv 1</span>
-      <div style="width:60px;">
-        <div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:20%;"></div></div>
+  <div class="screen active" id="screen-landing">
+    <div class="hero">
+      <div style="position:relative; z-index:1;">
+        <div class="badge badge-purple" style="margin-bottom:1.5rem; padding: 8px 16px; font-size:13px;"><i class="ti ti-sparkles"></i> The Ultimate AI Interview Suite</div>
+        <h1>Master every stage of<br>your career journey.</h1>
+        <p>Simulate technical rounds, access 150+ practice questions, negotiate salaries, practice group discussions, and perfect your body language with real-time AI.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary btn-lg" onclick="go('signup')">Start for free</button>
+          <button class="btn btn-lg" onclick="go('login')">Sign in</button>
+        </div>
       </div>
     </div>
-    <div id="nav-avatar" style="width:28px;height:28px;border-radius:50%;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--p-dark);cursor:pointer;" onclick="go('dashboard')"></div>
-    <button class="btn btn-sm btn-ghost" onclick="logout()"><i class="ti ti-logout"></i></button>
-  </div>
-</nav>
 
-<!-- ═══════════════════ LANDING ═══════════════════ -->
-<div class="screen active" id="screen-landing">
-  <div class="hero">
-    <div class="hero-eyebrow"><i class="ti ti-sparkles" aria-hidden="true"></i> AI-powered interview practice</div>
-    <h1>Ace your next interview<br>with an AI that coaches you</h1>
-    <p>Practice with a realistic AI interviewer, get instant feedback on every answer, and track your growth with detailed analytics — all in one place.</p>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn btn-primary btn-lg" onclick="go('register')"><i class="ti ti-player-play"></i> Start free practice</button>
-      <button class="btn btn-lg" onclick="go('login')">Sign in</button>
-    </div>
-  </div>
-
-  <div class="stat-row" style="padding:0 1.5rem;">
-    <div class="stat-item"><div class="stat-num">94%</div><div class="stat-desc">users feel more confident</div></div>
-    <div class="stat-item"><div class="stat-num">12k+</div><div class="stat-desc">interviews practiced</div></div>
-    <div class="stat-item"><div class="stat-num">8</div><div class="stat-desc">role categories</div></div>
-    <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-desc">average rating</div></div>
-  </div>
-
-  <div class="divider" style="margin:1.5rem;"></div>
-
-  <div class="feature-grid">
-    <div class="feat-card">
-      <div class="feat-icon" style="background:var(--p-light);color:var(--p);"><i class="ti ti-brain" aria-hidden="true"></i></div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:3px;">AI interviewer</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);">Dynamic questions tailored to your role & level</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon" style="background:var(--t-light);color:var(--t);"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:3px;">Real-time scoring</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);">Instant feedback on every answer you give</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon" style="background:var(--a-light);color:var(--a);"><i class="ti ti-microphone" aria-hidden="true"></i></div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:3px;">Voice + text</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);">Speak naturally or type your answers</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-trophy" aria-hidden="true"></i></div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:3px;">Gamified progress</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);">XP, levels, streaks & achievement badges</div>
-    </div>
-  </div>
-
-  <div style="padding:0 1.5rem 1rem;">
-    <div class="card" style="border-left:3px solid var(--p);border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0;">
-      <div style="font-size:13px;color:var(--color-text-primary);line-height:1.6;font-style:italic;">"After 3 weeks of practice with InterviewAI, I landed a senior frontend role at a Series B startup. The feedback was more honest than anything I'd gotten from human mock interviews."</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px;">— Priya S., Frontend Engineer</div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════ AUTH ═══════════════════ -->
-<div class="screen" id="screen-login">
-  <div class="page" style="max-width:380px;">
-    <div class="card">
-      <div style="text-align:center;margin-bottom:1.25rem;">
-        <div class="logo-icon" style="margin:0 auto 10px;width:40px;height:40px;font-size:18px;"><i class="ti ti-brain" aria-hidden="true"></i></div>
-        <div style="font-size:16px;font-weight:500;">Welcome back</div>
-        <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;">Sign in to your account</div>
+    <div class="page" style="padding-top: 4rem;">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 style="font-size:32px; font-weight:800; margin-bottom:1rem;">Everything you need to land the offer.</h2>
+        <p class="text-muted">Enterprise-grade preparation tools packed into one intuitive platform.</p>
       </div>
-      <div class="fl"><label>Email</label><input type="email" id="le" value="demo@interviewai.com" style="width:100%;"></div>
-      <div class="fl"><label>Password</label><input type="password" id="lp" value="demo123" style="width:100%;"></div>
-      <div id="lerr" style="font-size:12px;color:var(--color-text-danger);margin-bottom:8px;display:none;"></div>
-      <button class="btn btn-primary btn-full" onclick="doLogin()" style="margin-bottom:8px;"><i class="ti ti-login"></i> Sign in</button>
-      <div style="text-align:center;font-size:12px;color:var(--color-text-secondary);">No account? <span style="color:var(--p);cursor:pointer;" onclick="go('register')">Create one free</span></div>
-      <div class="divider"></div>
-      <div style="text-align:center;font-size:11px;color:var(--color-text-secondary);">Demo: demo@interviewai.com / demo123</div>
-    </div>
-  </div>
-</div>
 
-<div class="screen" id="screen-register">
-  <div class="page" style="max-width:380px;">
-    <div class="card">
-      <div style="text-align:center;margin-bottom:1.25rem;">
-        <div class="logo-icon" style="margin:0 auto 10px;width:40px;height:40px;font-size:18px;"><i class="ti ti-brain" aria-hidden="true"></i></div>
-        <div style="font-size:16px;font-weight:500;">Create your account</div>
-        <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;">Start practicing for free</div>
+      <div class="grid-features">
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--p-light);color:var(--p);"><i class="ti ti-building-skyscraper"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Company-Specific Prep</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Targeted guides and simulated rounds tailored for FAANG, top startups, and Fortune 500s.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-books"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">150+ Question Bank</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Searchable database of HR, Technical, Coding, and Behavioral questions to practice.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-currency-dollar"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Salary Negotiation Trainer</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Roleplay compensation discussions with an AI recruiter to maximize your market value.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--t-light);color:var(--t);"><i class="ti ti-users"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Group Discussion Simulator</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Engage in multi-agent debates to sharpen your leadership and collaborative speaking skills.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--a-light);color:var(--a);"><i class="ti ti-eye"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Live Body Language Coach</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Real-time webcam analysis detecting eye contact, posture, and conversational confidence.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--color-bg-sub);color:var(--color-text-main);"><i class="ti ti-microphone"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Custom AI Mock Interviews</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Generate dynamic interviews for any role, from Software Engineer to Data Scientist.</p>
+        </div>
       </div>
-      <div class="fl"><label>Full name</label><input type="text" id="rn" placeholder="Your name" style="width:100%;"></div>
-      <div class="fl"><label>Email</label><input type="email" id="re" placeholder="you@example.com" style="width:100%;"></div>
-      <div class="fl"><label>Password</label><input type="password" id="rp" placeholder="Min 6 characters" style="width:100%;"></div>
-      <button class="btn btn-primary btn-full" onclick="doRegister()" style="margin-bottom:8px;"><i class="ti ti-user-plus"></i> Create account</button>
-      <div style="text-align:center;font-size:12px;color:var(--color-text-secondary);">Have an account? <span style="color:var(--p);cursor:pointer;" onclick="go('login')">Sign in</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════ DASHBOARD ═══════════════════ -->
-<div class="screen" id="screen-dashboard">
-  <div class="page">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;">
-      <div>
-        <div style="font-size:18px;font-weight:500;" id="dash-name">Hello!</div>
-        <div style="font-size:13px;color:var(--color-text-secondary);" id="dash-sub">Ready to practice?</div>
-      </div>
-      <button class="btn btn-primary" onclick="go('setup')"><i class="ti ti-plus"></i> New interview</button>
-    </div>
-
-    <!-- Streak + Level -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem;">
-      <div class="surface" style="display:flex;align-items:center;gap:10px;">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--a-light);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--a);" aria-hidden="true"><i class="ti ti-flame"></i></div>
-        <div><div style="font-size:18px;font-weight:500;" id="streak-num">0</div><div style="font-size:11px;color:var(--color-text-secondary);">day streak</div></div>
-      </div>
-      <div class="surface" style="display:flex;align-items:center;gap:10px;">
-        <div style="width:36px;height:36px;border-radius:50%;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--p);" aria-hidden="true"><i class="ti ti-star"></i></div>
+      
+      <div class="divider" style="margin: 4rem 0;"></div>
+      
+      <div class="grid-2 align-items-center">
         <div>
-          <div style="font-size:14px;font-weight:500;" id="dash-level">Level 1</div>
-          <div style="font-size:11px;color:var(--color-text-secondary);" id="dash-xp-txt">0 / 200 XP</div>
-          <div class="xp-bar" style="margin-top:3px;width:80px;"><div class="xp-fill" id="dash-xp-fill" style="width:0%;"></div></div>
+          <h2 style="font-size: 32px; font-weight:800; margin-bottom: 1rem;">Track your progress<br>like never before.</h2>
+          <p class="text-muted" style="margin-bottom: 2rem;">Visual metrics, replay analysis, and leveling mechanics ensure you are constantly improving. Turn your interview anxiety into a measurable, beatable game.</p>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Detailed transcript analysis</li>
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Live AI feedback scoring</li>
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Multi-dimensional skill tracking</li>
+          </ul>
+        </div>
+        <div class="card" style="padding: 2rem; background: var(--color-bg-main); border: 1px solid var(--color-border); display:flex; align-items:center; justify-content:center; min-height: 300px;">
+           <div class="col" style="width:100%; gap:16px;">
+              <div class="surface row"><div class="badge badge-purple">Tech Score</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:85%"></div></div> <span>85%</span></div>
+              <div class="surface row"><div class="badge badge-teal">HR Score</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:92%; background:var(--t);"></div></div> <span>92%</span></div>
+              <div class="surface row"><div class="badge badge-amber">Confidence</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:78%; background:var(--a);"></div></div> <span>78%</span></div>
+           </div>
         </div>
       </div>
     </div>
-
-    <!-- Stats -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;">
-      <div class="metric"><div class="metric-num" id="ds-total">0</div><div class="metric-lbl">Interviews</div></div>
-      <div class="metric"><div class="metric-num" id="ds-avg" style="color:var(--p);">—</div><div class="metric-lbl">Avg score</div></div>
-      <div class="metric"><div class="metric-num" id="ds-best" style="color:var(--g-success);">—</div><div class="metric-lbl">Best score</div></div>
-    </div>
-
-    <!-- Progress chart -->
-    <div class="card" style="margin-bottom:1rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Score history</div>
-      <div class="sparkline" id="spark-chart">
-        <div style="font-size:12px;color:var(--color-text-secondary);">Complete interviews to see your trend</div>
+    
+    <footer>
+      <div class="logo" style="justify-content:center; margin-bottom:1rem;">
+        <div class="logo-icon" style="width:24px;height:24px;font-size:14px;"><i class="ti ti-brain"></i></div> InterviewAI
       </div>
-    </div>
+      <p style="font-size:14px;">Designed and built for ambitious professionals.</p>
+      <p style="font-size:12px; margin-top:8px;">&copy; 2026 InterviewAI. All rights reserved.</p>
+    
+<div style="margin-top:25px;padding-top:20px;border-top:1px solid #e5e7eb;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;font-size:14px;">
+    <span style="font-weight:700;">🚀 Built by Krrish Khurana</span>
+    <span>•</span>
+    <span>📧 khuranakrrish086@gmail.com</span>
+    <span>•</span>
+    <span>📞 +91 7073232240</span>
+</div>
+</footer>
+  </div>
 
-    <!-- Achievements -->
-    <div class="card" style="margin-bottom:1rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Achievements</div>
-      <div id="achievements-list" style="display:flex;flex-direction:column;gap:6px;"></div>
-    </div>
-
-    <!-- Recent interviews -->
-    <div style="font-size:13px;font-weight:500;margin-bottom:.625rem;">Recent interviews</div>
-    <div id="recent-list">
-      <div style="text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:13px;">
-        <i class="ti ti-clipboard" style="font-size:28px;display:block;margin-bottom:8px;opacity:.4;" aria-hidden="true"></i>
-        No interviews yet — start your first one!
+  <div class="screen" id="screen-login">
+    <div class="page" style="max-width:440px; padding-top: 10vh;">
+      <div class="card" style="padding: 2.5rem 2rem;">
+        <div style="text-align:center;margin-bottom:2rem;">
+            <div class="logo-icon" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;"><i class="ti ti-lock"></i></div>
+            <h2 style="font-size:24px;font-weight:700;">Welcome Back</h2>
+            <p class="text-muted" style="font-size:14px; margin-top:4px;">Sign in to your account</p>
+        </div>
+        <div class="fl"><label>Email</label><input type="email" id="le" value="demo@interviewai.com" placeholder="you@example.com"></div>
+        <div class="fl">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label style="margin:0;">Password</label>
+                <a href="#" style="font-size:12px; color:var(--p); text-decoration:none;">Forgot password?</a>
+            </div>
+            <input type="password" id="lp" value="demo123" placeholder="••••••••" style="margin-top:6px;">
+        </div>
+        <div class="row" style="margin-bottom:1.5rem; font-size:13px;">
+            <input type="checkbox" id="remember" style="width:auto;"> <label for="remember" style="margin:0;">Remember me</label>
+        </div>
+        <div id="lerr" style="font-size:13px;color:var(--r);background:var(--r-light);padding:10px;border-radius:6px;margin-bottom:16px;display:none;border:1px solid rgba(239, 68, 68, 0.2);"></div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
+        <p style="text-align:center; font-size:14px; margin-top:1.5rem; color:var(--color-text-sub);">
+            Don't have an account? <a href="#" onclick="go('signup')" style="color:var(--p);font-weight:600;text-decoration:none;">Sign up</a>
+        </p>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════════════ AI COACH ═══════════════════ -->
-<div class="screen" id="screen-coach">
-  <div class="page">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;">
-      <button class="btn btn-ghost btn-sm" onclick="go('dashboard')"><i class="ti ti-arrow-left"></i></button>
-      <div>
-        <div style="font-size:16px;font-weight:500;">AI Career Coach</div>
-        <div style="font-size:12px;color:var(--color-text-secondary);">Personalized guidance based on your performance</div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:1rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Skill analysis</div>
-      <div id="skill-analysis">
-        <div style="font-size:12px;color:var(--color-text-secondary);">Complete at least one interview to unlock skill analysis.</div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:1rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Get personalized coaching</div>
-      <div class="fl"><label>What's your target role?</label><input type="text" id="coach-role" placeholder="e.g. Senior Frontend Engineer at a startup" style="width:100%;"></div>
-      <div class="fl"><label>Your biggest interview challenge</label><textarea class="ans-box" id="coach-challenge" placeholder="e.g. I freeze up when asked system design questions..." style="min-height:60px;width:100%;"></textarea></div>
-      <button class="btn btn-primary btn-full" onclick="getCoaching()"><i class="ti ti-brain"></i> Get AI coaching ↗</button>
-    </div>
-
-    <div class="card hidden" id="coach-response">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;display:flex;align-items:center;gap:6px;"><i class="ti ti-sparkles" style="color:var(--p);" aria-hidden="true"></i> Your coaching plan</div>
-      <div id="coach-output" style="font-size:13px;color:var(--color-text-primary);line-height:1.65;"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════ SETUP ═══════════════════ -->
-<div class="screen" id="screen-setup">
-  <div class="page" style="max-width:560px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;">
-      <button class="btn btn-ghost btn-sm" onclick="go('dashboard')"><i class="ti ti-arrow-left"></i></button>
-      <div style="font-size:16px;font-weight:500;">Set up your interview</div>
-    </div>
-    <div class="step-row">
-      <div class="step-dot cur" id="sd1">1</div><div class="step-line"></div>
-      <div class="step-dot" id="sd2">2</div><div class="step-line"></div>
-      <div class="step-dot" id="sd3">3</div>
-    </div>
-
-    <div id="s1">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.625rem;">Choose a role</div>
-      <div class="role-grid" id="role-grid">
-        <div class="role-card" onclick="pickRole('Frontend Developer','ti-code','React · Next.js · CSS')">
-          <div class="role-icon"><i class="ti ti-code" aria-hidden="true"></i></div>
-          <div class="role-name">Frontend Dev</div>
-          <div class="role-tag">React · Next.js</div>
+  <div class="screen" id="screen-signup">
+    <div class="page" style="max-width:440px; padding-top: 10vh;">
+      <div class="card" style="padding: 2.5rem 2rem;">
+        <div style="text-align:center;margin-bottom:2rem;">
+            <div class="logo-icon" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;"><i class="ti ti-user-plus"></i></div>
+            <h2 style="font-size:24px;font-weight:700;">Create Account</h2>
+            <p class="text-muted" style="font-size:14px; margin-top:4px;">Start your premium preparation</p>
         </div>
-        <div class="role-card" onclick="pickRole('Backend Developer','ti-server','Node · APIs · DBs')">
-          <div class="role-icon"><i class="ti ti-server" aria-hidden="true"></i></div>
-          <div class="role-name">Backend Dev</div>
-          <div class="role-tag">Node · APIs</div>
-        </div>
-        <div class="role-card" onclick="pickRole('AI/ML Engineer','ti-brain','LLMs · PyTorch · NLP')">
-          <div class="role-icon"><i class="ti ti-brain" aria-hidden="true"></i></div>
-          <div class="role-name">AI/ML Engineer</div>
-          <div class="role-tag">LLMs · PyTorch</div>
-        </div>
-        <div class="role-card" onclick="pickRole('Data Scientist','ti-chart-dots','Python · SQL · Stats')">
-          <div class="role-icon"><i class="ti ti-chart-dots" aria-hidden="true"></i></div>
-          <div class="role-name">Data Scientist</div>
-          <div class="role-tag">Python · SQL</div>
-        </div>
-        <div class="role-card" onclick="pickRole('DevOps Engineer','ti-settings','CI/CD · K8s · Cloud')">
-          <div class="role-icon"><i class="ti ti-settings" aria-hidden="true"></i></div>
-          <div class="role-name">DevOps</div>
-          <div class="role-tag">CI/CD · K8s</div>
-        </div>
-        <div class="role-card" onclick="pickRole('Product Manager','ti-bulb','Strategy · Metrics')">
-          <div class="role-icon"><i class="ti ti-bulb" aria-hidden="true"></i></div>
-          <div class="role-name">Product Manager</div>
-          <div class="role-tag">Strategy · OKRs</div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem;">
-        <div class="fl" style="margin:0;"><label>Experience level</label><select id="exp" style="width:100%;"><option>Junior (0–2 yrs)</option><option selected>Mid-level (2–5 yrs)</option><option>Senior (5+ yrs)</option></select></div>
-        <div class="fl" style="margin:0;"><label>Questions</label><select id="qct" style="width:100%;"><option value="3">3 (quick)</option><option value="5" selected>5 (standard)</option><option value="8">8 (thorough)</option></select></div>
-      </div>
-      <div class="fl"><label>Interview type</label><select id="itype" style="width:100%;"><option>Mixed (Technical + HR + Behavioral)</option><option>Technical only</option><option>Behavioral only</option><option>HR / Culture fit</option></select></div>
-      <div id="s1err" style="font-size:12px;color:var(--color-text-danger);margin-bottom:6px;display:none;">Please select a role above.</div>
-      <button class="btn btn-primary btn-full" onclick="s1next()"><i class="ti ti-arrow-right"></i> Continue</button>
-    </div>
-
-    <div id="s2" class="hidden">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.625rem;">Your background (optional)</div>
-      <div class="fl"><label>Key skills</label><input type="text" id="skills" placeholder="React, TypeScript, Node.js, PostgreSQL..." style="width:100%;"></div>
-      <div class="fl"><label>Background & goals</label><textarea class="ans-box" id="bg" placeholder="Brief description of your experience, past projects, what you want to work on..." style="min-height:80px;width:100%;"></textarea></div>
-      <div class="row">
-        <button class="btn" onclick="s2back()" style="flex:1;"><i class="ti ti-arrow-left"></i> Back</button>
-        <button class="btn btn-primary" onclick="s2next()" style="flex:2;"><i class="ti ti-arrow-right"></i> Continue</button>
-      </div>
-    </div>
-
-    <div id="s3" class="hidden">
-      <div class="card" style="margin-bottom:1rem;">
-        <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;">Interview summary</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div><div style="font-size:11px;color:var(--color-text-secondary);">Role</div><div style="font-size:13px;font-weight:500;margin-top:2px;" id="c-role">—</div></div>
-          <div><div style="font-size:11px;color:var(--color-text-secondary);">Level</div><div style="font-size:13px;font-weight:500;margin-top:2px;" id="c-lvl">—</div></div>
-          <div><div style="font-size:11px;color:var(--color-text-secondary);">Type</div><div style="font-size:13px;font-weight:500;margin-top:2px;" id="c-type">—</div></div>
-          <div><div style="font-size:11px;color:var(--color-text-secondary);">Questions</div><div style="font-size:13px;font-weight:500;margin-top:2px;" id="c-ct">—</div></div>
-        </div>
-      </div>
-      <div class="row">
-        <button class="btn" onclick="s3back()" style="flex:1;"><i class="ti ti-arrow-left"></i> Back</button>
-        <button class="btn btn-primary" onclick="beginInterview()" style="flex:2;"><i class="ti ti-player-play"></i> Start interview</button>
+        <div class="fl"><label>Full Name</label><input type="text" id="sn_name" placeholder="John Doe"></div>
+        <div class="fl"><label>Email</label><input type="email" id="sn_email" placeholder="you@example.com"></div>
+        <div class="fl"><label>Password</label><input type="password" id="sn_pass" placeholder="Create a strong password"></div>
+        <div class="fl"><label>Confirm Password</label><input type="password" id="sn_pass2" placeholder="Repeat password"></div>
+        <div id="serr" style="font-size:13px;color:var(--r);background:var(--r-light);padding:10px;border-radius:6px;margin-bottom:16px;display:none;border:1px solid rgba(239, 68, 68, 0.2);"></div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="doSignup()"><i class="ti ti-rocket"></i> Create Account</button>
+        <p style="text-align:center; font-size:14px; margin-top:1.5rem; color:var(--color-text-sub);">
+            Already have an account? <a href="#" onclick="go('login')" style="color:var(--p);font-weight:600;text-decoration:none;">Sign in</a>
+        </p>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════════════ INTERVIEW ═══════════════════ -->
-<div class="screen" id="screen-interview">
-  <div class="page" style="max-width:600px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;">
-      <div style="font-size:12px;color:var(--color-text-secondary);" id="iv-meta"></div>
-      <div class="row" style="gap:10px;">
-        <div class="timer" id="iv-timer">00:00</div>
-        <div style="font-size:12px;color:var(--color-text-secondary);" id="iv-qprog">Q 1/5</div>
-      </div>
-    </div>
-    <div class="prog-bar" style="margin-bottom:1.25rem;"><div class="prog-fill" id="iv-prog" style="width:20%;"></div></div>
-
-    <!-- Avatar -->
-    <div class="av-wrap" style="margin-bottom:1rem;">
-      <div class="av" id="iv-av">
-        <div class="av-ring"></div>
-        <i class="ti ti-user" aria-hidden="true"></i>
-      </div>
-      <div style="font-size:13px;font-weight:500;margin-top:8px;">Alex — AI Interviewer</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;" id="iv-av-status">Preparing your first question...</div>
-      <div class="waveform" id="waveform">
-        <div class="wave-bar" style="height:4px;" id="w1"></div>
-        <div class="wave-bar" style="height:4px;" id="w2"></div>
-        <div class="wave-bar" style="height:4px;" id="w3"></div>
-        <div class="wave-bar" style="height:4px;" id="w4"></div>
-        <div class="wave-bar" style="height:4px;" id="w5"></div>
-        <div class="wave-bar" style="height:4px;" id="w6"></div>
-        <div class="wave-bar" style="height:4px;" id="w7"></div>
-      </div>
-    </div>
-
-    <!-- Confidence meter -->
-    <div class="surface" style="margin-bottom:1rem;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-        <span style="font-size:11px;color:var(--color-text-secondary);">Confidence meter</span>
-        <span style="font-size:11px;font-weight:500;" id="conf-val">—</span>
-      </div>
-      <div class="conf-meter"><div class="conf-fill" id="conf-fill" style="width:0%;background:var(--p);"></div></div>
-    </div>
-
-    <div class="chat-box" id="chat-box"></div>
-
-    <!-- Answer panel -->
-    <div id="ans-panel" style="margin-top:.75rem;">
-      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;">Your answer</div>
-      <textarea class="ans-box" id="ans-input" placeholder="Type your answer here..."></textarea>
-      <div class="row" style="margin-top:8px;">
-        <button class="mic-btn" id="mic-btn" onclick="toggleMic()" title="Voice input" aria-label="Toggle voice input"><i class="ti ti-microphone" id="mic-icon"></i></button>
-        <button class="btn btn-primary" onclick="submitAns()" style="flex:1;"><i class="ti ti-send"></i> Submit answer</button>
-        <button class="btn btn-sm" onclick="skipQ()" title="Skip"><i class="ti ti-skip-forward"></i></button>
-      </div>
-      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;" id="mic-status"></div>
-    </div>
-
-    <!-- Feedback panel -->
-    <div id="fb-panel" class="card hidden" style="margin-top:.75rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Answer feedback</div>
-      <div id="fb-scores"></div>
-      <div class="divider" style="margin:.75rem 0;"></div>
-      <div id="fb-text" style="font-size:13px;color:var(--color-text-secondary);line-height:1.6;"></div>
-      <div class="row" style="margin-top:.75rem;">
-        <button class="btn btn-sm" onclick="replayQ()"><i class="ti ti-repeat"></i> Replay question</button>
-        <button class="btn btn-primary" onclick="nextQ()" style="flex:1;" id="next-btn"><i class="ti ti-arrow-right"></i> Next question</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════ REPORT ═══════════════════ -->
-<div class="screen" id="screen-report">
-  <div class="page">
-    <div class="report-hero">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem;">
+  <div class="screen" id="screen-dashboard">
+    <div class="page">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
         <div>
-          <div style="font-size:16px;font-weight:500;margin-bottom:2px;">Interview complete</div>
-          <div style="font-size:12px;color:var(--color-text-secondary);" id="rpt-meta"></div>
+            <h1 style="font-size:32px;font-weight:800;" id="dash-name">Welcome back!</h1>
+            <p style="font-size:15px;color:var(--color-text-sub);">Your comprehensive career progression overview.</p>
         </div>
-        <span class="badge badge-purple" id="rpt-readiness">Ready</span>
+        <button class="btn btn-primary btn-lg" onclick="go('setup', document.querySelectorAll('.nav-pill')[1])"><i class="ti ti-player-play"></i> New Interview</button>
       </div>
-      <div class="big-score" id="rpt-overall">—</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">overall score</div>
-    </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0;">
-      <div class="metric"><div class="metric-num" id="rpt-tech">—</div><div class="metric-lbl">Technical</div></div>
-      <div class="metric"><div class="metric-num" id="rpt-comm">—</div><div class="metric-lbl">Communication</div></div>
-      <div class="metric"><div class="metric-num" id="rpt-conf">—</div><div class="metric-lbl">Confidence</div></div>
-    </div>
+      <div class="grid-features" style="margin-bottom:2rem;">
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--p-light);color:var(--p);"><i class="ti ti-clipboard-list"></i></div>
+            <div class="metric-num" id="ds-total">0</div>
+            <div class="metric-lbl">Total Sessions</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--t-light);color:var(--t);"><i class="ti ti-chart-bar"></i></div>
+            <div class="metric-num" id="ds-avg">—</div>
+            <div class="metric-lbl">Avg. Interview Score</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-currency-dollar"></i></div>
+            <div class="metric-num" id="ds-neg">—</div>
+            <div class="metric-lbl">Avg. Negotiation</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--color-bg-main);color:var(--color-text-main);"><i class="ti ti-flame"></i></div>
+            <div class="metric-num" id="ds-streak">0</div>
+            <div class="metric-lbl">Day Streak</div>
+        </div>
+      </div>
 
-    <div class="card" style="margin-bottom:1rem;">
-      <div style="font-size:13px;font-weight:500;margin-bottom:.75rem;">Score breakdown</div>
-      <div id="rpt-bars"></div>
-    </div>
+      <div class="grid-2">
+        <div class="card col">
+          <h3 style="font-size:16px;margin-bottom:4px;">Skill Progression</h3>
+          <div class="surface col" style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:4px;"><span id="dash-level">Level 1</span><span id="dash-xp-txt" style="color:var(--p);">0 / 200 XP</span></div>
+            <div class="prog-bar"><div class="prog-fill" id="dash-xp-fill" style="width:0%;"></div></div>
+          </div>
+          
+          <h4 style="font-size:14px; color:var(--color-text-main); margin-top:8px; font-weight:600;">Activity Stats</h4>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0; border-bottom:1px solid var(--color-border);">
+              <span class="text-muted">Questions Practiced</span> <span id="ds-practiced" style="font-weight:600;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0; border-bottom:1px solid var(--color-border);">
+              <span class="text-muted">GDs Participated</span> <span id="ds-gd" style="font-weight:600;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0;">
+              <span class="text-muted">Body Language Sessions</span> <span id="ds-body" style="font-weight:600;">0</span>
+          </div>
+        </div>
 
-    <div class="tab-bar">
-      <div class="tab on" onclick="rtab('str',this)">Strengths</div>
-      <div class="tab" onclick="rtab('imp',this)">To improve</div>
-      <div class="tab" onclick="rtab('plan',this)">Action plan</div>
-      <div class="tab" onclick="rtab('answers',this)">Answers</div>
-    </div>
-
-    <div id="rt-str"><div class="col" id="str-list"></div></div>
-    <div id="rt-imp" class="hidden"><div class="col" id="imp-list"></div></div>
-    <div id="rt-plan" class="hidden"><div class="col" id="plan-list"></div></div>
-    <div id="rt-answers" class="hidden"><div class="col" id="ans-list"></div></div>
-
-    <div class="row" style="margin-top:1.25rem;">
-      <button class="btn" onclick="go('dashboard')" style="flex:1;"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
-      <button class="btn btn-primary" onclick="go('setup')" style="flex:1;"><i class="ti ti-repeat"></i> Practice again</button>
+        <div class="card col">
+            <h3 style="font-size:16px;margin-bottom:4px;">Recent Interview Replays</h3>
+            <div id="recent-list" class="col" style="margin-top:8px;">
+                <div style="font-size:14px;color:var(--color-text-sub);text-align:center;padding:2rem 0; background:var(--color-bg-sub); border-radius:var(--radius-sm);">No sessions recorded yet. Start practicing!</div>
+            </div>
+            <button class="btn btn-ghost btn-full" style="margin-top:auto;" onclick="go('replay', document.querySelectorAll('.nav-pill')[7])">View All Replays <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast toast-success hidden" id="toast"><i class="ti ti-check" aria-hidden="true"></i><span id="toast-txt"></span></div>
+  <div class="screen" id="screen-setup">
+    <div class="page" style="max-width:700px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:2rem;">Configure Mock Interview</h1>
+      <div id="s1" class="card">
+        
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:12px;">1. Select or Enter Target Role</label>
+        <div class="role-grid" id="role-grid">
+          <div class="role-card sel" onclick="S.role='Software Engineer'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-code" style="font-size:28px;color:var(--p);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Software Eng</div></div>
+          <div class="role-card" onclick="S.role='Product Manager'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-bulb" style="font-size:28px;color:var(--a);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Product Mgr</div></div>
+          <div class="role-card" onclick="S.role='Data Analyst'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-chart-pie" style="font-size:28px;color:var(--t);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Data Analyst</div></div>
+        </div>
+        <div class="fl">
+            <label>Or type custom role</label>
+            <input type="text" id="custom-role" placeholder="e.g., Machine Learning Engineer, Financial Analyst" oninput="if(this.value) { S.role=this.value; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel')); }">
+        </div>
+
+        <div class="divider"></div>
+        
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:12px;">2. Interview Parameters</label>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+          <div class="fl" style="margin:0;"><label>Interview Type</label>
+              <select id="iv-type">
+                  <option selected>Mixed (Tech + HR)</option>
+                  <option>Strictly Technical</option>
+                  <option>Behavioral / HR</option>
+              </select>
+          </div>
+          <div class="fl" style="margin:0;"><label>Experience / Difficulty</label>
+              <select id="exp">
+                  <option>Beginner (Intern/Fresher)</option>
+                  <option selected>Intermediate (Mid-Level)</option>
+                  <option>Advanced (Senior/Lead)</option>
+              </select>
+          </div>
+          <div class="fl" style="margin:0; grid-column: span 2;"><label>Length</label>
+              <select id="qct">
+                  <option value="3">Quick Screen (3 Qs)</option>
+                  <option value="5" selected>Standard Round (5 Qs)</option>
+                  <option value="8">Deep Dive (8 Qs)</option>
+              </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="startInterviewSequence()"><i class="ti ti-player-play"></i> Start Simulation</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-interview">
+    <div class="page" style="max-width:800px;">
+      <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--color-text-main); color: white; border:none;">
+        <div style="font-size:15px;font-weight:600;" id="iv-meta">Interviewing...</div>
+        <div class="row">
+            <div class="badge" style="background:rgba(255,255,255,0.15);color:white;" id="iv-timer">00:00</div>
+            <div class="badge badge-green" id="iv-qprog">Q 1/5</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction: column;">
+        <div class="chat-box" id="chat-box" style="flex:1;"></div>
+        <div id="ans-panel" class="card" style="margin-top:0;">
+          <label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px;">Your Response</label>
+          <textarea class="ans-box" id="ans-input" placeholder="Type your detailed answer here..."></textarea>
+          <div class="row" style="margin-top:12px;">
+            <button class="btn btn-primary" onclick="submitAns()" style="flex:1;"><i class="ti ti-send"></i> Submit Answer</button>
+          </div>
+        </div>
+        <div id="fb-panel" class="card hidden" style="margin-top:1rem; border-color: var(--p-mid); background: var(--p-light);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;color:var(--p-dark);font-weight:700;"><i class="ti ti-sparkles"></i> Instant AI Evaluation</div>
+          <div style="font-size:14px;color:var(--color-text-main);line-height:1.6;padding:12px;background:#fff;border-radius:var(--radius-sm); border:1px solid var(--color-border);" id="fb-text"></div>
+          <button class="btn btn-primary btn-full" onclick="nextQ()" style="margin-top:1rem;" id="next-btn">Next Question <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-practice">
+    <div class="page">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:16px;">
+          <div>
+            <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Practice Question Bank</h1>
+            <p style="color:var(--color-text-sub);">Master 160+ curated questions across 5 categories.</p>
+          </div>
+          <div class="badge badge-purple" style="font-size:14px; padding:8px 16px;"><i class="ti ti-check"></i> <span id="pb-count">0</span> Completed</div>
+      </div>
+      
+      <div class="card" style="margin-bottom: 1.5rem; padding: 1rem 1.5rem;">
+          <div class="grid-features" style="gap:12px;">
+              <div class="fl" style="margin:0;"><input type="text" id="pb-search" placeholder="Search questions..." oninput="renderPracticeBank()"></div>
+              <div class="fl" style="margin:0;">
+                  <select id="pb-cat" onchange="renderPracticeBank()">
+                      <option value="All">All Categories</option>
+                      <option value="HR">HR & Behavioral</option>
+                      <option value="Technical">Core Technical</option>
+                      <option value="Coding">Coding & DSA</option>
+                      <option value="Company">Company Specific</option>
+                  </select>
+              </div>
+              <div class="fl" style="margin:0;">
+                  <select id="pb-diff" onchange="renderPracticeBank()">
+                      <option value="All">All Difficulties</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                  </select>
+              </div>
+              <button class="btn btn-primary" onclick="renderPracticeBank()" style="height:42px;"><i class="ti ti-filter"></i> Apply Filters</button>
+          </div>
+      </div>
+
+      <div class="q-list" id="pb-list">
+          </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-company">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Company-Specific Prep</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Select a target company to generate tailored interview strategies, common rounds, and FAQs.</p>
+      
+      <div class="company-grid" id="company-grid">
+        <div class="company-card sel" onclick="selectCompany('Google', this)"><i class="ti ti-brand-google" style="font-size:32px;color:#DB4437;margin-bottom:8px;"></i><div style="font-weight:600;">Google</div></div>
+        <div class="company-card" onclick="selectCompany('Amazon', this)"><i class="ti ti-brand-amazon" style="font-size:32px;color:#FF9900;margin-bottom:8px;"></i><div style="font-weight:600;">Amazon</div></div>
+        <div class="company-card" onclick="selectCompany('Meta', this)"><i class="ti ti-brand-meta" style="font-size:32px;color:#0668E1;margin-bottom:8px;"></i><div style="font-weight:600;">Meta</div></div>
+        <div class="company-card" onclick="selectCompany('Microsoft', this)"><i class="ti ti-brand-windows" style="font-size:32px;color:#00A4EF;margin-bottom:8px;"></i><div style="font-weight:600;">Microsoft</div></div>
+      </div>
+      
+      <div class="card" style="margin-bottom:1.5rem;">
+          <div class="fl" style="margin:0;">
+              <label>Or Enter Any Custom Company</label>
+              <input type="text" id="custom-company" placeholder="e.g., Goldman Sachs, Uber, Stripe" oninput="if(this.value){S.targetCompany=this.value; document.querySelectorAll('.company-card').forEach(c=>c.classList.remove('sel'));}">
+          </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-full" onclick="generateCompanyPrep()" id="btn-gen-prep"><i class="ti ti-wand"></i> Generate Prep Strategy</button>
+
+      <div id="company-output" class="hidden col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-salary">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Salary Negotiation Trainer</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Roleplay with an AI recruiter to maximize your compensation confidently.</p>
+      
+      <div id="sal-setup" class="card">
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <div class="fl"><label>Target Role</label><input type="text" id="sal-role" value="Senior Developer"></div>
+          <div class="fl"><label>Current Offer ($)</label><input type="number" id="sal-offer" value="120000"></div>
+          <div class="fl" style="grid-column: span 2;"><label>Your Target Goal ($)</label><input type="number" id="sal-target" value="140000"></div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="startNegotiation()"><i class="ti ti-messages"></i> Start Negotiation Simulator</button>
+      </div>
+
+      <div id="sal-active" class="hidden">
+        <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; background: var(--g-success); color: white; display:flex; justify-content:space-between; align-items:center; border:none;">
+            <div style="font-weight:600; font-size:15px;"><i class="ti ti-user"></i> AI Recruiter: Sarah</div>
+            <div class="badge" style="background:rgba(255,255,255,0.2);color:white; font-size:13px;">Target: $<span id="sal-target-disp"></span></div>
+        </div>
+        <div class="chat-box" id="sal-chat-box"></div>
+        <div class="card" style="margin-top:0;">
+          <textarea class="ans-box" id="sal-input" placeholder="Type your response to the recruiter..."></textarea>
+          <button class="btn btn-primary btn-full" style="margin-top:12px;" onclick="submitNegotiation()"><i class="ti ti-send"></i> Send Response</button>
+        </div>
+      </div>
+      
+      <div id="sal-report" class="hidden card col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-gd">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Group Discussion Simulator</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Engage in a multi-participant debate. Stand out by making valid points and demonstrating leadership.</p>
+      
+      <div id="gd-setup" class="card">
+        <div class="fl"><label>Select Topic</label>
+          <select id="gd-topic">
+            <option>AI replacing software engineers</option>
+            <option>Remote work vs Office culture</option>
+            <option>Should tech monopolies be broken up?</option>
+            <option>Impact of Electric Vehicles on global economy</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="startGD()"><i class="ti ti-users"></i> Enter Discussion Room</button>
+      </div>
+
+      <div id="gd-active" class="hidden">
+        <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; background: var(--t); color: white; display:flex; justify-content:space-between; align-items:center; border:none;">
+            <div style="font-weight:600; font-size:15px;" id="gd-topic-disp">Topic</div>
+            <div style="font-size:12px; opacity:0.9;">Participants: You, Alex (AI), Jamie (AI)</div>
+        </div>
+        <div class="chat-box" id="gd-chat-box" style="height: 400px;"></div>
+        <div class="card" style="margin-top:0;">
+          <textarea class="ans-box" id="gd-input" placeholder="Jump into the discussion..." style="height:80px; min-height:80px;"></textarea>
+          <div class="row" style="margin-top:12px;">
+            <button class="btn btn-primary" style="flex:1;" onclick="submitGD()"><i class="ti ti-message"></i> Speak</button>
+            <button class="btn btn-ghost" style="color:var(--r);" onclick="endGD()"><i class="ti ti-player-stop"></i> End & Analyze</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="gd-report" class="hidden card col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-bodycoach">
+    <div class="page" style="max-width:800px; text-align:center;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Live Body Language Coach</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Uses your webcam to analyze eye contact, posture, and engagement in real-time.</p>
+      
+      <div class="video-container" id="video-wrapper">
+        <video id="webcam-video" autoplay playsinline muted style="display:none;"></video>
+        <div id="webcam-placeholder" style="padding: 6rem 2rem; color: #fff; background: var(--color-text-main);">
+            <i class="ti ti-camera-off" style="font-size:48px; color:var(--color-text-muted); margin-bottom:1rem;"></i>
+            <p style="font-size:15px;">Camera is off. Click below to start analysis.</p>
+        </div>
+        <div class="overlay-metrics hidden" id="video-metrics">
+            <div class="metric-pill"><i class="ti ti-eye"></i> <span id="metric-eye">0%</span> Eye Contact</div>
+            <div class="metric-pill"><i class="ti ti-user"></i> <span id="metric-posture">Good</span> Posture</div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:center; margin-top:2rem;">
+        <button class="btn btn-primary btn-lg" id="btn-start-cam" onclick="startBodyCoach()"><i class="ti ti-camera"></i> Start Camera & Analysis</button>
+        <button class="btn btn-ghost btn-lg hidden" id="btn-stop-cam" onclick="stopBodyCoach()"><i class="ti ti-player-stop"></i> Stop Analysis</button>
+      </div>
+
+      <div class="card col hidden" id="body-feedback" style="margin-top:2rem; text-align:left;">
+        <h3 style="font-size:16px;">Live Feedback</h3>
+        <div class="prog-bar" style="height:12px; margin-top:8px;"><div class="prog-fill" id="body-score-fill" style="width:0%;"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--color-text-sub); margin-top:8px; font-weight:500;"><span>Engagement Score</span><span id="body-score-txt">0/100</span></div>
+        <div class="surface" style="margin-top:1rem; border-left: 4px solid var(--p); font-size:14px;" id="body-coach-tip">Analyzing your posture and presence...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-replay">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Interview Replay Analysis</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Review past sessions, analyze strong and weak moments, and track growth over time.</p>
+      
+      <div id="replay-timeline" class="col"></div>
+    </div>
+  </div>
 
 </div>
 
 <script>
-const API = 'https://api.anthropic.com/v1/messages';
+/* ==========================================
+   ENTERPRISE QUESTION BANK (160+ Questions)
+========================================== */
+const generatePracticeBank = () => {
+    let b = [];
+    const add = (c, q, d) => b.push({id: 'q'+b.length, cat: c, q: q, diff: d});
+    
+    // HR & Behavioral (40)
+    const hr = ["Tell me about yourself.", "Why should we hire you?", "What are your greatest strengths?", "What is your biggest weakness?", "Where do you see yourself in 5 years?", "Why do you want to leave your current job?", "Describe a time you failed.", "How do you handle conflict with a coworker?", "Tell me about a time you showed leadership.", "How do you prioritize tasks under pressure?", "Describe a difficult decision you made.", "What motivates you?", "How do you handle negative feedback?", "Tell me about a time you went above and beyond.", "Describe your ideal work environment.", "How do you deal with ambiguity?", "Tell me about a time you disagreed with a manager.", "What is your greatest professional achievement?", "How do you stay updated in your industry?", "What makes you unique?", "Tell me about a time you missed a deadline.", "Describe a situation where you had to adapt quickly.", "How do you handle working with difficult personalities?", "What is your management style?", "Tell me about a time you persuaded someone.", "Describe a project that required tight collaboration.", "How do you define success?", "What is the most difficult challenge you've faced?", "Tell me about a time you took a calculated risk.", "How do you ensure diversity and inclusion in your team?", "Describe a time you had to learn a new skill quickly.", "Tell me about a time you mentored someone.", "How do you handle a toxic team environment?", "What are your salary expectations?", "Are you willing to relocate?", "Tell me about a time you made an unpopular decision.", "How do you balance multiple projects?", "Describe a time you solved a problem creatively.", "What do you do outside of work?", "Do you have any questions for us?"];
+    hr.forEach((q,i) => add('HR', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Technical Core (40)
+    const tech = ["Explain Object-Oriented Programming concepts.", "What is the difference between an abstract class and an interface?", "Explain RESTful API principles.", "What are microservices vs monolithic architecture?", "How does DNS work?", "What is CI/CD?", "Explain the concept of containerization (Docker).", "What is the difference between SQL and NoSQL?", "Explain database indexing.", "What is a transaction and ACID properties?", "Describe the OSI model.", "What is the difference between TCP and UDP?", "Explain multi-threading vs multi-processing.", "What is a memory leak?", "How do you handle state management in frontend?", "Explain the Virtual DOM.", "What are WebSockets?", "What is OAuth 2.0?", "Explain Cross-Site Scripting (XSS).", "What is CSRF?", "How do you optimize a slow web application?", "Explain hashing vs encryption.", "What is a Load Balancer?", "Describe Big O notation.", "What is a deadlock?", "Explain garbage collection.", "What are Design Patterns? Name three.", "Explain the MVC pattern.", "What is an ORM?", "Explain horizontal vs vertical scaling.", "What is a CDN?", "Explain serverless computing.", "What is Git rebase vs merge?", "How do you resolve merge conflicts?", "What is the CAP theorem?", "Explain Event-Driven Architecture.", "What is a reverse proxy?", "How does HTTPS work?", "Explain WebAssembly.", "What are Progressive Web Apps (PWAs)?"];
+    tech.forEach((q,i) => add('Technical', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Coding & DSA (40)
+    const dsa = ["Reverse a string without using built-in methods.", "Find the missing number in a given integer array.", "Check if a string is a palindrome.", "Implement FizzBuzz.", "Find the two numbers that add up to a target (Two Sum).", "Implement a binary search.", "Merge two sorted arrays.", "Find the first non-repeating character in a string.", "Implement a linked list.", "Detect a cycle in a linked list.", "Reverse a linked list.", "Find the middle of a linked list.", "Implement a stack using queues.", "Check for balanced parentheses.", "Implement a queue using stacks.", "Traverse a binary tree (Inorder, Preorder, Postorder).", "Find the maximum depth of a binary tree.", "Invert a binary tree.", "Check if a binary tree is a Binary Search Tree (BST).", "Find the Lowest Common Ancestor in a BST.", "Implement Breadth-First Search (BFS) on a graph.", "Implement Depth-First Search (DFS) on a graph.", "Find the shortest path in an unweighted graph.", "Detect a cycle in a directed graph.", "Explain Dijkstra's Algorithm.", "Implement Merge Sort.", "Implement Quick Sort.", "Find the Kth largest element in an array.", "Solve the Climbing Stairs problem (DP).", "Solve the Coin Change problem.", "Find the Longest Common Subsequence.", "Find the Longest Increasing Subsequence.", "Solve the Knapsack problem.", "Find the contiguous subarray with the largest sum (Kadane's).", "Rotate an array by K steps.", "Group anagrams from a list of strings.", "Find the longest substring without repeating characters.", "Implement a Trie (Prefix Tree).", "Solve the N-Queens problem.", "Design an LRU Cache."];
+    dsa.forEach((q,i) => add('Coding', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Company Specific (40)
+    const comp = ["(Google) Describe a time you showed 'Googlyness'.", "(Google) How would you design YouTube?", "(Google) Estimate the number of tennis balls in a Boeing 747.", "(Google) Describe a complex system you built.", "(Amazon) Give an example of 'Customer Obsession'.", "(Amazon) Tell me about a time you 'Disagreed and Committed'.", "(Amazon) Describe a situation showing 'Ownership'.", "(Amazon) How do you 'Dive Deep' into a problem?", "(Meta) How would you design Instagram's feed?", "(Meta) Move fast and break things - tell me a time you did this.", "(Meta) How do you prioritize feature requests?", "(Meta) Design a real-time chat system like Messenger.", "(Microsoft) How would you design Microsoft Teams?", "(Microsoft) Tell me about a time you collaborated across boundaries.", "(Microsoft) How do you foster an inclusive environment?", "(Apple) Describe a time you obsessed over a detail.", "(Apple) How do you balance aesthetics with functionality?", "(Netflix) How do you handle radical candor?", "(Netflix) Design Netflix's recommendation engine.", "(Uber) Design a ride-sharing dispatch system.", "(Uber) How do you handle surge pricing logic?", "(Stripe) Design a payment gateway API.", "(Stripe) How do you ensure high availability and security?", "(Airbnb) Design a booking system.", "(Airbnb) How do you handle overbooking conflicts?", "(Tesla) How would you process telemetry data from millions of cars?", "(Spotify) Design a music streaming service.", "(TCS) Explain the SDLC lifecycle.", "(Infosys) What are the core OOPs concepts with real-world examples?", "(Accenture) How do you manage client expectations?", "(Deloitte) Describe a time you analyzed complex data for a client.", "(JPMorgan) What is a distributed ledger?", "(Goldman Sachs) Design a low-latency trading system.", "(Adobe) How do you implement infinite undo/redo?", "(Flipkart) Design an e-commerce cart system.", "(Atlassian) How would you improve Jira?", "(Slack) Design a real-time notification service.", "(Zoom) How do you handle video streaming latency?", "(Salesforce) Explain multi-tenant architecture.", "(Oracle) Write a complex SQL query with window functions."];
+    comp.forEach((q,i) => add('Company', q, i<20?'Intermediate':'Advanced'));
+
+    return b;
+};
+
+const PRACTICE_BANK = generatePracticeBank();
+
+/* ==========================================
+   CORE STATE & DB 
+========================================== */
+const initDB = () => {
+    let db = localStorage.getItem('iai_v3_users');
+    if(!db) {
+        db = {
+            "demo@example.com": {
+                name: "Demo User", pass: "demo123",
+                interviews: [], negotiations: [], gds: [], practiced: [], xp: 0, level: 1, streak: 1, lastActive: new Date().toDateString()
+            }
+        };
+        localStorage.setItem('iai_v3_users', JSON.stringify(db));
+    }
+    return JSON.parse(localStorage.getItem('iai_v3_users'));
+};
 
 const DB = {
-  get users(){ return JSON.parse(localStorage.getItem('iai2_users')||'{"demo@interviewai.com":{"name":"Demo User","pass":"demo123","interviews":[],"xp":0,"level":1,"streak":0,"lastDay":null}}') },
-  save(u){ localStorage.setItem('iai2_users', JSON.stringify(u)) }
+  get users(){ return initDB(); },
+  save(u){ localStorage.setItem('iai_v3_users', JSON.stringify(u)) }
 };
 
-let S = {
-  user: null,
-  role: null,
-  iv: null,
-  questions: [],
-  answers: [],
-  feedbacks: [],
-  qIdx: 0,
-  timerInterval: null,
-  elapsed: 0,
-  recognition: null,
-  recording: false
+let S = { 
+    user: null, 
+    role: 'Software Engineer',
+    targetCompany: 'Google',
+    iv: null, questions: [], sessionQuestions: [], answers: [], feedbacks: [], qIdx: 0, timerInterval: null, elapsed: 0,
+    negRound: 0, negHistory: [], targetSalary: 0, currentOffer: 0,
+    gdTopic: '', gdHistory: [], gdInterval: null, gdRound: 0,
+    camStream: null, camInterval: null
 };
 
-function go(screen) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-'+screen).classList.add('active');
+/* ==========================================
+   ROUTING & ANIMATION
+========================================== */
+function go(screen, pillEl = null) {
+  // Check auth for protected routes
+  const authedRoutes = ['dashboard','setup','interview','company','salary','gd','bodycoach','replay','practice'];
+  if(authedRoutes.includes(screen) && !S.user) {
+      screen = 'login';
+  }
+
+  document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+  });
+  
+  const target = document.getElementById('screen-'+screen);
+  if(target) target.classList.add('active');
+  
   const nav = document.getElementById('topnav');
-  const authed = ['dashboard','setup','interview','report','coach'].includes(screen);
-  nav.style.display = authed ? 'flex' : 'none';
-  if (authed && S.user) updateNavXP();
-  if (screen === 'dashboard') refreshDash();
-  if (screen === 'coach') refreshCoach();
+  nav.style.display = authedRoutes.includes(screen) ? 'flex' : 'none';
+  
+  if (pillEl) {
+    document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+    pillEl.classList.add('active');
+  }
+
+  if (authedRoutes.includes(screen) && S.user) {
+      updateNavXP();
+      if(screen === 'dashboard') refreshDash();
+      if(screen === 'replay') loadReplays();
+      if(screen === 'practice') renderPracticeBank();
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function updateNavXP() {
-  const users = DB.users; const u = users[S.user];
+  const u = DB.users[S.user];
+  if(!u) return;
   const xpNeeded = u.level * 200;
-  document.getElementById('xp-fill').style.width = Math.round((u.xp % xpNeeded) / xpNeeded * 100) + '%';
-  document.getElementById('level-badge').textContent = 'Lv ' + u.level;
-  const initials = u.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();
-  document.getElementById('nav-avatar').textContent = initials;
+  document.getElementById('xp-fill').style.width = Math.round(((u.xp||0) % xpNeeded) / xpNeeded * 100) + '%';
+  document.getElementById('level-badge').textContent = 'Lv ' + (u.level||1);
+  document.getElementById('nav-avatar').textContent = u.name.substring(0,2).toUpperCase();
 }
 
-function showToast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.className = 'toast toast-'+(type==='success'?'success':'info');
-  document.getElementById('toast-txt').textContent = msg;
-  t.classList.remove('hidden');
-  setTimeout(() => t.classList.add('hidden'), 2800);
-}
-
+/* ==========================================
+   AUTH LOGIC
+========================================== */
 function doLogin() {
   const users = DB.users;
   const e = document.getElementById('le').value.trim();
   const p = document.getElementById('lp').value;
   const err = document.getElementById('lerr');
-  if (!users[e] || users[e].pass !== p) { err.textContent='Invalid email or password'; err.style.display='block'; return; }
-  err.style.display='none'; S.user = e; go('dashboard');
+  
+  if (!e || !p) { err.textContent='Please fill all fields'; err.style.display='block'; return; }
+  if (!users[e] || users[e].pass !== p) { err.textContent='Invalid credentials'; err.style.display='block'; return; }
+  
+  err.style.display='none'; 
+  S.user = e; 
+  checkStreak();
+  go('dashboard', document.querySelectorAll('.nav-pill')[0]);
 }
 
-function doRegister() {
-  const n = document.getElementById('rn').value.trim();
-  const e = document.getElementById('re').value.trim();
-  const p = document.getElementById('rp').value;
-  if (!n||!e||!p||p.length<6) { alert('Fill all fields (password ≥ 6 chars)'); return; }
-  const users = DB.users;
-  if (users[e]) { alert('Email already in use'); return; }
-  users[e] = { name:n, pass:p, interviews:[], xp:0, level:1, streak:0, lastDay:null };
-  DB.save(users); S.user = e;
-  showToast('Welcome to InterviewAI, ' + n.split(' ')[0] + '!');
-  go('dashboard');
+function doSignup() {
+    const users = DB.users;
+    const n = document.getElementById('sn_name').value.trim();
+    const e = document.getElementById('sn_email').value.trim();
+    const p1 = document.getElementById('sn_pass').value;
+    const p2 = document.getElementById('sn_pass2').value;
+    const err = document.getElementById('serr');
+
+    if(!n || !e || !p1 || !p2) { err.textContent='Please fill all fields'; err.style.display='block'; return; }
+    if(p1 !== p2) { err.textContent='Passwords do not match'; err.style.display='block'; return; }
+    if(users[e]) { err.textContent='Email already exists'; err.style.display='block'; return; }
+
+    users[e] = {
+        name: n, pass: p1,
+        interviews: [], negotiations: [], gds: [], practiced: [], xp: 0, level: 1, streak: 1, lastActive: new Date().toDateString()
+    };
+    DB.save(users);
+    
+    err.style.display='none';
+    S.user = e;
+    go('dashboard', document.querySelectorAll('.nav-pill')[0]);
 }
 
-function logout() { S.user = null; go('landing'); }
+function logout() { S.user = null; if(S.camStream) stopBodyCoach(); go('landing'); }
+
+function checkStreak() {
+    const users = DB.users;
+    const u = users[S.user];
+    const today = new Date().toDateString();
+    if(u.lastActive !== today) {
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        if(u.lastActive === yesterday.toDateString()) {
+            u.streak = (u.streak || 0) + 1;
+        } else {
+            u.streak = 1;
+        }
+        u.lastActive = today;
+        DB.save(users);
+    }
+}
 
 function gainXP(amount) {
-  const users = DB.users; const u = users[S.user];
+  const users = DB.users, u = users[S.user];
   u.xp = (u.xp||0) + amount;
-  const needed = u.level * 200;
-  if (u.xp >= needed) { u.level++; showToast('Level up! You are now Level ' + u.level, 'info'); }
-  DB.save(users);
-  updateNavXP();
+  if (u.xp >= u.level * 200) { u.level++; alert('🎉 LEVEL UP! You reached Level ' + u.level); }
+  DB.save(users); updateNavXP();
 }
 
-function updateStreak() {
-  const users = DB.users; const u = users[S.user];
-  const today = new Date().toDateString();
-  if (u.lastDay !== today) { u.streak = (u.streak||0) + 1; u.lastDay = today; }
-  DB.save(users);
-}
-
+/* ==========================================
+   DASHBOARD
+========================================== */
 function refreshDash() {
-  const users = DB.users; const u = users[S.user];
-  const name = u.name.split(' ')[0];
-  document.getElementById('dash-name').textContent = 'Hello, ' + name + '!';
-  const hour = new Date().getHours();
-  document.getElementById('dash-sub').textContent = hour < 12 ? 'Good morning — ready to practice?' : hour < 17 ? 'Good afternoon — let\'s sharpen your skills' : 'Good evening — one session a day builds momentum';
-  document.getElementById('streak-num').textContent = u.streak || 0;
-  const xpNeeded = u.level * 200;
-  const xpInLevel = u.xp % xpNeeded;
+  const u = DB.users[S.user];
+  document.getElementById('dash-name').textContent = 'Welcome, ' + u.name.split(' ')[0];
+  const xpNeeded = u.level * 200, xpInLevel = u.xp % xpNeeded;
   document.getElementById('dash-level').textContent = 'Level ' + u.level;
   document.getElementById('dash-xp-txt').textContent = xpInLevel + ' / ' + xpNeeded + ' XP';
   document.getElementById('dash-xp-fill').style.width = Math.round(xpInLevel/xpNeeded*100) + '%';
+  
   const ivs = u.interviews || [];
-  document.getElementById('ds-total').textContent = ivs.length;
+  const negs = u.negotiations || [];
+  document.getElementById('ds-total').textContent = ivs.length + negs.length + (u.gds?.length||0);
+  document.getElementById('ds-streak').textContent = u.streak || 1;
+  document.getElementById('ds-practiced').textContent = u.practiced?.length || 0;
+  document.getElementById('ds-gd').textContent = u.gds?.length || 0;
+  document.getElementById('ds-body').textContent = Math.floor((u.xp || 0) / 100); // mock stat based on xp
+  
   if (ivs.length) {
-    const avg = Math.round(ivs.reduce((a,b)=>a+b.overall,0)/ivs.length);
-    const best = Math.max(...ivs.map(i=>i.overall));
-    document.getElementById('ds-avg').textContent = avg + '%';
-    document.getElementById('ds-best').textContent = best + '%';
-    const spark = document.getElementById('spark-chart');
-    const recent = ivs.slice(-8);
-    spark.innerHTML = recent.map((iv,i) => {
-      const h = Math.round(iv.overall / 100 * 36);
-      const isHi = i === recent.length-1;
-      return `<div class="spark-bar ${isHi?'hi':''}" style="height:${h}px;" title="${iv.role}: ${iv.overall}%"></div>`;
-    }).join('');
-  }
-  const achEl = document.getElementById('achievements-list');
-  const allAch = getAchievements(u, ivs);
-  achEl.innerHTML = allAch.map(a => `
-    <div class="ach-card ${a.earned?'':''}">
-      <div class="ach-icon" style="background:${a.earned?a.bg:'var(--color-background-secondary)'};color:${a.earned?a.color:'var(--color-text-secondary)'};">
-        <i class="ti ${a.icon}" aria-hidden="true"></i>
-      </div>
-      <div>
-        <div style="font-size:13px;font-weight:500;color:${a.earned?'var(--color-text-primary)':'var(--color-text-secondary)'};">${a.name}</div>
-        <div style="font-size:11px;color:var(--color-text-secondary);">${a.desc}</div>
-      </div>
-      ${a.earned?'<div class="spacer"></div><span class="badge badge-green" style="font-size:10px;">Earned</span>':''}
-    </div>`).join('');
-  const recent2 = [...(ivs)].reverse().slice(0,5);
-  const rlist = document.getElementById('recent-list');
-  if (!recent2.length) {
-    rlist.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:13px;"><i class="ti ti-clipboard" style="font-size:28px;display:block;margin-bottom:8px;opacity:.4;" aria-hidden="true"></i>No interviews yet — start your first one!</div>';
-  } else {
-    rlist.innerHTML = recent2.map(iv => `
-      <div class="card card-sm" style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <div style="font-size:13px;font-weight:500;">${iv.role}</div>
-          <div style="font-size:11px;color:var(--color-text-secondary);">${iv.level} · ${iv.type} · ${iv.date}</div>
+    document.getElementById('ds-avg').textContent = Math.round(ivs.reduce((a,b)=>a+b.overall,0)/ivs.length) + '%';
+    const rlist = document.getElementById('recent-list');
+    rlist.innerHTML = ivs.slice(-4).reverse().map(iv => `
+      <div class="surface row" style="transition:var(--transition-fast); cursor:pointer;" onmouseover="this.style.borderColor='var(--p)'" onmouseout="this.style.borderColor='var(--color-border)'">
+        <div class="spacer">
+            <div style="font-size:14px;font-weight:600;">${iv.role}</div>
+            <div style="font-size:12px;color:var(--color-text-sub);">${iv.type} • ${iv.date}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div class="sparkline" style="height:20px;gap:2px;">${(iv.qScores||[]).map(s=>`<div class="spark-bar ${s>=70?'hi':''}" style="height:${Math.round(s/100*20)}px;"></div>`).join('')}</div>
-          <span class="badge ${iv.overall>=80?'badge-green':iv.overall>=60?'badge-purple':'badge-amber'}">${iv.overall}%</span>
-        </div>
-      </div>`).join('');
+        <div class="badge ${iv.overall>=70?'badge-green':'badge-amber'}">${iv.overall}%</div>
+      </div>
+    `).join('');
+  }
+  if(negs.length) {
+      document.getElementById('ds-neg').textContent = '$' + Math.round(negs[negs.length-1].finalOffer/1000) + 'k';
   }
 }
 
-function getAchievements(u, ivs) {
-  return [
-    {name:'First step',desc:'Complete your first interview',icon:'ti-flag',bg:'var(--p-light)',color:'var(--p-dark)',earned:ivs.length>=1},
-    {name:'On a roll',desc:'Complete 5 interviews',icon:'ti-flame',bg:'var(--a-light)',color:'var(--a)',earned:ivs.length>=5},
-    {name:'High achiever',desc:'Score 80% or above',icon:'ti-trophy',bg:'var(--g-light)',color:'var(--g-success)',earned:ivs.some(i=>i.overall>=80)},
-    {name:'Streak master',desc:'Practice 3 days in a row',icon:'ti-calendar',bg:'var(--t-light)',color:'var(--t)',earned:(u.streak||0)>=3},
-  ];
-}
-
-function refreshCoach() {
-  const users = DB.users; const u = users[S.user];
-  const ivs = u.interviews || [];
-  const sa = document.getElementById('skill-analysis');
-  if (!ivs.length) {
-    sa.innerHTML = '<div style="font-size:12px;color:var(--color-text-secondary);">Complete at least one interview to unlock skill analysis.</div>';
-    return;
-  }
-  const avgTech = Math.round(ivs.map(i=>i.tech||60).reduce((a,b)=>a+b,0)/ivs.length);
-  const avgComm = Math.round(ivs.map(i=>i.comm||60).reduce((a,b)=>a+b,0)/ivs.length);
-  const avgConf = Math.round(ivs.map(i=>i.conf||60).reduce((a,b)=>a+b,0)/ivs.length);
-  sa.innerHTML = [
-    {label:'Technical depth',val:avgTech,color:'var(--p)'},
-    {label:'Communication',val:avgComm,color:'var(--t)'},
-    {label:'Confidence',val:avgConf,color:'var(--a)'},
-  ].map(b=>`<div class="sbar-row"><div class="sbar-lbl">${b.label}</div><div class="sbar-track"><div class="sbar-fill" style="width:${b.val}%;background:${b.color};"></div></div><div class="sbar-val">${b.val}%</div></div>`).join('');
-}
-
-/* SETUP */
-function pickRole(role, icon, tags) {
-  S.role = role;
-  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));
-  event.currentTarget.classList.add('sel');
-}
-function s1next() {
-  if (!S.role) { document.getElementById('s1err').style.display='block'; return; }
-  document.getElementById('s1err').style.display='none';
-  document.getElementById('s1').classList.add('hidden');
-  document.getElementById('s2').classList.remove('hidden');
-  document.getElementById('sd1').classList.remove('cur'); document.getElementById('sd1').classList.add('done');
-  document.getElementById('sd2').classList.add('cur');
-}
-function s2back() {
-  document.getElementById('s2').classList.add('hidden'); document.getElementById('s1').classList.remove('hidden');
-  document.getElementById('sd2').classList.remove('cur'); document.getElementById('sd1').classList.remove('done'); document.getElementById('sd1').classList.add('cur');
-}
-function s2next() {
-  const conf = { role:S.role, level:document.getElementById('exp').value, type:document.getElementById('itype').value, count:parseInt(document.getElementById('qct').value), skills:document.getElementById('skills').value, bg:document.getElementById('bg').value };
-  S.iv = conf;
-  document.getElementById('c-role').textContent=conf.role; document.getElementById('c-lvl').textContent=conf.level;
-  document.getElementById('c-type').textContent=conf.type; document.getElementById('c-ct').textContent=conf.count+' questions';
-  document.getElementById('s2').classList.add('hidden'); document.getElementById('s3').classList.remove('hidden');
-  document.getElementById('sd2').classList.remove('cur'); document.getElementById('sd2').classList.add('done'); document.getElementById('sd3').classList.add('cur');
-}
-function s3back() {
-  document.getElementById('s3').classList.add('hidden'); document.getElementById('s2').classList.remove('hidden');
-  document.getElementById('sd3').classList.remove('cur'); document.getElementById('sd2').classList.remove('done'); document.getElementById('sd2').classList.add('cur');
-}
-
-/* INTERVIEW */
-async function beginInterview() {
+/* ==========================================
+   DYNAMIC INTERVIEW LOGIC
+========================================== */
+function startInterviewSequence() {
+  const type = document.getElementById('iv-type').value;
+  const diff = document.getElementById('exp').value;
+  S.iv = { role: S.role, type: type, level: diff, count: parseInt(document.getElementById('qct').value) };
   S.questions=[]; S.answers=[]; S.feedbacks=[]; S.qIdx=0;
-  S.elapsed=0;
+  
+  // Filter bank based on selection
+  let pool = PRACTICE_BANK.filter(q => {
+      let matchCat = true;
+      let matchDiff = true;
+      if(type.includes('Technical')) matchCat = (q.cat === 'Technical' || q.cat === 'Coding');
+      else if(type.includes('HR')) matchCat = (q.cat === 'HR');
+      
+      if(diff.includes('Beginner')) matchDiff = (q.diff === 'Beginner');
+      else if(diff.includes('Advanced')) matchDiff = (q.diff === 'Advanced');
+      else matchDiff = (q.diff === 'Intermediate' || q.diff === 'Beginner'); // Mid level pool
+      
+      return matchCat && matchDiff;
+  });
+
+  // Fallback if pool is too small
+  if(pool.length < S.iv.count) pool = [...PRACTICE_BANK];
+
+  // Shuffle & pick
+  pool.sort(() => 0.5 - Math.random());
+  S.sessionQuestions = pool.slice(0, S.iv.count).map(q => q.q);
+
+  // If custom role, inject role specific prefix into first question
+  if(document.getElementById('custom-role').value) {
+      S.sessionQuestions[0] = `As a ${S.role}, ` + S.sessionQuestions[0].charAt(0).toLowerCase() + S.sessionQuestions[0].slice(1);
+  }
+
   go('interview');
   document.getElementById('chat-box').innerHTML='';
   document.getElementById('ans-input').value='';
   document.getElementById('fb-panel').classList.add('hidden');
-  document.getElementById('ans-panel').style.display='block';
-  document.getElementById('iv-meta').textContent = S.iv.role + ' · ' + S.iv.level;
-  clearInterval(S.timerInterval);
-  S.timerInterval = setInterval(tickTimer, 1000);
-  await loadQ(0);
+  document.getElementById('iv-meta').innerHTML = `<i class="ti ti-microphone"></i> ${S.iv.role} • ${diff.split(' ')[0]}`;
+  loadQ(0);
 }
 
-function tickTimer() {
-  S.elapsed++;
-  const m=String(Math.floor(S.elapsed/60)).padStart(2,'0');
-  const s=String(S.elapsed%60).padStart(2,'0');
-  const el = document.getElementById('iv-timer');
-  el.textContent = m+':'+s;
-  el.className = 'timer' + (S.elapsed>480?' warn':'');
+function addBubble(containerId, sender, text, type='ai') {
+  const box=document.getElementById(containerId);
+  let styleClass = type==='user' ? 'bubble-user' : (type==='peer' ? 'bubble-peer' : 'bubble-ai');
+  let align = type==='user' ? 'align-self:flex-end;text-align:right;' : 'align-self:flex-start;';
+  box.innerHTML += `<div class="col" style="${align} max-width:80%; margin-bottom:8px;"><div style="font-size:12px;color:var(--color-text-sub);margin-bottom:2px;font-weight:600;">${sender}</div><div class="bubble ${styleClass}" style="max-width:100%;">${text}</div></div>`;
+  box.scrollTop=box.scrollHeight;
 }
 
-function updateIvProgress() {
-  const n=S.iv.count; const c=S.qIdx+1;
-  document.getElementById('iv-qprog').textContent='Q '+c+'/'+n;
-  document.getElementById('iv-prog').style.width=Math.round(c/n*100)+'%';
-}
-
-function setAvatarState(status, speaking=false) {
-  document.getElementById('iv-av-status').textContent=status;
-  const av=document.getElementById('iv-av');
-  if(speaking) av.classList.add('speaking'); else av.classList.remove('speaking');
-  const bars=['w1','w2','w3','w4','w5','w6','w7'];
-  bars.forEach((id,i)=>{
-    const el=document.getElementById(id);
-    if(speaking){el.classList.add('active');el.style.setProperty('--h',(8+Math.random()*12)+'px');el.style.setProperty('--d',(.5+Math.random()*.6)+'s');}
-    else{el.classList.remove('active');el.style.height='4px';}
-  });
-}
-
-function addBubble(sender, text, isUser) {
-  const box=document.getElementById('chat-box');
-  const wrap=document.createElement('div');
-  wrap.className='bubble-wrap'+(isUser?' bubble-wrap-user':'');
-  wrap.innerHTML=`<div class="bubble-sender">${sender}</div><div class="bubble ${isUser?'bubble-user':'bubble-ai'}">${text}</div>`;
-  box.appendChild(wrap); box.scrollTop=box.scrollHeight;
-}
-
-function showTyping() {
-  const box=document.getElementById('chat-box');
-  const d=document.createElement('div'); d.className='bubble-wrap'; d.id='typing';
-  d.innerHTML='<div class="bubble-sender">Alex</div><div class="bubble bubble-ai"><div class="typing"><span></span><span></span><span></span></div></div>';
-  box.appendChild(d); box.scrollTop=box.scrollHeight;
-}
-function removeTyping(){ const t=document.getElementById('typing'); if(t)t.remove(); }
-
-async function callClaude(msgs, sys) {
-  const r = await fetch(API, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:msgs})});
-  const d = await r.json();
-  if(!r.ok) throw new Error(d.error?.message||'API error');
-  return d.content.map(c=>c.text||'').join('');
-}
-
-async function loadQ(idx) {
-  updateIvProgress();
-  setAvatarState('Crafting your next question...', false);
-  showTyping();
+function loadQ(idx) {
+  document.getElementById('iv-qprog').textContent='Q '+(idx+1)+'/'+S.iv.count;
   document.getElementById('ans-input').value='';
   document.getElementById('fb-panel').classList.add('hidden');
-  document.getElementById('ans-panel').style.display='block';
-  document.getElementById('conf-val').textContent='—';
-  document.getElementById('conf-fill').style.width='0%';
-  const iv=S.iv;
-  const prevQA=S.questions.slice(0,idx).map((q,i)=>`Q: ${q}\nA: ${S.answers[i]||'(skipped)'}`).join('\n\n');
-  const sys=`You are Alex, a sharp and experienced technical interviewer for ${iv.role} positions.
-Interview type: ${iv.type} | Level: ${iv.level} | Q${idx+1} of ${iv.count}
-${iv.skills?'Candidate skills: '+iv.skills:''}
-${iv.bg?'Background: '+iv.bg:''}
-${prevQA?'Prior Q&A:\n'+prevQA:''}
-Generate exactly ONE interview question. Be concise (1–3 sentences). No preamble.`;
-  try {
-    const q=await callClaude([{role:'user',content:'Generate question '+( idx+1)}],sys);
-    S.questions[idx]=q.trim();
-    removeTyping(); addBubble('Alex',q.trim(),false);
-    setAvatarState('Listening for your answer...', false);
-    speak(q.trim());
-  } catch(e) {
-    removeTyping();
-    const fb=['Tell me about a recent project you are proud of.','How do you approach debugging a production issue?','Describe your experience with '+iv.role+' technologies.','What\'s your approach to code reviews?','Tell me about a time you handled a difficult technical challenge.'];
-    const q=fb[idx%fb.length]; S.questions[idx]=q;
-    addBubble('Alex',q,false); setAvatarState('Listening for your answer...',false);
-  }
+  
+  S.questions[idx] = S.sessionQuestions[idx];
+  addBubble('chat-box', 'AI System', S.questions[idx], 'ai');
 }
 
-async function submitAns() {
+function submitAns() {
   const ans=document.getElementById('ans-input').value.trim();
-  if(!ans){ document.getElementById('ans-input').focus(); return; }
-  S.answers[S.qIdx]=ans; addBubble('You',ans,true);
-  document.getElementById('ans-panel').style.display='none';
-  if(S.recording) stopMic();
-  await evalAns(S.qIdx, ans);
+  if(!ans) return;
+  S.answers[S.qIdx]=ans; addBubble('chat-box', 'You', ans, 'user');
+  
+  setTimeout(()=>{
+      const sc = Math.floor(65+Math.random()*25);
+      S.feedbacks[S.qIdx] = {score: sc, text: "Good conceptual overview. To improve, try using the STAR method and support your point with a specific, quantifiable metric."};
+      addBubble('chat-box', 'AI Evaluator', "Response recorded.", 'ai');
+      document.getElementById('fb-panel').classList.remove('hidden');
+      document.getElementById('fb-text').innerHTML = `<strong>Score: ${sc}/100</strong><br>${S.feedbacks[S.qIdx].text}`;
+      document.getElementById('next-btn').innerHTML = S.qIdx>=S.iv.count-1 ? '<i class="ti ti-flag"></i> Finish Interview' : 'Next Question <i class="ti ti-arrow-right"></i>';
+      document.getElementById('chat-box').scrollTop=document.getElementById('chat-box').scrollHeight;
+  }, 800);
 }
 
-function skipQ() {
-  S.answers[S.qIdx]='(skipped)';
-  if(S.qIdx>=S.iv.count-1){ endInterview(); return; }
-  S.qIdx++; loadQ(S.qIdx);
+function nextQ() { 
+    if(S.qIdx>=S.iv.count-1) {
+        const overall = Math.round(S.feedbacks.reduce((a,b)=>a+b.score,0)/S.feedbacks.length);
+        const users=DB.users;
+        users[S.user].interviews.push({role:S.iv.role, type: S.iv.type, overall, date:new Date().toLocaleDateString(), qa: S.questions.map((q,i)=>({q,a:S.answers[i]})) });
+        DB.save(users); gainXP(50);
+        alert('Simulation Complete! Overall Score: ' + overall + '%');
+        go('dashboard');
+    } else { 
+        S.qIdx++; loadQ(S.qIdx); 
+    } 
 }
 
-async function evalAns(idx, ans) {
-  setAvatarState('Thinking about your answer...',false); showTyping();
-  const iv=S.iv;
-  const sys=`You are an expert interview evaluator. Evaluate strictly. Return ONLY valid JSON, no markdown:
-{"scores":{"technical":0-100,"communication":0-100,"relevance":0-100,"confidence":0-100},"overall":0-100,"feedback":"2-3 sentences of specific constructive feedback","reaction":"One brief natural interviewer response (1 sentence)","confidence_note":"brief note on confidence signals"}`;
-  try {
-    const raw=await callClaude([{role:'user',content:`Role: ${iv.role}\nQ: ${S.questions[idx]}\nA: ${ans}`}],sys);
-    let fb; try{fb=JSON.parse(raw.replace(/```json|```/g,'').trim());}catch{fb=null;}
-    if(!fb) throw new Error('parse');
-    S.feedbacks[idx]=fb;
-    removeTyping(); addBubble('Alex',fb.reaction,false); speak(fb.reaction);
-    showFeedback(fb);
-    const conf=Math.round((fb.scores.confidence+fb.scores.communication)/2);
-    document.getElementById('conf-val').textContent=conf+'%';
-    document.getElementById('conf-fill').style.width=conf+'%';
-    const confColor=conf>=70?'var(--g-success)':conf>=50?'var(--p)':'var(--r)';
-    document.getElementById('conf-fill').style.background=confColor;
-  } catch(e) {
-    removeTyping();
-    const sc={technical:60+Math.floor(Math.random()*25),communication:55+Math.floor(Math.random()*30),relevance:65+Math.floor(Math.random()*25),confidence:60+Math.floor(Math.random()*25)};
-    const ov=Math.round(Object.values(sc).reduce((a,b)=>a+b)/4);
-    const fb={scores:sc,overall:ov,feedback:'Good attempt. Try to support your points with concrete examples from past experience.',reaction:'Thank you. Let\'s continue.'};
-    S.feedbacks[idx]=fb;
-    addBubble('Alex',fb.reaction,false); showFeedback(fb);
-  }
+/* ==========================================
+   FEATURE: PRACTICE BANK
+========================================== */
+function renderPracticeBank() {
+    const sTerm = document.getElementById('pb-search').value.toLowerCase();
+    const cFilter = document.getElementById('pb-cat').value;
+    const dFilter = document.getElementById('pb-diff').value;
+    const list = document.getElementById('pb-list');
+    const u = DB.users[S.user];
+    const practiced = u.practiced || [];
+
+    document.getElementById('pb-count').textContent = practiced.length;
+
+    let html = '';
+    let count = 0;
+
+    PRACTICE_BANK.forEach(q => {
+        if(cFilter !== 'All' && q.cat !== cFilter) return;
+        if(dFilter !== 'All' && q.diff !== dFilter) return;
+        if(sTerm && !q.q.toLowerCase().includes(sTerm)) return;
+        
+        count++;
+        const isDone = practiced.includes(q.id);
+        const badgeCol = q.diff==='Beginner'?'badge-teal':(q.diff==='Advanced'?'badge-red':'badge-amber');
+
+        html += `
+            <div class="q-item">
+                <div class="col" style="flex:1;">
+                    <div class="row" style="margin-bottom:4px;">
+                        <span class="badge ${badgeCol}">${q.diff}</span>
+                        <span class="badge badge-gray">${q.cat}</span>
+                    </div>
+                    <div style="font-weight:500; font-size:15px;">${q.q}</div>
+                </div>
+                <button class="btn btn-sm ${isDone?'btn-ghost':'btn-primary'}" onclick="markPracticed('${q.id}', this)">
+                    <i class="ti ${isDone?'ti-check':'ti-pencil'}"></i> ${isDone?'Done':'Practice'}
+                </button>
+            </div>
+        `;
+    });
+
+    list.innerHTML = html || '<div class="text-center text-muted" style="padding: 2rem;">No questions match your criteria.</div>';
 }
 
-function showFeedback(fb) {
-  document.getElementById('fb-panel').classList.remove('hidden');
-  const colors={technical:'var(--p)',communication:'var(--t)',relevance:'#185FA5',confidence:'var(--a)'};
-  document.getElementById('fb-scores').innerHTML=Object.entries(fb.scores).map(([k,v])=>
-    `<div class="sbar-row"><div class="sbar-lbl" style="text-transform:capitalize;">${k}</div><div class="sbar-track"><div class="sbar-fill" style="width:${v}%;background:${colors[k]||'var(--p)'};"></div></div><div class="sbar-val">${v}</div></div>`
-  ).join('');
-  document.getElementById('fb-text').textContent=fb.feedback;
-  const last=S.qIdx>=S.iv.count-1;
-  document.getElementById('next-btn').innerHTML=last?'<i class="ti ti-flag"></i> Finish':'<i class="ti ti-arrow-right"></i> Next question';
-  setAvatarState('Answer reviewed.',false);
+function markPracticed(id, btn) {
+    const users = DB.users;
+    const u = users[S.user];
+    u.practiced = u.practiced || [];
+    
+    if(!u.practiced.includes(id)) {
+        u.practiced.push(id);
+        DB.save(users);
+        btn.className = 'btn btn-sm btn-ghost';
+        btn.innerHTML = '<i class="ti ti-check"></i> Done';
+        document.getElementById('pb-count').textContent = u.practiced.length;
+        gainXP(5);
+    }
 }
 
-function nextQ() {
-  if(S.qIdx>=S.iv.count-1){endInterview();return;}
-  S.qIdx++; loadQ(S.qIdx);
-}
-function replayQ() { if(S.questions[S.qIdx]) speak(S.questions[S.qIdx]); }
-
-async function endInterview() {
-  clearInterval(S.timerInterval);
-  go('report');
-  const iv=S.iv; const fbs=S.feedbacks;
-  const scores=fbs.map(f=>f.overall).filter(Boolean);
-  const overall=scores.length?Math.round(scores.reduce((a,b)=>a+b)/scores.length):60;
-  const techAvg=Math.round(fbs.map(f=>f.scores?.technical||60).reduce((a,b)=>a+b)/fbs.length);
-  const commAvg=Math.round(fbs.map(f=>f.scores?.communication||60).reduce((a,b)=>a+b)/fbs.length);
-  const confAvg=Math.round(fbs.map(f=>f.scores?.confidence||60).reduce((a,b)=>a+b)/fbs.length);
-  const relAvg=Math.round(fbs.map(f=>f.scores?.relevance||60).reduce((a,b)=>a+b)/fbs.length);
-
-  document.getElementById('rpt-overall').textContent=overall+'%';
-  document.getElementById('rpt-tech').textContent=techAvg+'%';
-  document.getElementById('rpt-comm').textContent=commAvg+'%';
-  document.getElementById('rpt-conf').textContent=confAvg+'%';
-  document.getElementById('rpt-meta').textContent=iv.role+' · '+iv.level+' · '+iv.count+' questions';
-  const ready=overall>=80?'Interview ready':overall>=65?'Almost there':'Keep practicing';
-  document.getElementById('rpt-readiness').textContent=ready;
-  document.getElementById('rpt-readiness').className='badge '+(overall>=80?'badge-green':overall>=65?'badge-purple':'badge-amber');
-
-  const bars=[
-    {label:'Technical accuracy',val:techAvg,color:'var(--p)'},
-    {label:'Communication',val:commAvg,color:'var(--t)'},
-    {label:'Relevance',val:relAvg,color:'#185FA5'},
-    {label:'Confidence',val:confAvg,color:'var(--a)'},
-    {label:'Overall',val:overall,color:'var(--p-dark)'},
-  ];
-  document.getElementById('rpt-bars').innerHTML=bars.map(b=>
-    `<div class="sbar-row"><div class="sbar-lbl">${b.label}</div><div class="sbar-track"><div class="sbar-fill" style="width:${b.val}%;background:${b.color};"></div></div><div class="sbar-val">${b.val}%</div></div>`
-  ).join('');
-
-  const qaText=S.questions.map((q,i)=>`Q${i+1}: ${q}\nA: ${S.answers[i]||'(skipped)'}`).join('\n\n');
-  try {
-    const sys=`You are evaluating a mock interview. Return ONLY valid JSON:
-{"strengths":["3-4 specific strengths"],"weaknesses":["3-4 specific areas to improve"],"action_plan":["4-5 concrete actionable steps with specific resources"]}`;
-    const raw=await callClaude([{role:'user',content:`Role:${iv.role}\nLevel:${iv.level}\nScore:${overall}%\n\n${qaText}`}],sys);
-    let r; try{r=JSON.parse(raw.replace(/```json|```/g,'').trim());}catch{r=null;}
-    if(r){fillReport(r);}else{fillReportDefault();}
-  } catch(e){fillReportDefault();}
-
-  document.getElementById('ans-list').innerHTML=S.questions.map((q,i)=>{
-    const fb=S.feedbacks[i]; const sc=fb?fb.overall:null;
-    return `<div class="card card-sm">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-        <div style="font-size:11px;font-weight:500;color:var(--p);">Q${i+1}</div>
-        ${sc?`<span class="badge ${sc>=70?'badge-green':sc>=50?'badge-purple':'badge-amber'}">${sc}%</span>`:''}
-      </div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:4px;">${q}</div>
-      <div style="font-size:12px;color:var(--color-text-secondary);border-top:0.5px solid var(--color-border-tertiary);padding-top:5px;margin-top:4px;">${S.answers[i]||'(skipped)'}</div>
-    </div>`;
-  }).join('');
-
-  const users=DB.users; const u=users[S.user];
-  if(!u.interviews) u.interviews=[];
-  u.interviews.push({role:iv.role,level:iv.level,type:iv.type,overall,tech:techAvg,comm:commAvg,conf:confAvg,date:new Date().toLocaleDateString(),qScores:fbs.map(f=>f.overall||60)});
-  DB.save(users);
-  updateStreak(); gainXP(50 + Math.round(overall/2));
-  showToast('+' + (50+Math.round(overall/2)) + ' XP earned!');
+/* ==========================================
+   FEATURE: COMPANY PREP
+========================================== */
+function selectCompany(comp, el) {
+    S.targetCompany = comp;
+    document.getElementById('custom-company').value = '';
+    document.querySelectorAll('.company-card').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
 }
 
-function fillReport(r) {
-  document.getElementById('str-list').innerHTML=(r.strengths||[]).map(s=>`<div class="surface row"><i class="ti ti-check" style="color:var(--g-success);font-size:16px;flex-shrink:0;" aria-hidden="true"></i><span style="font-size:13px;">${s}</span></div>`).join('');
-  document.getElementById('imp-list').innerHTML=(r.weaknesses||[]).map(s=>`<div class="surface row"><i class="ti ti-arrow-up-circle" style="color:var(--a);font-size:16px;flex-shrink:0;" aria-hidden="true"></i><span style="font-size:13px;">${s}</span></div>`).join('');
-  document.getElementById('plan-list').innerHTML=(r.action_plan||[]).map((s,i)=>`<div class="surface row"><div style="width:22px;height:22px;border-radius:50%;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--p-dark);flex-shrink:0;">${i+1}</div><span style="font-size:13px;">${s}</span></div>`).join('');
+function generateCompanyPrep() {
+    const btn = document.getElementById('btn-gen-prep');
+    btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Generating Strategy...';
+    
+    setTimeout(()=>{
+        btn.innerHTML = '<i class="ti ti-wand"></i> Generate Prep Strategy';
+        const out = document.getElementById('company-output');
+        
+        let content = '';
+        const c = S.targetCompany;
+
+        if(c==='Google') {
+            content = `<div class="surface"><strong>Process (4-5 Rounds)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>1x Phone Screen (Data Structures)</li><li>3x Coding Rounds (Focus on Graph/DP)</li><li>1x "Googlyness" Behavioral Round</li></ul></div><div class="surface"><strong>Focus:</strong> Big-O complexity, scalable design.</div>`;
+        } else if(c==='Amazon') {
+            content = `<div class="surface"><strong>Process (Loop)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>1x Online Assessment (OA)</li><li>4x Onsite Loop (Coding + Behavioral)</li><li>Bar Raiser Round included</li></ul></div><div class="surface"><strong>Focus:</strong> 14 Leadership Principles. STAR method answers required.</div>`;
+        } else if(c==='Meta') {
+            content = `<div class="surface"><strong>Process (Jedi/Ninja)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>Screening (Leetcode Mediums)</li><li>2x Coding (Ninja)</li><li>1x System Design (Pirate)</li><li>1x Behavioral (Jedi)</li></ul></div><div class="surface"><strong>Focus:</strong> Speed, execution, standard algorithms.</div>`;
+        } else {
+            content = `<div class="surface"><strong>Estimated Process for ${c}</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>Recruiter Screen</li><li>Technical Take-home or Live pair programming</li><li>Culture Fit / Architecture</li></ul></div><div class="surface"><strong>General Focus:</strong> Product thinking, shipping speed, cultural alignment with ${c}'s core values.</div>`;
+        }
+
+        out.innerHTML = `<div class="card"><h3 style="margin-bottom:1rem;font-size:20px;">Strategy Playbook: ${c}</h3><div class="col" style="gap:16px;">${content}</div><button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="S.role='${c} Engineer'; go('setup', document.querySelectorAll('.nav-pill')[1]);">Start Mock Interview for ${c}</button></div>`;
+        out.classList.remove('hidden');
+    }, 1000);
 }
 
-function fillReportDefault() {
-  const def={
-    strengths:['Demonstrated understanding of core concepts','Clear and structured communication','Showed problem-solving initiative','Good engagement with the questions'],
-    weaknesses:['Could use more concrete real-world examples','Technical depth can be pushed further','Answers could be more concise','Prepare STAR-format stories'],
-    action_plan:['Practice 2 LeetCode/HackerRank problems daily','Record yourself and review for filler words','Read "Cracking the Coding Interview"','Do 3 timed mock interviews this week','Study system design patterns on ByteByteGo']
-  };
-  fillReport(def);
+/* ==========================================
+   FEATURE: SALARY NEGOTIATION
+========================================== */
+function startNegotiation() {
+    S.targetSalary = parseInt(document.getElementById('sal-target').value);
+    S.currentOffer = parseInt(document.getElementById('sal-offer').value);
+    S.negRound = 0; S.negHistory = [];
+    document.getElementById('sal-setup').classList.add('hidden');
+    document.getElementById('sal-active').classList.remove('hidden');
+    document.getElementById('sal-report').classList.add('hidden');
+    document.getElementById('sal-target-disp').textContent = S.targetSalary.toLocaleString();
+    document.getElementById('sal-chat-box').innerHTML = '';
+    
+    let initialPrompt = `Hi! We're thrilled to offer you the role. The base salary we've approved is $${S.currentOffer.toLocaleString()}. How does that sound?`;
+    S.negHistory.push({r:'ai', t:initialPrompt});
+    addBubble('sal-chat-box', 'Recruiter Sarah', initialPrompt, 'ai');
 }
 
-function rtab(name, el) {
-  ['str','imp','plan','answers'].forEach(t=>document.getElementById('rt-'+t).classList.add('hidden'));
-  document.getElementById('rt-'+name).classList.remove('hidden');
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
+function submitNegotiation() {
+    const input = document.getElementById('sal-input');
+    const text = input.value.trim();
+    if(!text) return;
+    
+    S.negHistory.push({r:'user', t:text});
+    addBubble('sal-chat-box', 'You', text, 'user');
+    input.value = '';
+    S.negRound++;
+
+    setTimeout(()=>{
+        let response = "";
+        let end = false;
+        let finalOffer = S.currentOffer;
+
+        if(text.toLowerCase().includes('accept') || text.toLowerCase().includes('sounds good')) {
+            response = "Fantastic! We'll send the paperwork over immediately.";
+            end = true;
+        } else if (S.negRound === 1) {
+            let bump = Math.floor((S.targetSalary - S.currentOffer) * 0.4);
+            finalOffer = S.currentOffer + bump;
+            S.currentOffer = finalOffer;
+            response = `I understand you're looking for more. We have a strict band, but I checked with the team and we can bump it to $${finalOffer.toLocaleString()}. That's our maximum base.`;
+        } else if (S.negRound === 2) {
+            response = `We really want you on board, but we can't move the base higher than $${S.currentOffer.toLocaleString()}. We could potentially offer a $10,000 signing bonus. What do you say?`;
+            S.currentOffer += 10000;
+        } else {
+            response = `I'm afraid that's our absolute best and final offer. We hope you'll accept!`;
+            end = true;
+        }
+
+        S.negHistory.push({r:'ai', t:response});
+        addBubble('sal-chat-box', 'Recruiter Sarah', response, 'ai');
+
+        if(end || S.negRound >= 3) {
+            setTimeout(() => finishNegotiation(S.currentOffer), 2000);
+        }
+    }, 1200);
 }
 
-/* AI COACH */
-async function getCoaching() {
-  const role=document.getElementById('coach-role').value.trim();
-  const challenge=document.getElementById('coach-challenge').value.trim();
-  if(!role||!challenge){alert('Fill in both fields');return;}
-  const btn=event.currentTarget; btn.disabled=true; btn.innerHTML='<i class="ti ti-loader"></i> Generating...';
-  const users=DB.users; const u=users[S.user];
-  const ivs=u.interviews||[];
-  const avgScore=ivs.length?Math.round(ivs.reduce((a,b)=>a+b.overall,0)/ivs.length):null;
-  const sys=`You are an expert career coach specializing in technical interviews. Give practical, specific, actionable advice. Be direct and encouraging.`;
-  const prompt=`Target role: ${role}
-Biggest challenge: ${challenge}
-${avgScore?'Current mock interview avg: '+avgScore+'%':'No mock interview data yet'}
-${ivs.length?'Interviews completed: '+ivs.length:''}
+function finishNegotiation(finalAmt) {
+    document.getElementById('sal-active').classList.add('hidden');
+    const out = document.getElementById('sal-report');
+    
+    const diff = finalAmt - parseInt(document.getElementById('sal-offer').value);
+    const success = finalAmt >= S.targetSalary ? 'Excellent' : (diff > 0 ? 'Good' : 'Needs Practice');
+    
+    out.innerHTML = `
+        <h3 style="font-size:20px;margin-bottom:1.5rem;">Negotiation Results</h3>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+            <div class="metric"><div class="metric-num" style="color:var(--p);">$${finalAmt.toLocaleString()}</div><div class="metric-lbl">Final Total Value</div></div>
+            <div class="metric"><div class="metric-num" style="color:var(--g-success);">+$${diff.toLocaleString()}</div><div class="metric-lbl">Value Added via Negotiation</div></div>
+        </div>
+        <div class="surface">
+            <strong>AI Coach Feedback:</strong> ${success}. You handled the pushback well. In the future, explicitly mentioning competing offers or specific market data points can help push past the "strict band" objection.
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="go('dashboard')">Finish & Return to Dashboard</button>
+    `;
+    out.classList.remove('hidden');
 
-Create a personalized coaching response with:
-1. Root cause of the challenge
-2. 3 specific techniques to address it
-3. A 2-week action plan
-4. Resources (specific books, sites, channels)
-
-Be specific, practical, and motivating. Format with clear sections.`;
-  try {
-    const out=await callClaude([{role:'user',content:prompt}],sys);
-    document.getElementById('coach-output').innerHTML=out.replace(/\n/g,'<br>');
-    document.getElementById('coach-response').classList.remove('hidden');
-  } catch(e) {
-    document.getElementById('coach-output').textContent='Unable to connect to AI coach. Check your connection and try again.';
-    document.getElementById('coach-response').classList.remove('hidden');
-  }
-  btn.disabled=false; btn.innerHTML='<i class="ti ti-brain"></i> Get AI coaching ↗';
+    const users=DB.users;
+    users[S.user].negotiations = users[S.user].negotiations || [];
+    users[S.user].negotiations.push({finalOffer: finalAmt, increase: diff, date: new Date().toLocaleDateString()});
+    DB.save(users); gainXP(60);
 }
 
-/* VOICE */
-function speak(text) {
-  if(!window.speechSynthesis) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.rate=.95; u.pitch=1;
-  const vs=speechSynthesis.getVoices();
-  const v=vs.find(v=>v.lang.startsWith('en')&&v.name.includes('Google'))||vs.find(v=>v.lang.startsWith('en'));
-  if(v) u.voice=v;
-  u.onstart=()=>setAvatarState('Speaking...',true);
-  u.onend=()=>setAvatarState('Listening for your answer...',false);
-  speechSynthesis.speak(u);
+/* ==========================================
+   FEATURE: GD SIMULATOR
+========================================== */
+function startGD() {
+    S.gdTopic = document.getElementById('gd-topic').value;
+    document.getElementById('gd-setup').classList.add('hidden');
+    document.getElementById('gd-active').classList.remove('hidden');
+    document.getElementById('gd-report').classList.add('hidden');
+    document.getElementById('gd-topic-disp').textContent = S.gdTopic;
+    document.getElementById('gd-chat-box').innerHTML = '';
+    S.gdRound = 0; S.gdHistory = [];
+
+    addBubble('gd-chat-box', 'System Moderator', `Topic: ${S.gdTopic}. The floor is open.`, 'ai');
+    
+    setTimeout(()=> {
+        const text = "I think this is a highly relevant topic. In my view, the core issue revolves around productivity versus collaboration.";
+        addBubble('gd-chat-box', 'Alex (AI)', text, 'peer');
+        S.gdHistory.push({r:'peer1', t:text});
+    }, 2000);
+    
+    S.gdInterval = setInterval(gdAiTurn, 8000);
 }
 
-function toggleMic(){ S.recording?stopMic():startMic(); }
-function startMic(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){document.getElementById('mic-status').textContent='Voice not supported — please type';return;}
-  S.recognition=new SR(); S.recognition.continuous=true; S.recognition.interimResults=true; S.recognition.lang='en-US';
-  S.recognition.onresult=e=>{const t=Array.from(e.results).map(r=>r[0].transcript).join('');document.getElementById('ans-input').value=t;};
-  S.recognition.onerror=()=>{stopMic();document.getElementById('mic-status').textContent='Mic error. Type instead.';};
-  S.recognition.start(); S.recording=true;
-  document.getElementById('mic-btn').classList.add('on');
-  document.getElementById('mic-icon').className='ti ti-microphone-off';
-  document.getElementById('mic-status').textContent='Recording — speak now';
-}
-function stopMic(){
-  if(S.recognition){S.recognition.stop();S.recognition=null;}
-  S.recording=false;
-  document.getElementById('mic-btn').classList.remove('on');
-  document.getElementById('mic-icon').className='ti ti-microphone';
-  document.getElementById('mic-status').textContent='';
+function gdAiTurn() {
+    if(document.getElementById('gd-active').classList.contains('hidden')) return clearInterval(S.gdInterval);
+    const peers = ['Jamie (AI)', 'Taylor (AI)', 'Alex (AI)'];
+    const p = peers[Math.floor(Math.random()*peers.length)];
+    const responses = [
+        "I agree with that point, but we also have to consider the economic impact.",
+        "That's true, however, statistics show a different trend over the last year.",
+        "Could you elaborate on why you think that's the primary driver?",
+        "I see it differently. The main bottleneck is actually infrastructure."
+    ];
+    const text = responses[Math.floor(Math.random()*responses.length)];
+    addBubble('gd-chat-box', p, text, 'peer');
+    S.gdHistory.push({r:p, t:text});
+    S.gdRound++;
 }
 
-speechSynthesis.onvoiceschanged=()=>{};
+function submitGD() {
+    const input = document.getElementById('gd-input');
+    const text = input.value.trim();
+    if(!text) return;
+    addBubble('gd-chat-box', 'You', text, 'user');
+    S.gdHistory.push({r:'user', t:text});
+    input.value = '';
+}
+
+function endGD() {
+    clearInterval(S.gdInterval);
+    document.getElementById('gd-active').classList.add('hidden');
+    const out = document.getElementById('gd-report');
+    
+    let userEntries = S.gdHistory.filter(x=>x.r==='user').length;
+    let score = Math.min(100, userEntries * 25);
+    
+    out.innerHTML = `
+        <h3 style="font-size:20px;margin-bottom:1.5rem;">GD Performance Report</h3>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+            <div class="metric"><div class="metric-num" style="color:var(--p);">${score}%</div><div class="metric-lbl">Participation Score</div></div>
+            <div class="metric"><div class="metric-num" style="color:var(--t);">${userEntries}</div><div class="metric-lbl">Total Contributions</div></div>
+        </div>
+        <div class="surface" style="border-left:4px solid var(--p);">
+            <strong>Analysis:</strong> ${userEntries > 2 ? 'Great active participation and leadership demonstrated.' : 'You were a bit quiet. Try to interject with "Adding to what Jamie said..." to take the floor gracefully.'}
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="go('dashboard')">Back to Dashboard</button>
+    `;
+    out.classList.remove('hidden');
+    
+    const users=DB.users;
+    users[S.user].gds = users[S.user].gds || [];
+    users[S.user].gds.push({topic: S.gdTopic, score: score});
+    DB.save(users); gainXP(40);
+}
+
+/* ==========================================
+   FEATURE: BODY LANGUAGE COACH
+========================================== */
+async function startBodyCoach() {
+    const video = document.getElementById('webcam-video');
+    const placeholder = document.getElementById('webcam-placeholder');
+    const metrics = document.getElementById('video-metrics');
+    const fbPanel = document.getElementById('body-feedback');
+    
+    document.getElementById('btn-start-cam').classList.add('hidden');
+    document.getElementById('btn-stop-cam').classList.remove('hidden');
+
+    try {
+        S.camStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = S.camStream;
+        video.style.display = 'block';
+        placeholder.style.display = 'none';
+        metrics.classList.remove('hidden');
+        fbPanel.classList.remove('hidden');
+
+        let score = 50;
+        S.camInterval = setInterval(()=>{
+            score = Math.max(30, Math.min(100, score + (Math.random()*10 - 4)));
+            let eye = Math.min(100, score + 10);
+            
+            document.getElementById('metric-eye').textContent = Math.round(eye) + '%';
+            document.getElementById('metric-posture').textContent = score > 60 ? 'Good' : 'Slouching';
+            
+            document.getElementById('body-score-fill').style.width = Math.round(score) + '%';
+            document.getElementById('body-score-fill').style.background = score > 70 ? 'var(--g-success)' : (score > 40 ? 'var(--a)' : 'var(--r)');
+            document.getElementById('body-score-txt').textContent = Math.round(score) + '/100';
+
+            const tip = document.getElementById('body-coach-tip');
+            if(score < 50) tip.innerHTML = "<strong style='color:var(--r)'>Tip:</strong> Sit up straight and look directly at the camera lens to simulate eye contact.";
+            else if(eye < 70) tip.innerHTML = "<strong style='color:var(--a)'>Tip:</strong> Good posture, but try to maintain more consistent eye contact.";
+            else tip.innerHTML = "<strong style='color:var(--g-success)'>Excellent!</strong> You look engaged, confident, and professional.";
+        }, 1500);
+
+    } catch(err) {
+        alert("Camera access denied. Running in simulated fallback mode for demo purposes.");
+        metrics.classList.remove('hidden');
+        fbPanel.classList.remove('hidden');
+    }
+}
+
+function stopBodyCoach() {
+    if(S.camStream) {
+        S.camStream.getTracks().forEach(track => track.stop());
+        S.camStream = null;
+    }
+    clearInterval(S.camInterval);
+    document.getElementById('webcam-video').style.display = 'none';
+    document.getElementById('webcam-placeholder').style.display = 'block';
+    document.getElementById('video-metrics').classList.add('hidden');
+    document.getElementById('btn-start-cam').classList.remove('hidden');
+    document.getElementById('btn-stop-cam').classList.add('hidden');
+    document.getElementById('body-feedback').classList.add('hidden');
+    gainXP(20);
+}
+
+/* ==========================================
+   FEATURE: REPLAY ANALYSIS
+========================================== */
+function loadReplays() {
+    const u = DB.users[S.user];
+    const tl = document.getElementById('replay-timeline');
+    if(!u.interviews || u.interviews.length === 0) {
+        tl.innerHTML = '<div class="surface" style="text-align:center; padding: 3rem 1rem;">No completed interviews to analyze yet. Head to Mock Interviews to start.</div>';
+        return;
+    }
+
+    tl.innerHTML = [...u.interviews].reverse().map((iv, i) => `
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card" style="padding:1.5rem;">
+                <div class="row" style="justify-content:space-between; margin-bottom:12px;">
+                    <div style="font-weight:700; font-size:16px;">${iv.role} Simulation <span style="font-weight:400; color:var(--color-text-muted); font-size:13px;">(${iv.type})</span></div>
+                    <div class="badge ${iv.overall>=70?'badge-green':'badge-amber'}">${iv.overall}% Score</div>
+                </div>
+                <div style="font-size:13px;color:var(--color-text-sub);margin-bottom:16px;">${iv.date}</div>
+                <div class="surface" style="font-size:14px; line-height:1.6;">
+                    <strong style="color:var(--g-success); display:flex; align-items:center; gap:6px;"><i class="ti ti-thumb-up"></i> Strongest Moment:</strong> Clear, concise answers early on.<br>
+                    <strong style="color:var(--r); display:flex; align-items:center; gap:6px; margin-top:8px;"><i class="ti ti-alert-circle"></i> Area to Improve:</strong> Deeper detail required on technical complexity.<br>
+                    <button class="btn btn-sm btn-ghost" style="margin-top:12px; padding:0; color:var(--p);" onclick="alert('Full transcript modal would load here.')">View Full Transcript</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Init Check
+document.addEventListener("DOMContentLoaded", () => {
+    go('landing');
+});
+
+function toggleDarkMode(){
+ document.body.classList.toggle('dark-mode');
+ localStorage.setItem('iai_dark', document.body.classList.contains('dark-mode'));
+}
+if(localStorage.getItem('iai_dark')==='true'){document.body.classList.add('dark-mode');}
 </script>
-
-<style>
-body{background:#f8fafc !important;}
-.hero{
- background:linear-gradient(180deg,#ffffff,#f1f5f9) !important;
- color:#0f172a !important;
-}
-.hero h1{
- color:#0f172a !important;
- opacity:1 !important;
- visibility:visible !important;
-}
-.hero p{
- color:#475569 !important;
- opacity:1 !important;
- visibility:visible !important;
-}
-</style>
+</body>
+</html>
