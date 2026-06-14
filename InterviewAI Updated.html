@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewAI | Premium AI Coaching</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================
+   DESIGN SYSTEM & VARIABLES (Linear/Stripe Inspired)
+========================================== */
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Color Palette */
+  --p: #6366F1; --p-light: #EEF2FF; --p-dark: #4338CA; --p-mid: #818CF8;
+  --t: #0D9488; --t-light: #F0FDFA;
+  --a: #F59E0B; --a-light: #FEF3C7;
+  --r: #EF4444; --r-light: #FEF2F2;
+  --g-success: #10B981; --g-light: #ECFDF5;
+  
+  /* Surface & Text */
+  --color-bg-main: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sub: #F4F4F5;
+  --color-text-main: #09090B;
+  --color-text-sub: #71717A;
+  --color-text-muted: #A1A1AA;
+  --color-border: #E4E4E7;
+  --color-border-hover: #D4D4D8;
+  
+  /* Shadows & Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.02);
+  --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
+  
+  /* Animations */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); background: var(--color-bg-main); color: var(--color-text-main); -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
+
+/* ==========================================
+   ANIMATIONS & TRANSITIONS
+========================================== */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
+
+.screen { display: none; opacity: 0; }
+.screen.active { display: block; animation: fadeInUp 0.5s var(--transition-base) forwards; }
+.hidden { display: none !important; }
+
+/* ==========================================
+   LAYOUT UTILITIES
+========================================== */
+.page { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: 12px; }
+.spacer { flex: 1; }
+.divider { height: 1px; background: var(--color-border); margin: 2rem 0; width: 100%; }
+.text-center { text-align: center; }
+
+/* Grids */
+.grid-features { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+@media (max-width: 1024px) { .grid-features { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-features { grid-template-columns: 1fr; } }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+.topnav { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 64px; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(16px); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 100; transition: var(--transition-base); }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--color-text-main); letter-spacing: -0.5px; }
+.logo-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--p); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: 0 4px 10px rgba(99,102,241,0.3); }
+.nav-pills { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 0 10px; }
+.nav-pills::-webkit-scrollbar { display: none; }
+.nav-pill { padding: 8px 12px; font-size: 13px; font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; color: var(--color-text-sub); border: none; background: transparent; transition: var(--transition-fast); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.nav-pill:hover { background: var(--color-bg-sub); color: var(--color-text-main); }
+.nav-pill.active { background: var(--color-text-main); color: #fff; font-weight: 600; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+/* ==========================================
+   COMPONENTS
+========================================== */
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--color-border); background: var(--color-bg-card); color: var(--color-text-main); transition: var(--transition-base); box-shadow: var(--shadow-sm); outline: none; }
+.btn:hover { background: var(--color-bg-sub); border-color: var(--color-border-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: var(--p); color: #fff; border: 1px solid transparent; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
+.btn-primary:hover { background: var(--p-dark); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3); color: #fff; }
+.btn-ghost { border-color: transparent; background: transparent; box-shadow: none; }
+.btn-ghost:hover { background: var(--color-bg-sub); }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+.btn-lg { padding: 14px 24px; font-size: 15px; border-radius: var(--radius-md); font-weight: 600; }
+.btn-full { width: 100%; }
+
+/* Cards & Surfaces */
+.card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-sm); transition: var(--transition-base); }
+.card-hover:hover { box-shadow: var(--shadow-hover); border-color: var(--p-light); transform: translateY(-2px); }
+.surface { background: var(--color-bg-sub); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem; }
+
+/* Typography */
+h1, h2, h3, h4 { color: var(--color-text-main); letter-spacing: -0.02em; line-height: 1.2; }
+.text-muted { color: var(--color-text-sub); }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; }
+.badge-purple { background: var(--p-light); color: var(--p-dark); }
+.badge-teal { background: var(--t-light); color: var(--t); }
+.badge-amber { background: var(--a-light); color: var(--a); }
+.badge-red { background: var(--r-light); color: var(--r); }
+.badge-green { background: var(--g-light); color: var(--g-success); }
+.badge-gray { background: var(--color-bg-sub); color: var(--color-text-sub); }
+
+/* Forms */
+.fl { margin-bottom: 1.25rem; width: 100%; }
+.fl label { display: block; font-size: 13px; color: var(--color-text-main); margin-bottom: 6px; font-weight: 500; }
+input, select, textarea { width: 100%; padding: 10px 14px; font-family: var(--font-sans); font-size: 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); color: var(--color-text-main); transition: var(--transition-fast); outline: none; }
+input:focus, select:focus, textarea:focus { border-color: var(--p); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+input::placeholder, textarea::placeholder { color: var(--color-text-muted); }
+.ans-box { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+/* Progress Bars */
+.prog-bar, .xp-bar { width: 100%; height: 6px; background: var(--color-bg-sub); border-radius: 4px; overflow: hidden; }
+.prog-fill, .xp-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); background: var(--p); }
+
+/* Chat Bubbles */
+.chat-box { background: var(--color-bg-main); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; min-height: 300px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; margin-bottom: 1rem; scroll-behavior: smooth; }
+.bubble { max-width: 85%; padding: 12px 16px; border-radius: var(--radius-md); font-size: 14px; line-height: 1.6; box-shadow: var(--shadow-sm); animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.bubble-ai { align-self: flex-start; background: var(--color-bg-card); border: 1px solid var(--color-border); border-bottom-left-radius: 4px; }
+.bubble-user { align-self: flex-end; background: var(--color-text-main); color: #fff; border-bottom-right-radius: 4px; }
+.bubble-peer { align-self: flex-start; background: var(--t-light); border: 1px solid var(--t-light); color: var(--color-text-main); border-bottom-left-radius: 4px; }
+
+/* Custom Grids for Setup */
+.role-grid, .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.role-card, .company-card { padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; background: var(--color-bg-card); text-align: center; transition: var(--transition-base); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.role-card:hover, .company-card:hover { border-color: var(--p-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.role-card.sel, .company-card.sel { border: 2px solid var(--p); background: var(--p-light); transform: scale(1.02); }
+
+/* Hero Section */
+.hero { padding: 6rem 1.5rem; text-align: center; background: radial-gradient(100% 100% at 50% 0%, #FFFFFF 0%, #F4F4F5 100%); border-bottom: 1px solid var(--color-border); margin-top: -64px; padding-top: calc(6rem + 64px); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMCwwLDAsMC4wNSkiLz48L3N2Zz4='); mask-image: linear-gradient(to bottom, black 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%); pointer-events: none; }
+.hero h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: var(--color-text-main); letter-spacing: -0.04em; }
+.hero p { font-size: 18px; color: var(--color-text-sub); max-width: 600px; margin: 0 auto 2.5rem; }
+
+/* Dashboard Metrics */
+.metric { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-sm); transition: var(--transition-base); }
+.metric:hover { box-shadow: var(--shadow-md); border-color: var(--color-border-hover); transform: translateY(-2px); }
+.metric-num { font-size: 32px; font-weight: 700; color: var(--color-text-main); letter-spacing: -1px; line-height: 1; }
+.metric-lbl { font-size: 13px; font-weight: 500; color: var(--color-text-sub); }
+.metric-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px; }
+
+/* Video Coach */
+.video-container { width: 100%; max-width: 600px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; background: #000; position: relative; border: 1px solid var(--color-border); box-shadow: var(--shadow-lg); }
+video { width: 100%; height: auto; display: block; transform: scaleX(-1); }
+.overlay-metrics { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; gap: 8px; justify-content: center; }
+.metric-pill { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); color: #fff; padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.1); }
+
+/* Timeline */
+.timeline-item { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
+.timeline-item::before { content: ''; position: absolute; left: 5px; top: 24px; bottom: -2rem; width: 2px; background: var(--color-border); }
+.timeline-item:last-child::before { display: none; }
+.timeline-dot { position: absolute; left: 0; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--color-bg-card); border: 2px solid var(--p); box-shadow: 0 0 0 4px var(--color-bg-main); z-index: 1; }
+
+/* Practice Bank List */
+.q-list { display: flex; flex-direction: column; gap: 12px; max-height: 600px; overflow-y: auto; padding-right: 8px; }
+.q-item { padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg-card); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; transition: var(--transition-fast); }
+.q-item:hover { border-color: var(--p-mid); box-shadow: var(--shadow-md); transform: translateX(4px); }
+
+/* Footer */
+footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-bg-main); color: var(--color-text-sub); margin-top: 4rem; }
+
+@media (max-width: 768px) {
+  .hero { padding: 4rem 1rem; }
+  .page { padding: 1rem 1rem 5rem; }
+  .nav-right span.hidden-mobile { display: none; }
+}
+
+.dark-mode{
+ background:#0f172a !important;
+ color:#f8fafc !important;
+}
+.dark-mode .card,.dark-mode .metric,.dark-mode input,.dark-mode select,.dark-mode textarea{
+ background:#111827 !important;
+ color:#f8fafc !important;
+}
+.card-hover:hover{transform:translateY(-6px) scale(1.01)!important;}
+.hero h1{background:linear-gradient(90deg,#6366F1,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+.dark-mode{
+  background:#0b1220 !important;
+  color:#f8fafc !important;
+}
+.dark-mode .topnav,
+.dark-mode .card,
+.dark-mode .metric,
+.dark-mode .surface,
+.dark-mode .chat-box,
+.dark-mode footer{
+  background:#111827 !important;
+  color:#f8fafc !important;
+  border-color:#374151 !important;
+}
+.dark-mode .text-muted,
+.dark-mode p,
+.dark-mode .metric-lbl,
+.dark-mode .nav-pill{
+  color:#cbd5e1 !important;
+}
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode .logo,
+.dark-mode label{
+  color:#ffffff !important;
+}
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea{
+  background:#1f2937 !important;
+  color:#ffffff !important;
+  border-color:#4b5563 !important;
+}
+.dark-mode .hero{
+  background:linear-gradient(180deg,#0f172a,#111827) !important;
+}
+.dark-mode .bubble-ai{
+  background:#1f2937 !important;
+  color:#fff !important;
+  border-color:#374151 !important;
+}
+.dark-mode .q-item,
+.dark-mode .role-card,
+.dark-mode .company-card{
+  background:#111827 !important;
+  color:#fff !important;
+  border-color:#374151 !important;
+}
+.dark-mode .nav-pill.active{
+  background:#6366f1 !important;
+  color:#fff !important;
+}
+
+</style>
+</head>
+<body>
+
+<div id="root">
+  <nav class="topnav" id="topnav" style="display:none;">
+    <div class="logo">
+      <div class="logo-icon"><i class="ti ti-brain"></i></div>
+      InterviewAI
+    </div>
+    <div class="nav-pills" id="nav-pills">
+      <button class="nav-pill" onclick="go('dashboard', this)"><i class="ti ti-layout-dashboard"></i> Dashboard</button>
+      <button class="nav-pill" onclick="go('setup', this)"><i class="ti ti-microphone"></i> Mock Interview</button>
+      <button class="nav-pill" onclick="go('practice', this)"><i class="ti ti-books"></i> Practice Bank</button>
+      <button class="nav-pill" onclick="go('company', this)"><i class="ti ti-building"></i> Company Prep</button>
+      <button class="nav-pill" onclick="go('salary', this)"><i class="ti ti-currency-dollar"></i> Salary Trainer</button>
+      <button class="nav-pill" onclick="go('gd', this)"><i class="ti ti-users"></i> GD Simulator</button>
+      <button class="nav-pill" onclick="go('bodycoach', this)"><i class="ti ti-eye"></i> Body Coach</button>
+      <button class="nav-pill" onclick="go('replay', this)"><i class="ti ti-player-track-next"></i> Replays</button>
+    </div>
+    <div class="nav-right">
+      <div id="xp-display" style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--color-text-sub);">
+        <span class="badge badge-purple" id="level-badge" style="font-size:11px;">Lv 1</span>
+        <div style="width:80px;" class="hidden-mobile">
+          <div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:20%;"></div></div>
+        </div>
+      </div>
+      <div id="nav-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--color-text-main);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;cursor:pointer;box-shadow:var(--shadow-sm);" onclick="go('dashboard', document.querySelector('.nav-pill'))"></div>
+      <button class="btn btn-sm btn-ghost" onclick="toggleDarkMode()" title="Dark Mode"><i class="ti ti-moon"></i></button><button class="btn btn-sm btn-ghost" onclick="logout()" title="Logout"><i class="ti ti-logout"></i></button>
+    </div>
+  </nav>
+
+  <div class="screen active" id="screen-landing">
+    <div class="hero">
+      <div style="position:relative; z-index:1;">
+        <div class="badge badge-purple" style="margin-bottom:1.5rem; padding: 8px 16px; font-size:13px;"><i class="ti ti-sparkles"></i> The Ultimate AI Interview Suite</div>
+        <h1>Master every stage of<br>your career journey.</h1>
+        <p>Simulate technical rounds, access 150+ practice questions, negotiate salaries, practice group discussions, and perfect your body language with real-time AI.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary btn-lg" onclick="go('signup')">Start for free</button>
+          <button class="btn btn-lg" onclick="go('login')">Sign in</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" style="padding-top: 4rem;">
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <h2 style="font-size:32px; font-weight:800; margin-bottom:1rem;">Everything you need to land the offer.</h2>
+        <p class="text-muted">Enterprise-grade preparation tools packed into one intuitive platform.</p>
+      </div>
+
+      <div class="grid-features">
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--p-light);color:var(--p);"><i class="ti ti-building-skyscraper"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Company-Specific Prep</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Targeted guides and simulated rounds tailored for FAANG, top startups, and Fortune 500s.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-books"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">150+ Question Bank</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Searchable database of HR, Technical, Coding, and Behavioral questions to practice.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-currency-dollar"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Salary Negotiation Trainer</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Roleplay compensation discussions with an AI recruiter to maximize your market value.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--t-light);color:var(--t);"><i class="ti ti-users"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Group Discussion Simulator</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Engage in multi-agent debates to sharpen your leadership and collaborative speaking skills.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--a-light);color:var(--a);"><i class="ti ti-eye"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Live Body Language Coach</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Real-time webcam analysis detecting eye contact, posture, and conversational confidence.</p>
+        </div>
+        <div class="card card-hover">
+          <div class="metric-icon" style="background:var(--color-bg-sub);color:var(--color-text-main);"><i class="ti ti-microphone"></i></div>
+          <h3 style="font-size:16px;margin-bottom:8px;">Custom AI Mock Interviews</h3>
+          <p style="font-size:14px;color:var(--color-text-sub);">Generate dynamic interviews for any role, from Software Engineer to Data Scientist.</p>
+        </div>
+      </div>
+      
+      <div class="divider" style="margin: 4rem 0;"></div>
+      
+      <div class="grid-2 align-items-center">
+        <div>
+          <h2 style="font-size: 32px; font-weight:800; margin-bottom: 1rem;">Track your progress<br>like never before.</h2>
+          <p class="text-muted" style="margin-bottom: 2rem;">Visual metrics, replay analysis, and leveling mechanics ensure you are constantly improving. Turn your interview anxiety into a measurable, beatable game.</p>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Detailed transcript analysis</li>
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Live AI feedback scoring</li>
+            <li style="display:flex; gap:8px; align-items:center;"><i class="ti ti-check" style="color:var(--p);"></i> Multi-dimensional skill tracking</li>
+          </ul>
+        </div>
+        <div class="card" style="padding: 2rem; background: var(--color-bg-main); border: 1px solid var(--color-border); display:flex; align-items:center; justify-content:center; min-height: 300px;">
+           <div class="col" style="width:100%; gap:16px;">
+              <div class="surface row"><div class="badge badge-purple">Tech Score</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:85%"></div></div> <span>85%</span></div>
+              <div class="surface row"><div class="badge badge-teal">HR Score</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:92%; background:var(--t);"></div></div> <span>92%</span></div>
+              <div class="surface row"><div class="badge badge-amber">Confidence</div> <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:78%; background:var(--a);"></div></div> <span>78%</span></div>
+           </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div class="logo" style="justify-content:center; margin-bottom:1rem;">
+        <div class="logo-icon" style="width:24px;height:24px;font-size:14px;"><i class="ti ti-brain"></i></div> InterviewAI
+      </div>
+      <p style="font-size:14px;">Designed and built for ambitious professionals.</p>
+      <p style="font-size:12px; margin-top:8px;">&copy; 2026 InterviewAI. All rights reserved.</p>
+    
+<div style="margin-top:25px;padding-top:20px;border-top:1px solid #e5e7eb;display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;font-size:14px;">
+    <span style="font-weight:700;">🚀 Built by Krrish Khurana</span>
+    <span>•</span>
+    <span>📧 khuranakrrish086@gmail.com</span>
+    <span>•</span>
+    <span>📞 +91 7073232240</span>
+</div>
+</footer>
+  </div>
+
+  <div class="screen" id="screen-login">
+    <div class="page" style="max-width:440px; padding-top: 10vh;">
+      <div class="card" style="padding: 2.5rem 2rem;">
+        <div style="text-align:center;margin-bottom:2rem;">
+            <div class="logo-icon" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;"><i class="ti ti-lock"></i></div>
+            <h2 style="font-size:24px;font-weight:700;">Welcome Back</h2>
+            <p class="text-muted" style="font-size:14px; margin-top:4px;">Sign in to your account</p>
+        </div>
+        <div class="fl"><label>Email</label><input type="email" id="le" value="demo@interviewai.com" placeholder="you@example.com"></div>
+        <div class="fl">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label style="margin:0;">Password</label>
+                <a href="#" style="font-size:12px; color:var(--p); text-decoration:none;">Forgot password?</a>
+            </div>
+            <input type="password" id="lp" value="demo123" placeholder="••••••••" style="margin-top:6px;">
+        </div>
+        <div class="row" style="margin-bottom:1.5rem; font-size:13px;">
+            <input type="checkbox" id="remember" style="width:auto;"> <label for="remember" style="margin:0;">Remember me</label>
+        </div>
+        <div id="lerr" style="font-size:13px;color:var(--r);background:var(--r-light);padding:10px;border-radius:6px;margin-bottom:16px;display:none;border:1px solid rgba(239, 68, 68, 0.2);"></div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="doLogin()"><i class="ti ti-login"></i> Sign in</button>
+        <p style="text-align:center; font-size:14px; margin-top:1.5rem; color:var(--color-text-sub);">
+            Don't have an account? <a href="#" onclick="go('signup')" style="color:var(--p);font-weight:600;text-decoration:none;">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-signup">
+    <div class="page" style="max-width:440px; padding-top: 10vh;">
+      <div class="card" style="padding: 2.5rem 2rem;">
+        <div style="text-align:center;margin-bottom:2rem;">
+            <div class="logo-icon" style="margin:0 auto 16px;width:48px;height:48px;font-size:24px;"><i class="ti ti-user-plus"></i></div>
+            <h2 style="font-size:24px;font-weight:700;">Create Account</h2>
+            <p class="text-muted" style="font-size:14px; margin-top:4px;">Start your premium preparation</p>
+        </div>
+        <div class="fl"><label>Full Name</label><input type="text" id="sn_name" placeholder="John Doe"></div>
+        <div class="fl"><label>Email</label><input type="email" id="sn_email" placeholder="you@example.com"></div>
+        <div class="fl"><label>Password</label><input type="password" id="sn_pass" placeholder="Create a strong password"></div>
+        <div class="fl"><label>Confirm Password</label><input type="password" id="sn_pass2" placeholder="Repeat password"></div>
+        <div id="serr" style="font-size:13px;color:var(--r);background:var(--r-light);padding:10px;border-radius:6px;margin-bottom:16px;display:none;border:1px solid rgba(239, 68, 68, 0.2);"></div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="doSignup()"><i class="ti ti-rocket"></i> Create Account</button>
+        <p style="text-align:center; font-size:14px; margin-top:1.5rem; color:var(--color-text-sub);">
+            Already have an account? <a href="#" onclick="go('login')" style="color:var(--p);font-weight:600;text-decoration:none;">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-dashboard">
+    <div class="page">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+            <h1 style="font-size:32px;font-weight:800;" id="dash-name">Welcome back!</h1>
+            <p style="font-size:15px;color:var(--color-text-sub);">Your comprehensive career progression overview.</p>
+        </div>
+        <button class="btn btn-primary btn-lg" onclick="go('setup', document.querySelectorAll('.nav-pill')[1])"><i class="ti ti-player-play"></i> New Interview</button>
+      </div>
+
+      <div class="grid-features" style="margin-bottom:2rem;">
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--p-light);color:var(--p);"><i class="ti ti-clipboard-list"></i></div>
+            <div class="metric-num" id="ds-total">0</div>
+            <div class="metric-lbl">Total Sessions</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--t-light);color:var(--t);"><i class="ti ti-chart-bar"></i></div>
+            <div class="metric-num" id="ds-avg">—</div>
+            <div class="metric-lbl">Avg. Interview Score</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--g-light);color:var(--g-success);"><i class="ti ti-currency-dollar"></i></div>
+            <div class="metric-num" id="ds-neg">—</div>
+            <div class="metric-lbl">Avg. Negotiation</div>
+        </div>
+        <div class="metric">
+            <div class="metric-icon" style="background:var(--color-bg-main);color:var(--color-text-main);"><i class="ti ti-flame"></i></div>
+            <div class="metric-num" id="ds-streak">0</div>
+            <div class="metric-lbl">Day Streak</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card col">
+          <h3 style="font-size:16px;margin-bottom:4px;">Skill Progression</h3>
+          <div class="surface col" style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:4px;"><span id="dash-level">Level 1</span><span id="dash-xp-txt" style="color:var(--p);">0 / 200 XP</span></div>
+            <div class="prog-bar"><div class="prog-fill" id="dash-xp-fill" style="width:0%;"></div></div>
+          </div>
+          
+          <h4 style="font-size:14px; color:var(--color-text-main); margin-top:8px; font-weight:600;">Activity Stats</h4>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0; border-bottom:1px solid var(--color-border);">
+              <span class="text-muted">Questions Practiced</span> <span id="ds-practiced" style="font-weight:600;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0; border-bottom:1px solid var(--color-border);">
+              <span class="text-muted">GDs Participated</span> <span id="ds-gd" style="font-weight:600;">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding: 8px 0;">
+              <span class="text-muted">Body Language Sessions</span> <span id="ds-body" style="font-weight:600;">0</span>
+          </div>
+        </div>
+
+        <div class="card col">
+            <h3 style="font-size:16px;margin-bottom:4px;">Recent Interview Replays</h3>
+            <div id="recent-list" class="col" style="margin-top:8px;">
+                <div style="font-size:14px;color:var(--color-text-sub);text-align:center;padding:2rem 0; background:var(--color-bg-sub); border-radius:var(--radius-sm);">No sessions recorded yet. Start practicing!</div>
+            </div>
+            <button class="btn btn-ghost btn-full" style="margin-top:auto;" onclick="go('replay', document.querySelectorAll('.nav-pill')[7])">View All Replays <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-setup">
+    <div class="page" style="max-width:700px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:2rem;">Configure Mock Interview</h1>
+      <div id="s1" class="card">
+        
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:12px;">1. Select or Enter Target Role</label>
+        <div class="role-grid" id="role-grid">
+          <div class="role-card sel" onclick="S.role='Software Engineer'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-code" style="font-size:28px;color:var(--p);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Software Eng</div></div>
+          <div class="role-card" onclick="S.role='Product Manager'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-bulb" style="font-size:28px;color:var(--a);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Product Mgr</div></div>
+          <div class="role-card" onclick="S.role='Data Analyst'; document.getElementById('custom-role').value=''; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel'));this.classList.add('sel');"><i class="ti ti-chart-pie" style="font-size:28px;color:var(--t);margin-bottom:8px;"></i><div style="font-weight:600;font-size:13px;">Data Analyst</div></div>
+        </div>
+        <div class="fl">
+            <label>Or type custom role</label>
+            <input type="text" id="custom-role" placeholder="e.g., Machine Learning Engineer, Financial Analyst" oninput="if(this.value) { S.role=this.value; document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('sel')); }">
+        </div>
+
+        <div class="divider"></div>
+        
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:12px;">2. Interview Parameters</label>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+          <div class="fl" style="margin:0;"><label>Interview Type</label>
+              <select id="iv-type">
+                  <option selected>Mixed (Tech + HR)</option>
+                  <option>Strictly Technical</option>
+                  <option>Behavioral / HR</option>
+              </select>
+          </div>
+          <div class="fl" style="margin:0;"><label>Experience / Difficulty</label>
+              <select id="exp">
+                  <option>Beginner (Intern/Fresher)</option>
+                  <option selected>Intermediate (Mid-Level)</option>
+                  <option>Advanced (Senior/Lead)</option>
+              </select>
+          </div>
+          <div class="fl" style="margin:0; grid-column: span 2;"><label>Length</label>
+              <select id="qct">
+                  <option value="3">Quick Screen (3 Qs)</option>
+                  <option value="5" selected>Standard Round (5 Qs)</option>
+                  <option value="8">Deep Dive (8 Qs)</option>
+              </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" onclick="startInterviewSequence()"><i class="ti ti-player-play"></i> Start Simulation</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-interview">
+    <div class="page" style="max-width:800px;">
+      <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--color-text-main); color: white; border:none;">
+        <div style="font-size:15px;font-weight:600;" id="iv-meta">Interviewing...</div>
+        <div class="row">
+            <div class="badge" style="background:rgba(255,255,255,0.15);color:white;" id="iv-timer">00:00</div>
+            <div class="badge badge-green" id="iv-qprog">Q 1/5</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction: column;">
+        <div class="chat-box" id="chat-box" style="flex:1;"></div>
+        <div id="ans-panel" class="card" style="margin-top:0;">
+          <label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px;">Your Response</label>
+          <textarea class="ans-box" id="ans-input" placeholder="Type your detailed answer here..."></textarea>
+          <div class="row" style="margin-top:12px;">
+            <button class="btn btn-primary" onclick="submitAns()" style="flex:1;"><i class="ti ti-send"></i> Submit Answer</button>
+          </div>
+        </div>
+        <div id="fb-panel" class="card hidden" style="margin-top:1rem; border-color: var(--p-mid); background: var(--p-light);">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;color:var(--p-dark);font-weight:700;"><i class="ti ti-sparkles"></i> Instant AI Evaluation</div>
+          <div style="font-size:14px;color:var(--color-text-main);line-height:1.6;padding:12px;background:#fff;border-radius:var(--radius-sm); border:1px solid var(--color-border);" id="fb-text"></div>
+          <button class="btn btn-primary btn-full" onclick="nextQ()" style="margin-top:1rem;" id="next-btn">Next Question <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-practice">
+    <div class="page">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:16px;">
+          <div>
+            <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Practice Question Bank</h1>
+            <p style="color:var(--color-text-sub);">Master 160+ curated questions across 5 categories.</p>
+          </div>
+          <div class="badge badge-purple" style="font-size:14px; padding:8px 16px;"><i class="ti ti-check"></i> <span id="pb-count">0</span> Completed</div>
+      </div>
+      
+      <div class="card" style="margin-bottom: 1.5rem; padding: 1rem 1.5rem;">
+          <div class="grid-features" style="gap:12px;">
+              <div class="fl" style="margin:0;"><input type="text" id="pb-search" placeholder="Search questions..." oninput="renderPracticeBank()"></div>
+              <div class="fl" style="margin:0;">
+                  <select id="pb-cat" onchange="renderPracticeBank()">
+                      <option value="All">All Categories</option>
+                      <option value="HR">HR & Behavioral</option>
+                      <option value="Technical">Core Technical</option>
+                      <option value="Coding">Coding & DSA</option>
+                      <option value="Company">Company Specific</option>
+                  </select>
+              </div>
+              <div class="fl" style="margin:0;">
+                  <select id="pb-diff" onchange="renderPracticeBank()">
+                      <option value="All">All Difficulties</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                  </select>
+              </div>
+              <button class="btn btn-primary" onclick="renderPracticeBank()" style="height:42px;"><i class="ti ti-filter"></i> Apply Filters</button>
+          </div>
+      </div>
+
+      <div class="q-list" id="pb-list">
+          </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-company">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Company-Specific Prep</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Select a target company to generate tailored interview strategies, common rounds, and FAQs.</p>
+      
+      <div class="company-grid" id="company-grid">
+        <div class="company-card sel" onclick="selectCompany('Google', this)"><i class="ti ti-brand-google" style="font-size:32px;color:#DB4437;margin-bottom:8px;"></i><div style="font-weight:600;">Google</div></div>
+        <div class="company-card" onclick="selectCompany('Amazon', this)"><i class="ti ti-brand-amazon" style="font-size:32px;color:#FF9900;margin-bottom:8px;"></i><div style="font-weight:600;">Amazon</div></div>
+        <div class="company-card" onclick="selectCompany('Meta', this)"><i class="ti ti-brand-meta" style="font-size:32px;color:#0668E1;margin-bottom:8px;"></i><div style="font-weight:600;">Meta</div></div>
+        <div class="company-card" onclick="selectCompany('Microsoft', this)"><i class="ti ti-brand-windows" style="font-size:32px;color:#00A4EF;margin-bottom:8px;"></i><div style="font-weight:600;">Microsoft</div></div>
+      </div>
+      
+      <div class="card" style="margin-bottom:1.5rem;">
+          <div class="fl" style="margin:0;">
+              <label>Or Enter Any Custom Company</label>
+              <input type="text" id="custom-company" placeholder="e.g., Goldman Sachs, Uber, Stripe" oninput="if(this.value){S.targetCompany=this.value; document.querySelectorAll('.company-card').forEach(c=>c.classList.remove('sel'));}">
+          </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-full" onclick="generateCompanyPrep()" id="btn-gen-prep"><i class="ti ti-wand"></i> Generate Prep Strategy</button>
+
+      <div id="company-output" class="hidden col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-salary">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Salary Negotiation Trainer</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Roleplay with an AI recruiter to maximize your compensation confidently.</p>
+      
+      <div id="sal-setup" class="card">
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <div class="fl"><label>Target Role</label><input type="text" id="sal-role" value="Senior Developer"></div>
+          <div class="fl"><label>Current Offer ($)</label><input type="number" id="sal-offer" value="120000"></div>
+          <div class="fl" style="grid-column: span 2;"><label>Your Target Goal ($)</label><input type="number" id="sal-target" value="140000"></div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="startNegotiation()"><i class="ti ti-messages"></i> Start Negotiation Simulator</button>
+      </div>
+
+      <div id="sal-active" class="hidden">
+        <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; background: var(--g-success); color: white; display:flex; justify-content:space-between; align-items:center; border:none;">
+            <div style="font-weight:600; font-size:15px;"><i class="ti ti-user"></i> AI Recruiter: Sarah</div>
+            <div class="badge" style="background:rgba(255,255,255,0.2);color:white; font-size:13px;">Target: $<span id="sal-target-disp"></span></div>
+        </div>
+        <div class="chat-box" id="sal-chat-box"></div>
+        <div class="card" style="margin-top:0;">
+          <textarea class="ans-box" id="sal-input" placeholder="Type your response to the recruiter..."></textarea>
+          <button class="btn btn-primary btn-full" style="margin-top:12px;" onclick="submitNegotiation()"><i class="ti ti-send"></i> Send Response</button>
+        </div>
+      </div>
+      
+      <div id="sal-report" class="hidden card col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-gd">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Group Discussion Simulator</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Engage in a multi-participant debate. Stand out by making valid points and demonstrating leadership.</p>
+      
+      <div id="gd-setup" class="card">
+        <div class="fl"><label>Select Topic</label>
+          <select id="gd-topic">
+            <option>AI replacing software engineers</option>
+            <option>Remote work vs Office culture</option>
+            <option>Should tech monopolies be broken up?</option>
+            <option>Impact of Electric Vehicles on global economy</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" onclick="startGD()"><i class="ti ti-users"></i> Enter Discussion Room</button>
+      </div>
+
+      <div id="gd-active" class="hidden">
+        <div class="card" style="padding: 1rem 1.5rem; margin-bottom: 1rem; background: var(--t); color: white; display:flex; justify-content:space-between; align-items:center; border:none;">
+            <div style="font-weight:600; font-size:15px;" id="gd-topic-disp">Topic</div>
+            <div style="font-size:12px; opacity:0.9;">Participants: You, Alex (AI), Jamie (AI)</div>
+        </div>
+        <div class="chat-box" id="gd-chat-box" style="height: 400px;"></div>
+        <div class="card" style="margin-top:0;">
+          <textarea class="ans-box" id="gd-input" placeholder="Jump into the discussion..." style="height:80px; min-height:80px;"></textarea>
+          <div class="row" style="margin-top:12px;">
+            <button class="btn btn-primary" style="flex:1;" onclick="submitGD()"><i class="ti ti-message"></i> Speak</button>
+            <button class="btn btn-ghost" style="color:var(--r);" onclick="endGD()"><i class="ti ti-player-stop"></i> End & Analyze</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="gd-report" class="hidden card col" style="margin-top:2rem;"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-bodycoach">
+    <div class="page" style="max-width:800px; text-align:center;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Live Body Language Coach</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Uses your webcam to analyze eye contact, posture, and engagement in real-time.</p>
+      
+      <div class="video-container" id="video-wrapper">
+        <video id="webcam-video" autoplay playsinline muted style="display:none;"></video>
+        <div id="webcam-placeholder" style="padding: 6rem 2rem; color: #fff; background: var(--color-text-main);">
+            <i class="ti ti-camera-off" style="font-size:48px; color:var(--color-text-muted); margin-bottom:1rem;"></i>
+            <p style="font-size:15px;">Camera is off. Click below to start analysis.</p>
+        </div>
+        <div class="overlay-metrics hidden" id="video-metrics">
+            <div class="metric-pill"><i class="ti ti-eye"></i> <span id="metric-eye">0%</span> Eye Contact</div>
+            <div class="metric-pill"><i class="ti ti-user"></i> <span id="metric-posture">Good</span> Posture</div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:center; margin-top:2rem;">
+        <button class="btn btn-primary btn-lg" id="btn-start-cam" onclick="startBodyCoach()"><i class="ti ti-camera"></i> Start Camera & Analysis</button>
+        <button class="btn btn-ghost btn-lg hidden" id="btn-stop-cam" onclick="stopBodyCoach()"><i class="ti ti-player-stop"></i> Stop Analysis</button>
+      </div>
+
+      <div class="card col hidden" id="body-feedback" style="margin-top:2rem; text-align:left;">
+        <h3 style="font-size:16px;">Live Feedback</h3>
+        <div class="prog-bar" style="height:12px; margin-top:8px;"><div class="prog-fill" id="body-score-fill" style="width:0%;"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--color-text-sub); margin-top:8px; font-weight:500;"><span>Engagement Score</span><span id="body-score-txt">0/100</span></div>
+        <div class="surface" style="margin-top:1rem; border-left: 4px solid var(--p); font-size:14px;" id="body-coach-tip">Analyzing your posture and presence...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-replay">
+    <div class="page" style="max-width:800px;">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:8px;">Interview Replay Analysis</h1>
+      <p style="color:var(--color-text-sub);margin-bottom:2rem;">Review past sessions, analyze strong and weak moments, and track growth over time.</p>
+      
+      <div id="replay-timeline" class="col"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ==========================================
+   ENTERPRISE QUESTION BANK (160+ Questions)
+========================================== */
+const generatePracticeBank = () => {
+    let b = [];
+    const add = (c, q, d) => b.push({id: 'q'+b.length, cat: c, q: q, diff: d});
+    
+    // HR & Behavioral (40)
+    const hr = ["Tell me about yourself.", "Why should we hire you?", "What are your greatest strengths?", "What is your biggest weakness?", "Where do you see yourself in 5 years?", "Why do you want to leave your current job?", "Describe a time you failed.", "How do you handle conflict with a coworker?", "Tell me about a time you showed leadership.", "How do you prioritize tasks under pressure?", "Describe a difficult decision you made.", "What motivates you?", "How do you handle negative feedback?", "Tell me about a time you went above and beyond.", "Describe your ideal work environment.", "How do you deal with ambiguity?", "Tell me about a time you disagreed with a manager.", "What is your greatest professional achievement?", "How do you stay updated in your industry?", "What makes you unique?", "Tell me about a time you missed a deadline.", "Describe a situation where you had to adapt quickly.", "How do you handle working with difficult personalities?", "What is your management style?", "Tell me about a time you persuaded someone.", "Describe a project that required tight collaboration.", "How do you define success?", "What is the most difficult challenge you've faced?", "Tell me about a time you took a calculated risk.", "How do you ensure diversity and inclusion in your team?", "Describe a time you had to learn a new skill quickly.", "Tell me about a time you mentored someone.", "How do you handle a toxic team environment?", "What are your salary expectations?", "Are you willing to relocate?", "Tell me about a time you made an unpopular decision.", "How do you balance multiple projects?", "Describe a time you solved a problem creatively.", "What do you do outside of work?", "Do you have any questions for us?"];
+    hr.forEach((q,i) => add('HR', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Technical Core (40)
+    const tech = ["Explain Object-Oriented Programming concepts.", "What is the difference between an abstract class and an interface?", "Explain RESTful API principles.", "What are microservices vs monolithic architecture?", "How does DNS work?", "What is CI/CD?", "Explain the concept of containerization (Docker).", "What is the difference between SQL and NoSQL?", "Explain database indexing.", "What is a transaction and ACID properties?", "Describe the OSI model.", "What is the difference between TCP and UDP?", "Explain multi-threading vs multi-processing.", "What is a memory leak?", "How do you handle state management in frontend?", "Explain the Virtual DOM.", "What are WebSockets?", "What is OAuth 2.0?", "Explain Cross-Site Scripting (XSS).", "What is CSRF?", "How do you optimize a slow web application?", "Explain hashing vs encryption.", "What is a Load Balancer?", "Describe Big O notation.", "What is a deadlock?", "Explain garbage collection.", "What are Design Patterns? Name three.", "Explain the MVC pattern.", "What is an ORM?", "Explain horizontal vs vertical scaling.", "What is a CDN?", "Explain serverless computing.", "What is Git rebase vs merge?", "How do you resolve merge conflicts?", "What is the CAP theorem?", "Explain Event-Driven Architecture.", "What is a reverse proxy?", "How does HTTPS work?", "Explain WebAssembly.", "What are Progressive Web Apps (PWAs)?"];
+    tech.forEach((q,i) => add('Technical', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Coding & DSA (40)
+    const dsa = ["Reverse a string without using built-in methods.", "Find the missing number in a given integer array.", "Check if a string is a palindrome.", "Implement FizzBuzz.", "Find the two numbers that add up to a target (Two Sum).", "Implement a binary search.", "Merge two sorted arrays.", "Find the first non-repeating character in a string.", "Implement a linked list.", "Detect a cycle in a linked list.", "Reverse a linked list.", "Find the middle of a linked list.", "Implement a stack using queues.", "Check for balanced parentheses.", "Implement a queue using stacks.", "Traverse a binary tree (Inorder, Preorder, Postorder).", "Find the maximum depth of a binary tree.", "Invert a binary tree.", "Check if a binary tree is a Binary Search Tree (BST).", "Find the Lowest Common Ancestor in a BST.", "Implement Breadth-First Search (BFS) on a graph.", "Implement Depth-First Search (DFS) on a graph.", "Find the shortest path in an unweighted graph.", "Detect a cycle in a directed graph.", "Explain Dijkstra's Algorithm.", "Implement Merge Sort.", "Implement Quick Sort.", "Find the Kth largest element in an array.", "Solve the Climbing Stairs problem (DP).", "Solve the Coin Change problem.", "Find the Longest Common Subsequence.", "Find the Longest Increasing Subsequence.", "Solve the Knapsack problem.", "Find the contiguous subarray with the largest sum (Kadane's).", "Rotate an array by K steps.", "Group anagrams from a list of strings.", "Find the longest substring without repeating characters.", "Implement a Trie (Prefix Tree).", "Solve the N-Queens problem.", "Design an LRU Cache."];
+    dsa.forEach((q,i) => add('Coding', q, i<15?'Beginner':(i<30?'Intermediate':'Advanced')));
+
+    // Company Specific (40)
+    const comp = ["(Google) Describe a time you showed 'Googlyness'.", "(Google) How would you design YouTube?", "(Google) Estimate the number of tennis balls in a Boeing 747.", "(Google) Describe a complex system you built.", "(Amazon) Give an example of 'Customer Obsession'.", "(Amazon) Tell me about a time you 'Disagreed and Committed'.", "(Amazon) Describe a situation showing 'Ownership'.", "(Amazon) How do you 'Dive Deep' into a problem?", "(Meta) How would you design Instagram's feed?", "(Meta) Move fast and break things - tell me a time you did this.", "(Meta) How do you prioritize feature requests?", "(Meta) Design a real-time chat system like Messenger.", "(Microsoft) How would you design Microsoft Teams?", "(Microsoft) Tell me about a time you collaborated across boundaries.", "(Microsoft) How do you foster an inclusive environment?", "(Apple) Describe a time you obsessed over a detail.", "(Apple) How do you balance aesthetics with functionality?", "(Netflix) How do you handle radical candor?", "(Netflix) Design Netflix's recommendation engine.", "(Uber) Design a ride-sharing dispatch system.", "(Uber) How do you handle surge pricing logic?", "(Stripe) Design a payment gateway API.", "(Stripe) How do you ensure high availability and security?", "(Airbnb) Design a booking system.", "(Airbnb) How do you handle overbooking conflicts?", "(Tesla) How would you process telemetry data from millions of cars?", "(Spotify) Design a music streaming service.", "(TCS) Explain the SDLC lifecycle.", "(Infosys) What are the core OOPs concepts with real-world examples?", "(Accenture) How do you manage client expectations?", "(Deloitte) Describe a time you analyzed complex data for a client.", "(JPMorgan) What is a distributed ledger?", "(Goldman Sachs) Design a low-latency trading system.", "(Adobe) How do you implement infinite undo/redo?", "(Flipkart) Design an e-commerce cart system.", "(Atlassian) How would you improve Jira?", "(Slack) Design a real-time notification service.", "(Zoom) How do you handle video streaming latency?", "(Salesforce) Explain multi-tenant architecture.", "(Oracle) Write a complex SQL query with window functions."];
+    comp.forEach((q,i) => add('Company', q, i<20?'Intermediate':'Advanced'));
+
+    return b;
+};
+
+const PRACTICE_BANK = generatePracticeBank();
+
+/* ==========================================
+   CORE STATE & DB 
+========================================== */
+const initDB = () => {
+    let db = localStorage.getItem('iai_v3_users');
+    if(!db) {
+        db = {
+            "demo@example.com": {
+                name: "Demo User", pass: "demo123",
+                interviews: [], negotiations: [], gds: [], practiced: [], xp: 0, level: 1, streak: 1, lastActive: new Date().toDateString()
+            }
+        };
+        localStorage.setItem('iai_v3_users', JSON.stringify(db));
+    }
+    return JSON.parse(localStorage.getItem('iai_v3_users'));
+};
+
+const DB = {
+  get users(){ return initDB(); },
+  save(u){ localStorage.setItem('iai_v3_users', JSON.stringify(u)) }
+};
+
+let S = { 
+    user: null, 
+    role: 'Software Engineer',
+    targetCompany: 'Google',
+    iv: null, questions: [], sessionQuestions: [], answers: [], feedbacks: [], qIdx: 0, timerInterval: null, elapsed: 0,
+    negRound: 0, negHistory: [], targetSalary: 0, currentOffer: 0,
+    gdTopic: '', gdHistory: [], gdInterval: null, gdRound: 0,
+    camStream: null, camInterval: null
+};
+
+/* ==========================================
+   ROUTING & ANIMATION
+========================================== */
+function go(screen, pillEl = null) {
+  // Check auth for protected routes
+  const authedRoutes = ['dashboard','setup','interview','company','salary','gd','bodycoach','replay','practice'];
+  if(authedRoutes.includes(screen) && !S.user) {
+      screen = 'login';
+  }
+
+  document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+  });
+  
+  const target = document.getElementById('screen-'+screen);
+  if(target) target.classList.add('active');
+  
+  const nav = document.getElementById('topnav');
+  nav.style.display = authedRoutes.includes(screen) ? 'flex' : 'none';
+  
+  if (pillEl) {
+    document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+    pillEl.classList.add('active');
+  }
+
+  if (authedRoutes.includes(screen) && S.user) {
+      updateNavXP();
+      if(screen === 'dashboard') refreshDash();
+      if(screen === 'replay') loadReplays();
+      if(screen === 'practice') renderPracticeBank();
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function updateNavXP() {
+  const u = DB.users[S.user];
+  if(!u) return;
+  const xpNeeded = u.level * 200;
+  document.getElementById('xp-fill').style.width = Math.round(((u.xp||0) % xpNeeded) / xpNeeded * 100) + '%';
+  document.getElementById('level-badge').textContent = 'Lv ' + (u.level||1);
+  document.getElementById('nav-avatar').textContent = u.name.substring(0,2).toUpperCase();
+}
+
+/* ==========================================
+   AUTH LOGIC
+========================================== */
+function doLogin() {
+  const users = DB.users;
+  const e = document.getElementById('le').value.trim();
+  const p = document.getElementById('lp').value;
+  const err = document.getElementById('lerr');
+  
+  if (!e || !p) { err.textContent='Please fill all fields'; err.style.display='block'; return; }
+  if (!users[e] || users[e].pass !== p) { err.textContent='Invalid credentials'; err.style.display='block'; return; }
+  
+  err.style.display='none'; 
+  S.user = e; 
+  checkStreak();
+  go('dashboard', document.querySelectorAll('.nav-pill')[0]);
+}
+
+function doSignup() {
+    const users = DB.users;
+    const n = document.getElementById('sn_name').value.trim();
+    const e = document.getElementById('sn_email').value.trim();
+    const p1 = document.getElementById('sn_pass').value;
+    const p2 = document.getElementById('sn_pass2').value;
+    const err = document.getElementById('serr');
+
+    if(!n || !e || !p1 || !p2) { err.textContent='Please fill all fields'; err.style.display='block'; return; }
+    if(p1 !== p2) { err.textContent='Passwords do not match'; err.style.display='block'; return; }
+    if(users[e]) { err.textContent='Email already exists'; err.style.display='block'; return; }
+
+    users[e] = {
+        name: n, pass: p1,
+        interviews: [], negotiations: [], gds: [], practiced: [], xp: 0, level: 1, streak: 1, lastActive: new Date().toDateString()
+    };
+    DB.save(users);
+    
+    err.style.display='none';
+    S.user = e;
+    go('dashboard', document.querySelectorAll('.nav-pill')[0]);
+}
+
+function logout() { S.user = null; if(S.camStream) stopBodyCoach(); go('landing'); }
+
+function checkStreak() {
+    const users = DB.users;
+    const u = users[S.user];
+    const today = new Date().toDateString();
+    if(u.lastActive !== today) {
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        if(u.lastActive === yesterday.toDateString()) {
+            u.streak = (u.streak || 0) + 1;
+        } else {
+            u.streak = 1;
+        }
+        u.lastActive = today;
+        DB.save(users);
+    }
+}
+
+function gainXP(amount) {
+  const users = DB.users, u = users[S.user];
+  u.xp = (u.xp||0) + amount;
+  if (u.xp >= u.level * 200) { u.level++; alert('🎉 LEVEL UP! You reached Level ' + u.level); }
+  DB.save(users); updateNavXP();
+}
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+function refreshDash() {
+  const u = DB.users[S.user];
+  document.getElementById('dash-name').textContent = 'Welcome, ' + u.name.split(' ')[0];
+  const xpNeeded = u.level * 200, xpInLevel = u.xp % xpNeeded;
+  document.getElementById('dash-level').textContent = 'Level ' + u.level;
+  document.getElementById('dash-xp-txt').textContent = xpInLevel + ' / ' + xpNeeded + ' XP';
+  document.getElementById('dash-xp-fill').style.width = Math.round(xpInLevel/xpNeeded*100) + '%';
+  
+  const ivs = u.interviews || [];
+  const negs = u.negotiations || [];
+  document.getElementById('ds-total').textContent = ivs.length + negs.length + (u.gds?.length||0);
+  document.getElementById('ds-streak').textContent = u.streak || 1;
+  document.getElementById('ds-practiced').textContent = u.practiced?.length || 0;
+  document.getElementById('ds-gd').textContent = u.gds?.length || 0;
+  document.getElementById('ds-body').textContent = Math.floor((u.xp || 0) / 100); // mock stat based on xp
+  
+  if (ivs.length) {
+    document.getElementById('ds-avg').textContent = Math.round(ivs.reduce((a,b)=>a+b.overall,0)/ivs.length) + '%';
+    const rlist = document.getElementById('recent-list');
+    rlist.innerHTML = ivs.slice(-4).reverse().map(iv => `
+      <div class="surface row" style="transition:var(--transition-fast); cursor:pointer;" onmouseover="this.style.borderColor='var(--p)'" onmouseout="this.style.borderColor='var(--color-border)'">
+        <div class="spacer">
+            <div style="font-size:14px;font-weight:600;">${iv.role}</div>
+            <div style="font-size:12px;color:var(--color-text-sub);">${iv.type} • ${iv.date}</div>
+        </div>
+        <div class="badge ${iv.overall>=70?'badge-green':'badge-amber'}">${iv.overall}%</div>
+      </div>
+    `).join('');
+  }
+  if(negs.length) {
+      document.getElementById('ds-neg').textContent = '$' + Math.round(negs[negs.length-1].finalOffer/1000) + 'k';
+  }
+}
+
+/* ==========================================
+   DYNAMIC INTERVIEW LOGIC
+========================================== */
+function startInterviewSequence() {
+  const type = document.getElementById('iv-type').value;
+  const diff = document.getElementById('exp').value;
+  S.iv = { role: S.role, type: type, level: diff, count: parseInt(document.getElementById('qct').value) };
+  S.questions=[]; S.answers=[]; S.feedbacks=[]; S.qIdx=0;
+  
+  // Filter bank based on selection
+  let pool = PRACTICE_BANK.filter(q => {
+      let matchCat = true;
+      let matchDiff = true;
+      if(type.includes('Technical')) matchCat = (q.cat === 'Technical' || q.cat === 'Coding');
+      else if(type.includes('HR')) matchCat = (q.cat === 'HR');
+      
+      if(diff.includes('Beginner')) matchDiff = (q.diff === 'Beginner');
+      else if(diff.includes('Advanced')) matchDiff = (q.diff === 'Advanced');
+      else matchDiff = (q.diff === 'Intermediate' || q.diff === 'Beginner'); // Mid level pool
+      
+      return matchCat && matchDiff;
+  });
+
+  // Fallback if pool is too small
+  if(pool.length < S.iv.count) pool = [...PRACTICE_BANK];
+
+  // Shuffle & pick
+  pool.sort(() => 0.5 - Math.random());
+  S.sessionQuestions = pool.slice(0, S.iv.count).map(q => q.q);
+
+  // If custom role, inject role specific prefix into first question
+  if(document.getElementById('custom-role').value) {
+      S.sessionQuestions[0] = `As a ${S.role}, ` + S.sessionQuestions[0].charAt(0).toLowerCase() + S.sessionQuestions[0].slice(1);
+  }
+
+  go('interview');
+  document.getElementById('chat-box').innerHTML='';
+  document.getElementById('ans-input').value='';
+  document.getElementById('fb-panel').classList.add('hidden');
+  document.getElementById('iv-meta').innerHTML = `<i class="ti ti-microphone"></i> ${S.iv.role} • ${diff.split(' ')[0]}`;
+  loadQ(0);
+}
+
+function addBubble(containerId, sender, text, type='ai') {
+  const box=document.getElementById(containerId);
+  let styleClass = type==='user' ? 'bubble-user' : (type==='peer' ? 'bubble-peer' : 'bubble-ai');
+  let align = type==='user' ? 'align-self:flex-end;text-align:right;' : 'align-self:flex-start;';
+  box.innerHTML += `<div class="col" style="${align} max-width:80%; margin-bottom:8px;"><div style="font-size:12px;color:var(--color-text-sub);margin-bottom:2px;font-weight:600;">${sender}</div><div class="bubble ${styleClass}" style="max-width:100%;">${text}</div></div>`;
+  box.scrollTop=box.scrollHeight;
+}
+
+function loadQ(idx) {
+  document.getElementById('iv-qprog').textContent='Q '+(idx+1)+'/'+S.iv.count;
+  document.getElementById('ans-input').value='';
+  document.getElementById('fb-panel').classList.add('hidden');
+  
+  S.questions[idx] = S.sessionQuestions[idx];
+  addBubble('chat-box', 'AI System', S.questions[idx], 'ai');
+}
+
+function submitAns() {
+  const ans=document.getElementById('ans-input').value.trim();
+  if(!ans) return;
+  S.answers[S.qIdx]=ans; addBubble('chat-box', 'You', ans, 'user');
+  
+  setTimeout(()=>{
+      const sc = Math.floor(65+Math.random()*25);
+      S.feedbacks[S.qIdx] = {score: sc, text: "Good conceptual overview. To improve, try using the STAR method and support your point with a specific, quantifiable metric."};
+      addBubble('chat-box', 'AI Evaluator', "Response recorded.", 'ai');
+      document.getElementById('fb-panel').classList.remove('hidden');
+      document.getElementById('fb-text').innerHTML = `<strong>Score: ${sc}/100</strong><br>${S.feedbacks[S.qIdx].text}`;
+      document.getElementById('next-btn').innerHTML = S.qIdx>=S.iv.count-1 ? '<i class="ti ti-flag"></i> Finish Interview' : 'Next Question <i class="ti ti-arrow-right"></i>';
+      document.getElementById('chat-box').scrollTop=document.getElementById('chat-box').scrollHeight;
+  }, 800);
+}
+
+function nextQ() { 
+    if(S.qIdx>=S.iv.count-1) {
+        const overall = Math.round(S.feedbacks.reduce((a,b)=>a+b.score,0)/S.feedbacks.length);
+        const users=DB.users;
+        users[S.user].interviews.push({role:S.iv.role, type: S.iv.type, overall, date:new Date().toLocaleDateString(), qa: S.questions.map((q,i)=>({q,a:S.answers[i]})) });
+        DB.save(users); gainXP(50);
+        alert('Simulation Complete! Overall Score: ' + overall + '%');
+        go('dashboard');
+    } else { 
+        S.qIdx++; loadQ(S.qIdx); 
+    } 
+}
+
+/* ==========================================
+   FEATURE: PRACTICE BANK
+========================================== */
+function renderPracticeBank() {
+    const sTerm = document.getElementById('pb-search').value.toLowerCase();
+    const cFilter = document.getElementById('pb-cat').value;
+    const dFilter = document.getElementById('pb-diff').value;
+    const list = document.getElementById('pb-list');
+    const u = DB.users[S.user];
+    const practiced = u.practiced || [];
+
+    document.getElementById('pb-count').textContent = practiced.length;
+
+    let html = '';
+    let count = 0;
+
+    PRACTICE_BANK.forEach(q => {
+        if(cFilter !== 'All' && q.cat !== cFilter) return;
+        if(dFilter !== 'All' && q.diff !== dFilter) return;
+        if(sTerm && !q.q.toLowerCase().includes(sTerm)) return;
+        
+        count++;
+        const isDone = practiced.includes(q.id);
+        const badgeCol = q.diff==='Beginner'?'badge-teal':(q.diff==='Advanced'?'badge-red':'badge-amber');
+
+        html += `
+            <div class="q-item">
+                <div class="col" style="flex:1;">
+                    <div class="row" style="margin-bottom:4px;">
+                        <span class="badge ${badgeCol}">${q.diff}</span>
+                        <span class="badge badge-gray">${q.cat}</span>
+                    </div>
+                    <div style="font-weight:500; font-size:15px;">${q.q}</div>
+                </div>
+                <button class="btn btn-sm ${isDone?'btn-ghost':'btn-primary'}" onclick="markPracticed('${q.id}', this)">
+                    <i class="ti ${isDone?'ti-check':'ti-pencil'}"></i> ${isDone?'Done':'Practice'}
+                </button>
+            </div>
+        `;
+    });
+
+    list.innerHTML = html || '<div class="text-center text-muted" style="padding: 2rem;">No questions match your criteria.</div>';
+}
+
+function markPracticed(id, btn) {
+    const users = DB.users;
+    const u = users[S.user];
+    u.practiced = u.practiced || [];
+    
+    if(!u.practiced.includes(id)) {
+        u.practiced.push(id);
+        DB.save(users);
+        btn.className = 'btn btn-sm btn-ghost';
+        btn.innerHTML = '<i class="ti ti-check"></i> Done';
+        document.getElementById('pb-count').textContent = u.practiced.length;
+        gainXP(5);
+    }
+}
+
+/* ==========================================
+   FEATURE: COMPANY PREP
+========================================== */
+function selectCompany(comp, el) {
+    S.targetCompany = comp;
+    document.getElementById('custom-company').value = '';
+    document.querySelectorAll('.company-card').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+}
+
+function generateCompanyPrep() {
+    const btn = document.getElementById('btn-gen-prep');
+    btn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Generating Strategy...';
+    
+    setTimeout(()=>{
+        btn.innerHTML = '<i class="ti ti-wand"></i> Generate Prep Strategy';
+        const out = document.getElementById('company-output');
+        
+        let content = '';
+        const c = S.targetCompany;
+
+        if(c==='Google') {
+            content = `<div class="surface"><strong>Process (4-5 Rounds)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>1x Phone Screen (Data Structures)</li><li>3x Coding Rounds (Focus on Graph/DP)</li><li>1x "Googlyness" Behavioral Round</li></ul></div><div class="surface"><strong>Focus:</strong> Big-O complexity, scalable design.</div>`;
+        } else if(c==='Amazon') {
+            content = `<div class="surface"><strong>Process (Loop)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>1x Online Assessment (OA)</li><li>4x Onsite Loop (Coding + Behavioral)</li><li>Bar Raiser Round included</li></ul></div><div class="surface"><strong>Focus:</strong> 14 Leadership Principles. STAR method answers required.</div>`;
+        } else if(c==='Meta') {
+            content = `<div class="surface"><strong>Process (Jedi/Ninja)</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>Screening (Leetcode Mediums)</li><li>2x Coding (Ninja)</li><li>1x System Design (Pirate)</li><li>1x Behavioral (Jedi)</li></ul></div><div class="surface"><strong>Focus:</strong> Speed, execution, standard algorithms.</div>`;
+        } else {
+            content = `<div class="surface"><strong>Estimated Process for ${c}</strong><ul style="margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;"><li>Recruiter Screen</li><li>Technical Take-home or Live pair programming</li><li>Culture Fit / Architecture</li></ul></div><div class="surface"><strong>General Focus:</strong> Product thinking, shipping speed, cultural alignment with ${c}'s core values.</div>`;
+        }
+
+        out.innerHTML = `<div class="card"><h3 style="margin-bottom:1rem;font-size:20px;">Strategy Playbook: ${c}</h3><div class="col" style="gap:16px;">${content}</div><button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="S.role='${c} Engineer'; go('setup', document.querySelectorAll('.nav-pill')[1]);">Start Mock Interview for ${c}</button></div>`;
+        out.classList.remove('hidden');
+    }, 1000);
+}
+
+/* ==========================================
+   FEATURE: SALARY NEGOTIATION
+========================================== */
+function startNegotiation() {
+    S.targetSalary = parseInt(document.getElementById('sal-target').value);
+    S.currentOffer = parseInt(document.getElementById('sal-offer').value);
+    S.negRound = 0; S.negHistory = [];
+    document.getElementById('sal-setup').classList.add('hidden');
+    document.getElementById('sal-active').classList.remove('hidden');
+    document.getElementById('sal-report').classList.add('hidden');
+    document.getElementById('sal-target-disp').textContent = S.targetSalary.toLocaleString();
+    document.getElementById('sal-chat-box').innerHTML = '';
+    
+    let initialPrompt = `Hi! We're thrilled to offer you the role. The base salary we've approved is $${S.currentOffer.toLocaleString()}. How does that sound?`;
+    S.negHistory.push({r:'ai', t:initialPrompt});
+    addBubble('sal-chat-box', 'Recruiter Sarah', initialPrompt, 'ai');
+}
+
+function submitNegotiation() {
+    const input = document.getElementById('sal-input');
+    const text = input.value.trim();
+    if(!text) return;
+    
+    S.negHistory.push({r:'user', t:text});
+    addBubble('sal-chat-box', 'You', text, 'user');
+    input.value = '';
+    S.negRound++;
+
+    setTimeout(()=>{
+        let response = "";
+        let end = false;
+        let finalOffer = S.currentOffer;
+
+        if(text.toLowerCase().includes('accept') || text.toLowerCase().includes('sounds good')) {
+            response = "Fantastic! We'll send the paperwork over immediately.";
+            end = true;
+        } else if (S.negRound === 1) {
+            let bump = Math.floor((S.targetSalary - S.currentOffer) * 0.4);
+            finalOffer = S.currentOffer + bump;
+            S.currentOffer = finalOffer;
+            response = `I understand you're looking for more. We have a strict band, but I checked with the team and we can bump it to $${finalOffer.toLocaleString()}. That's our maximum base.`;
+        } else if (S.negRound === 2) {
+            response = `We really want you on board, but we can't move the base higher than $${S.currentOffer.toLocaleString()}. We could potentially offer a $10,000 signing bonus. What do you say?`;
+            S.currentOffer += 10000;
+        } else {
+            response = `I'm afraid that's our absolute best and final offer. We hope you'll accept!`;
+            end = true;
+        }
+
+        S.negHistory.push({r:'ai', t:response});
+        addBubble('sal-chat-box', 'Recruiter Sarah', response, 'ai');
+
+        if(end || S.negRound >= 3) {
+            setTimeout(() => finishNegotiation(S.currentOffer), 2000);
+        }
+    }, 1200);
+}
+
+function finishNegotiation(finalAmt) {
+    document.getElementById('sal-active').classList.add('hidden');
+    const out = document.getElementById('sal-report');
+    
+    const diff = finalAmt - parseInt(document.getElementById('sal-offer').value);
+    const success = finalAmt >= S.targetSalary ? 'Excellent' : (diff > 0 ? 'Good' : 'Needs Practice');
+    
+    out.innerHTML = `
+        <h3 style="font-size:20px;margin-bottom:1.5rem;">Negotiation Results</h3>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+            <div class="metric"><div class="metric-num" style="color:var(--p);">$${finalAmt.toLocaleString()}</div><div class="metric-lbl">Final Total Value</div></div>
+            <div class="metric"><div class="metric-num" style="color:var(--g-success);">+$${diff.toLocaleString()}</div><div class="metric-lbl">Value Added via Negotiation</div></div>
+        </div>
+        <div class="surface">
+            <strong>AI Coach Feedback:</strong> ${success}. You handled the pushback well. In the future, explicitly mentioning competing offers or specific market data points can help push past the "strict band" objection.
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="go('dashboard')">Finish & Return to Dashboard</button>
+    `;
+    out.classList.remove('hidden');
+
+    const users=DB.users;
+    users[S.user].negotiations = users[S.user].negotiations || [];
+    users[S.user].negotiations.push({finalOffer: finalAmt, increase: diff, date: new Date().toLocaleDateString()});
+    DB.save(users); gainXP(60);
+}
+
+/* ==========================================
+   FEATURE: GD SIMULATOR
+========================================== */
+function startGD() {
+    S.gdTopic = document.getElementById('gd-topic').value;
+    document.getElementById('gd-setup').classList.add('hidden');
+    document.getElementById('gd-active').classList.remove('hidden');
+    document.getElementById('gd-report').classList.add('hidden');
+    document.getElementById('gd-topic-disp').textContent = S.gdTopic;
+    document.getElementById('gd-chat-box').innerHTML = '';
+    S.gdRound = 0; S.gdHistory = [];
+
+    addBubble('gd-chat-box', 'System Moderator', `Topic: ${S.gdTopic}. The floor is open.`, 'ai');
+    
+    setTimeout(()=> {
+        const text = "I think this is a highly relevant topic. In my view, the core issue revolves around productivity versus collaboration.";
+        addBubble('gd-chat-box', 'Alex (AI)', text, 'peer');
+        S.gdHistory.push({r:'peer1', t:text});
+    }, 2000);
+    
+    S.gdInterval = setInterval(gdAiTurn, 8000);
+}
+
+function gdAiTurn() {
+    if(document.getElementById('gd-active').classList.contains('hidden')) return clearInterval(S.gdInterval);
+    const peers = ['Jamie (AI)', 'Taylor (AI)', 'Alex (AI)'];
+    const p = peers[Math.floor(Math.random()*peers.length)];
+    const responses = [
+        "I agree with that point, but we also have to consider the economic impact.",
+        "That's true, however, statistics show a different trend over the last year.",
+        "Could you elaborate on why you think that's the primary driver?",
+        "I see it differently. The main bottleneck is actually infrastructure."
+    ];
+    const text = responses[Math.floor(Math.random()*responses.length)];
+    addBubble('gd-chat-box', p, text, 'peer');
+    S.gdHistory.push({r:p, t:text});
+    S.gdRound++;
+}
+
+function submitGD() {
+    const input = document.getElementById('gd-input');
+    const text = input.value.trim();
+    if(!text) return;
+    addBubble('gd-chat-box', 'You', text, 'user');
+    S.gdHistory.push({r:'user', t:text});
+    input.value = '';
+}
+
+function endGD() {
+    clearInterval(S.gdInterval);
+    document.getElementById('gd-active').classList.add('hidden');
+    const out = document.getElementById('gd-report');
+    
+    let userEntries = S.gdHistory.filter(x=>x.r==='user').length;
+    let score = Math.min(100, userEntries * 25);
+    
+    out.innerHTML = `
+        <h3 style="font-size:20px;margin-bottom:1.5rem;">GD Performance Report</h3>
+        <div class="grid-2" style="gap:16px;margin-bottom:1.5rem;">
+            <div class="metric"><div class="metric-num" style="color:var(--p);">${score}%</div><div class="metric-lbl">Participation Score</div></div>
+            <div class="metric"><div class="metric-num" style="color:var(--t);">${userEntries}</div><div class="metric-lbl">Total Contributions</div></div>
+        </div>
+        <div class="surface" style="border-left:4px solid var(--p);">
+            <strong>Analysis:</strong> ${userEntries > 2 ? 'Great active participation and leadership demonstrated.' : 'You were a bit quiet. Try to interject with "Adding to what Jamie said..." to take the floor gracefully.'}
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:1.5rem;" onclick="go('dashboard')">Back to Dashboard</button>
+    `;
+    out.classList.remove('hidden');
+    
+    const users=DB.users;
+    users[S.user].gds = users[S.user].gds || [];
+    users[S.user].gds.push({topic: S.gdTopic, score: score});
+    DB.save(users); gainXP(40);
+}
+
+/* ==========================================
+   FEATURE: BODY LANGUAGE COACH
+========================================== */
+async function startBodyCoach() {
+    const video = document.getElementById('webcam-video');
+    const placeholder = document.getElementById('webcam-placeholder');
+    const metrics = document.getElementById('video-metrics');
+    const fbPanel = document.getElementById('body-feedback');
+    
+    document.getElementById('btn-start-cam').classList.add('hidden');
+    document.getElementById('btn-stop-cam').classList.remove('hidden');
+
+    try {
+        S.camStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = S.camStream;
+        video.style.display = 'block';
+        placeholder.style.display = 'none';
+        metrics.classList.remove('hidden');
+        fbPanel.classList.remove('hidden');
+
+        let score = 50;
+        S.camInterval = setInterval(()=>{
+            score = Math.max(30, Math.min(100, score + (Math.random()*10 - 4)));
+            let eye = Math.min(100, score + 10);
+            
+            document.getElementById('metric-eye').textContent = Math.round(eye) + '%';
+            document.getElementById('metric-posture').textContent = score > 60 ? 'Good' : 'Slouching';
+            
+            document.getElementById('body-score-fill').style.width = Math.round(score) + '%';
+            document.getElementById('body-score-fill').style.background = score > 70 ? 'var(--g-success)' : (score > 40 ? 'var(--a)' : 'var(--r)');
+            document.getElementById('body-score-txt').textContent = Math.round(score) + '/100';
+
+            const tip = document.getElementById('body-coach-tip');
+            if(score < 50) tip.innerHTML = "<strong style='color:var(--r)'>Tip:</strong> Sit up straight and look directly at the camera lens to simulate eye contact.";
+            else if(eye < 70) tip.innerHTML = "<strong style='color:var(--a)'>Tip:</strong> Good posture, but try to maintain more consistent eye contact.";
+            else tip.innerHTML = "<strong style='color:var(--g-success)'>Excellent!</strong> You look engaged, confident, and professional.";
+        }, 1500);
+
+    } catch(err) {
+        alert("Camera access denied. Running in simulated fallback mode for demo purposes.");
+        metrics.classList.remove('hidden');
+        fbPanel.classList.remove('hidden');
+    }
+}
+
+function stopBodyCoach() {
+    if(S.camStream) {
+        S.camStream.getTracks().forEach(track => track.stop());
+        S.camStream = null;
+    }
+    clearInterval(S.camInterval);
+    document.getElementById('webcam-video').style.display = 'none';
+    document.getElementById('webcam-placeholder').style.display = 'block';
+    document.getElementById('video-metrics').classList.add('hidden');
+    document.getElementById('btn-start-cam').classList.remove('hidden');
+    document.getElementById('btn-stop-cam').classList.add('hidden');
+    document.getElementById('body-feedback').classList.add('hidden');
+    gainXP(20);
+}
+
+/* ==========================================
+   FEATURE: REPLAY ANALYSIS
+========================================== */
+function loadReplays() {
+    const u = DB.users[S.user];
+    const tl = document.getElementById('replay-timeline');
+    if(!u.interviews || u.interviews.length === 0) {
+        tl.innerHTML = '<div class="surface" style="text-align:center; padding: 3rem 1rem;">No completed interviews to analyze yet. Head to Mock Interviews to start.</div>';
+        return;
+    }
+
+    tl.innerHTML = [...u.interviews].reverse().map((iv, i) => `
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card" style="padding:1.5rem;">
+                <div class="row" style="justify-content:space-between; margin-bottom:12px;">
+                    <div style="font-weight:700; font-size:16px;">${iv.role} Simulation <span style="font-weight:400; color:var(--color-text-muted); font-size:13px;">(${iv.type})</span></div>
+                    <div class="badge ${iv.overall>=70?'badge-green':'badge-amber'}">${iv.overall}% Score</div>
+                </div>
+                <div style="font-size:13px;color:var(--color-text-sub);margin-bottom:16px;">${iv.date}</div>
+                <div class="surface" style="font-size:14px; line-height:1.6;">
+                    <strong style="color:var(--g-success); display:flex; align-items:center; gap:6px;"><i class="ti ti-thumb-up"></i> Strongest Moment:</strong> Clear, concise answers early on.<br>
+                    <strong style="color:var(--r); display:flex; align-items:center; gap:6px; margin-top:8px;"><i class="ti ti-alert-circle"></i> Area to Improve:</strong> Deeper detail required on technical complexity.<br>
+                    <button class="btn btn-sm btn-ghost" style="margin-top:12px; padding:0; color:var(--p);" onclick="alert('Full transcript modal would load here.')">View Full Transcript</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Init Check
+document.addEventListener("DOMContentLoaded", () => {
+    go('landing');
+});
+
+function toggleDarkMode(){
+ document.body.classList.toggle('dark-mode');
+ localStorage.setItem('iai_dark', document.body.classList.contains('dark-mode'));
+}
+if(localStorage.getItem('iai_dark')==='true'){document.body.classList.add('dark-mode');}
+</script>
+</body>
+</html>
