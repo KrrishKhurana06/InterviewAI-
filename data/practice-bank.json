@@ -1,0 +1,5 @@
+{
+  "Google": "<div class=\"surface\">Process (4-5 Rounds)<ul style=\"margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;\">1x Phone Screen (Data Structures)3x Coding Rounds (Focus on Graph/DP)1x \"Googlyness\" Behavioral Round<div class=\"surface\">Focus: Big-O complexity, scalable design.",
+  "Amazon": "<div class=\"surface\">Process (Loop)<ul style=\"margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;\">1x Online Assessment (OA)4x Onsite Loop (Coding + Behavioral)Bar Raiser Round included<div class=\"surface\">Focus: 14 Leadership Principles. STAR method answers required.",
+  "Meta": "<div class=\"surface\">Process (Jedi/Ninja)<ul style=\"margin-left:20px;font-size:14px;color:var(--color-text-sub);margin-top:4px;\">Screening (Leetcode Mediums)2x Coding (Ninja)1x System Design (Pirate)1x Behavioral (Jedi)<div class=\"surface\">Focus: Speed, execution, standard algorithms."
+}
